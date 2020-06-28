@@ -1,0 +1,45 @@
+<ion-content fullscreen>
+  <div>
+      <ion-row>
+        <ion-col>
+          <ion-text color="tertiary">
+            <h1>Log In</h1>
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text color="light">
+            <h2>Sign up</h2>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+  </div>
+  <div class="login-intro">
+    <div>
+        <ion-avatar class="ion-margin-start">
+          <img src="assets/media/login/etiqueta.svg">
+        </ion-avatar>
+    </div>
+  </div>
+  <div class="login-form">
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="Login()">
+      <ion-item>
+        <ion-input formControlName="username" placeholder="Enter Username" type="text" maxlength="30"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="password" placeholder="Enter Password" type="password" maxlength="30"></ion-input>
+      </ion-item>
+      <ion-button 
+        size="default" 
+        expand="block"
+        color="tertiary"
+        type="submit"
+        shape="round"
+        fill="outline"
+      >
+        <ion-icon slot="start" name="star"></ion-icon>
+        Log In
+      </ion-button>
+    </form>
+
+  </div>
+</ion-content>
