@@ -12,11 +12,14 @@ export class HttpService {
   ) { }
 
   post(serviceName: string, data: any){
-    const headers = new HttpHeaders();
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
+      'Accept': 'application/json', 
+      'content-type': 'application/json'
+    });
     const options = { header: headers, withCredentials: false};
-
     const url = environment.apiURL+serviceName;
-
-    return this.http.post(url, JSON.stringify(data), options);
+    return this.http.post(url, data, options);
   }
 }

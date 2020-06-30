@@ -1,17 +1,22 @@
 <ion-content fullscreen>
   <div>
-      <ion-row>
-        <ion-col>
-          <ion-text color="tertiary">
-            <h1>Log In</h1>
-          </ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text color="light">
-            <h2>Sign up</h2>
-          </ion-text>
-        </ion-col>
-      </ion-row>
+      <ion-grid
+      fixed="true"
+      class="head"
+      >
+        <ion-row>
+          <ion-col>
+            <ion-text color="tertiary">
+              <h1>Log In</h1>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-text color="light">
+              <h2>Sign up</h2>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   </div>
   <div class="login-intro">
     <div>
@@ -36,10 +41,36 @@
         shape="round"
         fill="outline"
       >
-        <ion-icon slot="start" name="star"></ion-icon>
         Log In
       </ion-button>
     </form>
-
+  </div>
+  <div class="forget-pw">
+    <ion-text>
+        Olvidaste tu contraseña?
+    </ion-text>
+  </div>
+  <div class="social-login">
+      <ion-grid
+      fixed="true"
+      >
+        <ion-row>
+          <ion-col class="ion-align-self-center icon">
+            <ion-avatar>
+              <img src="assets/media/login/facebook.svg" class="icon-small">
+            </ion-avatar>
+          </ion-col>
+          <ion-col class="ion-align-self-center icon">
+            <ion-avatar>
+              <img src="assets/media/login/search.svg" class="icon-small">
+            </ion-avatar>
+          </ion-col>
+          <ion-col class="ion-align-self-center icon">
+            <ion-avatar>
+              <img src="assets/media/login/twitter.svg" class="icon-small">
+            </ion-avatar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   </div>
 </ion-content>

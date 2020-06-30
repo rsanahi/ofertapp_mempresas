@@ -1,16 +1,47 @@
 .login-intro {
-    padding: 30%;
+    padding: 20%;
     padding-left: 35%;
     padding-bottom: 20%;
 }
 
 .login-form {
-    border-bottom: solid 1px green;
     padding-left: 10%;
     padding-right: 10%;
     text-align: center;
+    padding-bottom: 5%;
 }
 
 .login-form > form > ion-item {
     margin-bottom: 8%;
+}
+
+.head {
+    text-align: center;
+    font-family: 'BalsamiqSans';
+}
+
+.forget-pw {
+    text-align: center;
+    align-items: center;
+}
+
+.forget-pw > ion-text{
+    font-size: 12px;
+}
+
+.social-login {
+    margin-top: 5%;
+    padding: 10%;
+    padding-top: 0;
+}
+
+.icon{
+    text-align: center;
+    padding-left: 5%;
+}
+
+.icon-small {
+    align-items: center;
+    width: 40px;
+    height: 40px;
 }
