@@ -106,8 +106,8 @@
         </ion-slide>
       </ion-slides>
       <!-- Add Arrows -->
-      <button (click)="swipeBefore()" class="swiper-button-prev"></button>
-      <button (click)="swipeNext()" class="swiper-button-next"></button>
+      <button (click)="swipeBefore()" class="swiper-button-prev arrow-button" *ngIf="left_arrow"></button>
+      <button (click)="swipeNext()" class="swiper-button-next arrow-button" *ngIf="rigth_arrow"></button>
       
   </div>
 </ion-content>

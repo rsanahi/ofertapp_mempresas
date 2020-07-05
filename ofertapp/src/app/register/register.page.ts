@@ -16,8 +16,11 @@ export class RegisterPage implements OnInit {
   slidesOptions = { initialSlide: 0 }
 
   //Variables
-  user_type = Boolean; //Si es True sera Cliente, False Empresa
+  left_arrow : Boolean;
+  rigth_arrow : Boolean;
+  user_type : Boolean; //Si es True sera Cliente, False Empresa
 
+  //FORM TEXT
   format_user_form = SingupConstants.CLIENTE;
 
   constructor() { }
@@ -64,19 +67,36 @@ export class RegisterPage implements OnInit {
   }
 
   swipeNext(){
-    if(this.swiper){
-      this.slides.lockSwipes(false);
-    }
-    this.slides.slideNext();
-    this.slides.lockSwipes(true);
+    this.slides.lockSwipes(false);
+    this.slides.slideNext().then(()=>{
+      this.slides.lockSwipes(true);
+      this.set_arrows();
+    });
   }
 
   swipeBefore(){
-    if(this.swiper){
-      this.slides.lockSwipes(false);
-    }
-    this.slides.slidePrev();
-    this.slides.lockSwipes(true);
+    this.slides.lockSwipes(false);
+    this.slides.slidePrev().then(()=>{
+      this.slides.lockSwipes(true);
+      this.set_arrows();
+    });
+  }
+
+  set_arrows(){
+    this.slides.getActiveIndex().then((index)=>{
+      if(index == 0){
+        this.left_arrow = false;
+        this.rigth_arrow = false;
+      }
+      else if (index == 3){
+        this.left_arrow = true;
+        this.rigth_arrow = false;
+      }
+      else{
+        this.left_arrow = true;
+        this.rigth_arrow = true;
+      }
+    });
   }
 
 }
