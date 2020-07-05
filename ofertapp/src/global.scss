@@ -34,3 +34,15 @@
     font-family: 'BalsamiqSans';
     src: url('./assets/fonts/BalsamiqSans-Bold.ttf');
   }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+.border-green {
+    border: solid 1px green;
+}

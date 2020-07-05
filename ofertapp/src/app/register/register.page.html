@@ -1,9 +1,113 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content fullscreen>
+  <div>
+    <ion-grid
+    fixed="true"
+    class="head"
+    >
+      <ion-row>
+        <ion-col>
+          <ion-text color="primary">
+            <h1>Sing up</h1>
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium">
+            <ion-router-link color="medium" href="/login">
+              <h1>Log in</h1>
+            </ion-router-link>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div>
+      <ion-slides 
+      pager="true" 
+      #mySlider
+      (ionSlideDrag)="onIonDrag($event)"
+      [options]="slidesOptions"
+      >
+        <ion-slide>
+          <div class="slide">
+            <img src="assets/media/slide-1.png"/>
+            <h2>Bienvenidos</h2>
+            <h4>¿Como desea registrarse?</h4>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                    <ion-card button="true" type="button" (click)="set_user_type(true)">
+                        <img src="./madison.jpg" />
+                        <ion-card-header>
+                          <ion-card-subtitle>Cliente</ion-card-subtitle>
+                        </ion-card-header>
+                        <ion-card-content>
+                          Persona en busca de ofertas
+                        </ion-card-content>
+                      </ion-card>
+                </ion-col>
+                <ion-col>
+                    <ion-card button="true" type="button" (click)="set_user_type(false)">
+                        <img src="./madison.jpg" />
+                        <ion-card-header>
+                          <ion-card-subtitle>Empresa</ion-card-subtitle>
+                        </ion-card-header>
+                        <ion-card-content>
+                          Empresa la cual ofrece ofertas
+                        </ion-card-content>
+                      </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-slide>
 
-<ion-content>
+        <ion-slide>
+          <img src="assets/media/slide-2.png"/>
+          <h2>Informacion {{format_user_form.USER_TYPE}}</h2>
+          <form>
+              <ion-item>
+                <ion-label position="stacked">Nombre</ion-label>
+                <ion-input placeholder="" type="text" maxlength="30"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Direccion</ion-label>
+                <ion-input placeholder="" type="text" maxlength="30"></ion-input>
+              </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Telefono</ion-label>
+                  <ion-input placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+          </form>
+        </ion-slide>
 
+        <ion-slide>
+          <img src="assets/media/slide-3.png"/>
+          <h2>Informacion de la Cuenta</h2>
+          <form>
+              <ion-item>
+                <ion-label position="stacked">Username</ion-label>
+                <ion-input placeholder="" type="text" maxlength="30"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input placeholder="" type="text" maxlength="30"></ion-input>
+              </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Password</ion-label>
+                  <ion-input placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+          </form>
+        </ion-slide>
+
+        <ion-slide>
+          <img src="assets/media/slide-4.png"/>
+          <h2>Ready to Play?</h2>
+          <ion-button fill="clear">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+        </ion-slide>
+      </ion-slides>
+      <!-- Add Arrows -->
+      <button (click)="swipeBefore()" class="swiper-button-prev"></button>
+      <button (click)="swipeNext()" class="swiper-button-next"></button>
+      
+  </div>
 </ion-content>

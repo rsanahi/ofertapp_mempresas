@@ -6,19 +6,21 @@
       >
         <ion-row>
           <ion-col>
-            <ion-text color="tertiary">
+            <ion-text color="primary">
               <h1>Log In</h1>
             </ion-text>
           </ion-col>
           <ion-col>
-            <ion-text color="light">
-              <h2>Sign up</h2>
+            <ion-text color="medium">
+              <ion-router-link color="medium" href="/register">
+                <h1>Sign up</h1>
+              </ion-router-link>
             </ion-text>
           </ion-col>
         </ion-row>
       </ion-grid>
   </div>
-  <div class="login-intro">
+  <div class="login-intro center">
     <div>
         <ion-avatar class="ion-margin-start">
           <img src="assets/media/login/etiqueta.svg">
@@ -28,25 +30,24 @@
   <div class="login-form">
     <form [formGroup]="loginForm" novalidate (ngSubmit)="Login()">
       <ion-item>
-        <ion-input formControlName="username" placeholder="Enter Username" type="text" maxlength="30"></ion-input>
+        <ion-label position="stacked">Username</ion-label>
+        <ion-input formControlName="username" placeholder="" type="text" maxlength="30"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input formControlName="password" placeholder="Enter Password" type="password" maxlength="30"></ion-input>
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input formControlName="password" placeholder="" type="password" maxlength="30"></ion-input>
       </ion-item>
       <ion-button 
-        size="default" 
-        expand="block"
-        color="tertiary"
+        color="primary"
         type="submit"
-        shape="round"
-        fill="outline"
+        class="button"
       >
         Log In
       </ion-button>
     </form>
   </div>
   <div class="forget-pw">
-    <ion-text>
+    <ion-text color="primary">
         Olvidaste tu contraseña?
     </ion-text>
   </div>
@@ -55,18 +56,18 @@
       fixed="true"
       >
         <ion-row>
-          <ion-col class="ion-align-self-center icon">
-            <ion-avatar>
+          <ion-col class="ion-align-self-center">
+            <ion-avatar class="center">
               <img src="assets/media/login/facebook.svg" class="icon-small">
             </ion-avatar>
           </ion-col>
-          <ion-col class="ion-align-self-center icon">
-            <ion-avatar>
+          <ion-col class="ion-align-self-center">
+            <ion-avatar class="center">
               <img src="assets/media/login/search.svg" class="icon-small">
             </ion-avatar>
           </ion-col>
-          <ion-col class="ion-align-self-center icon">
-            <ion-avatar>
+          <ion-col class="ion-align-self-center">
+            <ion-avatar class="center">
               <img src="assets/media/login/twitter.svg" class="icon-small">
             </ion-avatar>
           </ion-col>
