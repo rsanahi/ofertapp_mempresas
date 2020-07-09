@@ -1,0 +1,13 @@
+{
+    "login":{
+        "login":"Log In",
+        "singup":"Sign Up",
+        "email":"email",
+        "password":"password",
+        "forgett_password":"Did you forget your password?"
+    },
+    "signup":{
+
+    },
+    "coming_soon":"Coming soon..."
+}

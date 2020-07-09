@@ -1,77 +1,95 @@
 <ion-content fullscreen>
-  <div>
-      <ion-grid
-      fixed="true"
-      class="head"
-      >
-        <ion-row>
-          <ion-col>
-            <ion-text color="primary">
-              <h1>Log In</h1>
-            </ion-text>
-          </ion-col>
-          <ion-col>
-            <ion-text color="medium">
-              <ion-router-link color="medium" href="/register">
-                <h1>Sign up</h1>
-              </ion-router-link>
-            </ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-  </div>
-  <div class="login-intro center">
-    <div>
-        <ion-avatar class="ion-margin-start">
-          <img src="assets/media/login/etiqueta.svg">
-        </ion-avatar>
+  <div class="box">
+    <div class="row content">
+        <div>
+            <ion-grid
+            fixed="true"
+            class="head"
+            >
+              <ion-row>
+                <ion-col>
+                  <ion-text color="primary">
+                    <h2>{{ 'login.login' | translate }}</h2>
+                  </ion-text>
+                </ion-col>
+                <ion-col>
+                  <ion-text color="medium">
+                    <ion-router-link color="medium" href="/register">
+                      <h2>{{ 'login.singup' | translate }}</h2>
+                    </ion-router-link>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </div>
+        <div class="login-intro center">
+          <div>
+              <ion-avatar class="ion-margin-start">
+                <img src="assets/media/login/etiqueta.svg">
+              </ion-avatar>
+          </div>
+        </div>
+        <div class="login-form">
+          <form [formGroup]="loginForm" novalidate (ngSubmit)="Login()">
+            <ion-item>
+              <ion-label position="stacked">{{ 'login.email' | translate }}</ion-label>
+              <ion-input formControlName="username" placeholder="" type="text" maxlength="30"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">{{ 'login.password' | translate }}</ion-label>
+              <ion-input formControlName="password" placeholder="" type="password" maxlength="30"></ion-input>
+            </ion-item>
+            <ion-button 
+              color="primary"
+              type="submit"
+              class="button"
+            >
+            {{ 'login.login' | translate }}
+            </ion-button>
+          </form>
+        </div>
+        <div class="forget-pw">
+          <ion-text color="primary">
+            {{ 'login.forgett_password' | translate }}
+          </ion-text>
+        </div>
+        <div class="social-login">
+            <ion-grid
+            fixed="true"
+            >
+              <ion-row>
+                <ion-col class="ion-align-self-center">
+                  <ion-avatar class="center" (click)=social_login()>
+                    <img src="assets/media/login/facebook.svg" class="icon-small">
+                  </ion-avatar>
+                </ion-col>
+                <ion-col class="ion-align-self-center">
+                  <ion-avatar class="center" (click)=social_login()>
+                    <img src="assets/media/login/search.svg" class="icon-small">
+                  </ion-avatar>
+                </ion-col>
+                <ion-col class="ion-align-self-center">
+                  <ion-avatar class="center" (click)=social_login()>
+                    <img src="assets/media/login/twitter.svg" class="icon-small">
+                  </ion-avatar>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+    <div class="row footer">
+      <ion-item>
+        <div style="width:50%">
+          <h6>ofertapp V 1.0.0 2020</h6>
+        </div>
+        <div class="aling-rigth" style="width:50%" (click)="open_popover($event)">
+          <h6>español</h6>
+        </div>
+        
+      </ion-item>
     </div>
   </div>
-  <div class="login-form">
-    <form [formGroup]="loginForm" novalidate (ngSubmit)="Login()">
-      <ion-item>
-        <ion-label position="stacked">Username</ion-label>
-        <ion-input formControlName="username" placeholder="" type="text" maxlength="30"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Password</ion-label>
-        <ion-input formControlName="password" placeholder="" type="password" maxlength="30"></ion-input>
-      </ion-item>
-      <ion-button 
-        color="primary"
-        type="submit"
-        class="button"
-      >
-        Log In
-      </ion-button>
-    </form>
-  </div>
-  <div class="forget-pw">
-    <ion-text color="primary">
-        Olvidaste tu contraseña?
-    </ion-text>
-  </div>
-  <div class="social-login">
-      <ion-grid
-      fixed="true"
-      >
-        <ion-row>
-          <ion-col class="ion-align-self-center">
-            <ion-avatar class="center">
-              <img src="assets/media/login/facebook.svg" class="icon-small">
-            </ion-avatar>
-          </ion-col>
-          <ion-col class="ion-align-self-center">
-            <ion-avatar class="center">
-              <img src="assets/media/login/search.svg" class="icon-small">
-            </ion-avatar>
-          </ion-col>
-          <ion-col class="ion-align-self-center">
-            <ion-avatar class="center">
-              <img src="assets/media/login/twitter.svg" class="icon-small">
-            </ion-avatar>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-  </div>
+  
+
+
 </ion-content>

@@ -1,6 +1,6 @@
 .login-intro {
-    padding-top: 20%;
-    padding-bottom: 20%;
+    padding-top: 15%;
+    padding-bottom: 15%;
 }
 
 .login-form {
@@ -30,7 +30,8 @@
 
 .social-login {
     margin-top: 5%;
-    padding: 10%;
+    padding: 8%;
+    padding-bottom: 0%;
     padding-top: 0;
 }
 
@@ -41,7 +42,6 @@
 }
 
 .button {
-    width: 140px;
     height: 45px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -53,3 +53,44 @@
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     }
+
+.footer {
+    border: solid 1px red;
+    background-color: transparent !important;
+}
+
+
+
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box .row {
+  border: 0px dotted grey;
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+  /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+}
+
+.box .row.content {
+  flex: 1 1 auto;
+}
+
+.box .row.footer {
+  flex: 0 1 20px;
+}

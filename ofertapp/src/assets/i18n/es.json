@@ -1,0 +1,13 @@
+{
+    "login":{
+        "login":"Iniciar Sesión",
+        "singup":"Regístrate",
+        "email":"email",
+        "password":"contraseña",
+        "forgett_password":"¿Olvidaste tu contraseña?"
+    },
+    "signup":{
+
+    },
+    "coming_soon":"Proximamente..."
+}

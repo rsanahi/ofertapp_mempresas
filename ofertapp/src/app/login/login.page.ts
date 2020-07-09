@@ -4,6 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { AuthConstants } from '../config/auth-constants';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +15,17 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
+
+  // variables
+  proximamente: String;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private storageService: StorageService,
     private router: Router,
+    private translate: TranslateService,
+    public toastController: ToastController,
     ) { 
     this.createForm();
   }
@@ -47,9 +55,38 @@ export class LoginPage implements OnInit {
         }
       },
       (error: any)=>{
-        console.log("Network connection error");
+        this.presentToast(error.message);
       });
     }
+  }
+
+  //ion popover
+  open_popover(ev){
+    
+  }
+
+  useLanguage(language: string) {
+    this.translate.use(language);
+  }
+
+  // ion toast
+  async presentToast(text) {
+    const toast = await this.toastController.create({
+      message: text,
+      duration: 2000,
+      position: "bottom",
+      color: "light"
+    });
+    toast.present();
+  }
+
+  social_login(){
+    this.translate.get('coming_soon').subscribe(
+      value => {
+        this.proximamente = value;
+      }
+    )
+    this.presentToast(this.proximamente);
   }
 
 }
