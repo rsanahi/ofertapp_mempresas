@@ -1,0 +1,7 @@
+<div *ngIf="idioma">
+  <ion-list>
+    <ion-item button (click)="useLanguage('es')">{{labels.es}}</ion-item>
+    <ion-item button (click)="useLanguage('en')">{{labels.en}}</ion-item>
+    <ion-item lines="none" detail="false" button (click)="dismissPopover()">Close</ion-item>
+  </ion-list>
+</div>

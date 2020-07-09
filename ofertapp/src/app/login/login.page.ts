@@ -6,6 +6,8 @@ import { AuthConstants } from '../config/auth-constants';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from '../components/popover/popover.component';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +28,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private translate: TranslateService,
     public toastController: ToastController,
+    public popoverController: PopoverController
     ) { 
     this.createForm();
   }
@@ -61,12 +64,15 @@ export class LoginPage implements OnInit {
   }
 
   //ion popover
-  open_popover(ev){
-    
-  }
-
-  useLanguage(language: string) {
-    this.translate.use(language);
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true,
+      componentProps: {"idioma":true,'labels':{"es":"español","en":"ingles"}}
+    });
+    return await popover.present();
   }
 
   // ion toast
