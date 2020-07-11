@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { IonSlides} from '@ionic/angular';
-import { SingupConstants } from '../config/singup-constants';
-import { NONE_TYPE } from '@angular/compiler';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from '../components/popover/popover.component';
 
 @Component({
   selector: 'app-register',
@@ -13,19 +14,62 @@ export class RegisterPage implements OnInit {
 
   swiper:any;
   @ViewChild('mySlider')  slides: IonSlides;
-  slidesOptions = { initialSlide: 0 }
+  slidesOptions = { 
+    initialSlide: 0,
+
+    centeredSlides: true,
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'custom',
+    },
+   }
 
   //Variables
   left_arrow : Boolean;
   rigth_arrow : Boolean;
   user_type : Boolean; //Si es True sera Cliente, False Empresa
 
-  //FORM TEXT
-  format_user_form = SingupConstants.CLIENTE;
+  //FORM
+  clientForm: FormGroup;
+  businessForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    public popoverController: PopoverController,
+    private fb: FormBuilder,
+  ) {
+    this.create_client_form()
+    this.create_business_form()
+  }
 
   ngOnInit() {
+  }
+
+  create_client_form(){
+    this.clientForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      password2: ['', Validators.required],
+    });
+  }
+
+  create_business_form(){
+    this.businessForm = this.fb.group({
+      name: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      password2: ['', Validators.required]
+    })
+  }
+
+  register(){
+    if(this.user_type){
+      console.log(this.clientForm.value);
+    }
+    else{
+      console.log(this.businessForm.value);
+    }
   }
 
   set_user_type(type){
@@ -37,27 +81,20 @@ export class RegisterPage implements OnInit {
       - False: Usuario Empresa
     */
     this.user_type = type;
-    this.type_form();
     this.swipeNext();
   }
 
-  type_form(){
-    /*
-    Funcion para definir las variables del formulario del acuerdo al tipo 
-    de usuario seleccionado
-    */
-    if(this.user_type){
-      this.format_user_form = SingupConstants.CLIENTE;
-      return true;
-    }
-    else{
-      this.format_user_form = SingupConstants.EMPRESA;
-      return false;
-    }
+  //ion popover
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true,
+      componentProps: {"idioma":true,'labels':{"es":"español","en":"ingles"}}
+    });
+    return await popover.present();
   }
-
-
-
 
   // Slider block and moves events
 

@@ -12,7 +12,26 @@
         "input_password":"coloca tu clave"
     },
     "signup":{
-
+        "login":"Inicíar sesion",
+        "signup":"Regístrate",
+        "already_account":"¿Ya tienes una cuenta?",
+        "welcome":"Bienvenidos",
+        "how_register":"¿Como desea registrarse?",
+        "client":"Cliente",
+        "business":"Empresa",
+        "client_form":{
+            "name":"Nombre y Apellido",
+            "email":"Email",
+            "password":"Contraseña",
+            "confirm_password":"Confirmar Contraseña"
+        },
+        "business_form":{
+            "name":"Nombre de la Empresa",
+            "phone":"Número",
+            "email":"Email",
+            "password":"Contraseña",
+            "confirm_password":"Confirmar Contraseña"
+        }
     },
     "coming_soon":"Proximamente...",
     "social_login":{

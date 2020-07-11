@@ -1,113 +1,144 @@
 <ion-content fullscreen>
-  <div>
-    <ion-grid
-    fixed="true"
-    class="head"
-    >
-      <ion-row>
-        <ion-col>
-          <ion-text color="primary">
-            <h1>Sing up</h1>
-          </ion-text>
-        </ion-col>
-        <ion-col>
-          <ion-text color="medium">
-            <ion-router-link color="medium" href="/login">
-              <h1>Log in</h1>
-            </ion-router-link>
-          </ion-text>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-  <div>
-      <ion-slides 
-      pager="true" 
-      #mySlider
-      (ionSlideDrag)="onIonDrag($event)"
-      [options]="slidesOptions"
-      >
-        <ion-slide>
-          <div class="slide">
-            <img src="assets/media/slide-1.png"/>
-            <h2>Bienvenidos</h2>
-            <h4>¿Como desea registrarse?</h4>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                    <ion-card button="true" type="button" (click)="set_user_type(true)">
-                        <img src="./madison.jpg" />
-                        <ion-card-header>
-                          <ion-card-subtitle>Cliente</ion-card-subtitle>
-                        </ion-card-header>
-                        <ion-card-content>
-                          Persona en busca de ofertas
-                        </ion-card-content>
-                      </ion-card>
-                </ion-col>
-                <ion-col>
-                    <ion-card button="true" type="button" (click)="set_user_type(false)">
-                        <img src="./madison.jpg" />
-                        <ion-card-header>
-                          <ion-card-subtitle>Empresa</ion-card-subtitle>
-                        </ion-card-header>
-                        <ion-card-content>
-                          Empresa la cual ofrece ofertas
-                        </ion-card-content>
-                      </ion-card>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
+  <div class="box">
+    <!--header-->
+    <div class="row header">
+      <div class="center" style="padding: 5%;">
+        <ion-text>
+          <h1 style="font-family: BalsamiqSans;">
+              {{ 'signup.signup' | translate }}
+          </h1>
+          <div (click)="presentPopover($event)" style="text-align:center;">
+            <ion-text color="medium">
+              <h6>español <ion-icon name="caret-down-outline"></ion-icon></h6>
+            </ion-text>
           </div>
-        </ion-slide>
+        </ion-text>
+      </div>
 
-        <ion-slide>
-          <img src="assets/media/slide-2.png"/>
-          <h2>Informacion {{format_user_form.USER_TYPE}}</h2>
-          <form>
-              <ion-item>
-                <ion-label position="stacked">Nombre</ion-label>
-                <ion-input placeholder="" type="text" maxlength="30"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">Direccion</ion-label>
-                <ion-input placeholder="" type="text" maxlength="30"></ion-input>
-              </ion-item>
+    </div>
+    <!--Content-->
+    <div class="row content">
+      <div>
+        <ion-slides 
+        pager="true" 
+        #mySlider
+        (ionSlideDrag)="onIonDrag($event)"
+        [options]="slidesOptions"
+        >
+          <ion-slide >
+            <div class="slide">
+              <img src="assets/media/slide-1.png"/>
+              <h2>{{ 'signup.welcome' | translate }}</h2>
+              <h4>{{ 'signup.how_register' | translate }}</h4>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                      <ion-card button="true" type="button" (click)="set_user_type(true)">
+                          <img src="./madison.jpg" />
+                          <ion-card-header>
+                            <ion-card-subtitle>{{ 'signup.client' | translate }}</ion-card-subtitle>
+                          </ion-card-header>
+                          <ion-card-content>
+                            Persona en busca de ofertas
+                          </ion-card-content>
+                        </ion-card>
+                  </ion-col>
+                  <ion-col>
+                      <ion-card button="true" type="button" (click)="set_user_type(false)">
+                          <img src="./madison.jpg" />
+                          <ion-card-header>
+                            <ion-card-subtitle>{{ 'signup.business' | translate }}</ion-card-subtitle>
+                          </ion-card-header>
+                          <ion-card-content>
+                            Empresa la cual ofrece ofertas
+                          </ion-card-content>
+                        </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ion-slide>
+  
+          <ion-slide>
+            <img src="assets/media/slide-2.png"/>
+            <!--Formulario cliente-->
+            <div *ngIf="user_type">
+              <h2>{{ 'signup.client' | translate}}</h2>
+              <form [formGroup]="clientForm" novalidate>
                 <ion-item>
-                  <ion-label position="stacked">Telefono</ion-label>
-                  <ion-input placeholder="" type="text" maxlength="30"></ion-input>
+                  <ion-label position="stacked">{{ 'signup.client_form.name' | translate}}</ion-label>
+                  <ion-input formControlName="name" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
-          </form>
-        </ion-slide>
-
-        <ion-slide>
-          <img src="assets/media/slide-3.png"/>
-          <h2>Informacion de la Cuenta</h2>
-          <form>
-              <ion-item>
-                <ion-label position="stacked">Username</ion-label>
-                <ion-input placeholder="" type="text" maxlength="30"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">Email</ion-label>
-                <ion-input placeholder="" type="text" maxlength="30"></ion-input>
-              </ion-item>
                 <ion-item>
-                  <ion-label position="stacked">Password</ion-label>
-                  <ion-input placeholder="" type="text" maxlength="30"></ion-input>
+                  <ion-label position="stacked">{{ 'signup.client_form.email' | translate}}</ion-label>
+                  <ion-input formControlName="email" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
-          </form>
-        </ion-slide>
-
-        <ion-slide>
-          <img src="assets/media/slide-4.png"/>
-          <h2>Ready to Play?</h2>
-          <ion-button fill="clear">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
-        </ion-slide>
-      </ion-slides>
-      <!-- Add Arrows -->
-      <button (click)="swipeBefore()" class="swiper-button-prev arrow-button" *ngIf="left_arrow"></button>
-      <button (click)="swipeNext()" class="swiper-button-next arrow-button" *ngIf="rigth_arrow"></button>
-      
+                <ion-item>
+                  <ion-label position="stacked">{{ 'signup.client_form.password' | translate}}</ion-label>
+                  <ion-input formControlName="password" placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'signup.client_form.confirm_password' | translate}}</ion-label>
+                  <ion-input formControlName="password2" placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+              </form>
+            </div>
+            <!--Formulario empresa-->
+            <div *ngIf="!user_type">
+              <h2>{{ 'signup.business' | translate}}</h2>
+              <form [formGroup]="businessForm" novalidate>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'signup.business_form.name' | translate}}</ion-label>
+                  <ion-input formControlName="name" placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'signup.business_form.phone' | translate}}</ion-label>
+                  <ion-input formControlName="phone" placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'signup.business_form.email' | translate}}</ion-label>
+                  <ion-input formControlName="email" placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'signup.business_form.password' | translate}}</ion-label>
+                  <ion-input formControlName="password" placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'signup.business_form.confirm_password' | translate}}</ion-label>
+                  <ion-input formControlName="password2" placeholder="" type="text" maxlength="30"></ion-input>
+                </ion-item>
+              </form>
+            </div>
+          </ion-slide>
+  
+          <ion-slide>
+            <img src="assets/media/slide-4.png"/>
+            <h2>Ready to Play?</h2>
+            <h5>Politicas de Privacidad - Terminos y Condiciones</h5>
+            <ion-button fill="clear" (click)="register()">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+          </ion-slide>
+        </ion-slides>
+        <button (click)="swipeBefore()" class="swiper-button-prev arrow-button" *ngIf="left_arrow"></button>
+        <button (click)="swipeNext()" class="swiper-button-next arrow-button" *ngIf="rigth_arrow"></button>
+        
+      </div>
+    </div>
+    <!--footer-->
+    <div class="row footer">
+      <div class="center" style="padding:5%;">
+        <ion-text color="medium" style="font-family: BalsamiqSans;">
+          {{ 'signup.already_account' | translate }}
+        </ion-text>
+      </div>
+      <div class="center" style="padding-bottom:5%;">
+        <br>
+        <ion-text>
+          <ion-router-link href="/login">
+            {{ 'signup.login' | translate }}
+          </ion-router-link>
+        </ion-text>
+      </div>
+    </div>
+    
   </div>
 </ion-content>

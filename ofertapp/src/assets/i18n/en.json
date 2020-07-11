@@ -12,7 +12,26 @@
         "input_password":"put your password"
     },
     "signup":{
-
+        "login":"Log in",
+        "signup":"Sign Up",
+        "already_account":"Do you already have an account?",
+        "welcome":"Welcome",
+        "how_register":"How do you want to register?",
+        "client":"Client",
+        "business":"Business",
+        "client_form":{
+            "name":"First and Last name",
+            "email":"Email",
+            "password":"Password",
+            "confirm_password":"Confirm Password"
+        },
+        "business_form":{
+            "name":"Business Name",
+            "phone":"Phone",
+            "email":"Email",
+            "password":"Password",
+            "confirm_password":"Confirm Password"
+        }
     },
     "coming_soon":"Coming soon...",
     "social_login":{
