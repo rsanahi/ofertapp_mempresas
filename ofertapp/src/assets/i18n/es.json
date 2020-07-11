@@ -1,13 +1,21 @@
 {
+    "spanish":"español",
+    "english":"ingles",
     "login":{
         "login":"Iniciar Sesión",
-        "singup":"Regístrate",
+        "singup":"REGÍSTRATE",
         "email":"email",
         "password":"contraseña",
-        "forgett_password":"¿Olvidaste tu contraseña?"
+        "forgett_password":"¿Olvidaste tu contraseña?",
+        "without_account":"¿No tiene un cuenta todavia?",
+        "input_email":"coloca tu email",
+        "input_password":"coloca tu clave"
     },
     "signup":{
 
     },
-    "coming_soon":"Proximamente..."
+    "coming_soon":"Proximamente...",
+    "social_login":{
+        "alt_login":"O inicia sesion con"
+    }
 }

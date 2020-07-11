@@ -1,13 +1,21 @@
 {
+    "spanish":"spanish",
+    "english":"english",
     "login":{
         "login":"Log In",
-        "singup":"Sign Up",
+        "singup":"SIGN UP",
         "email":"email",
         "password":"password",
-        "forgett_password":"Did you forget your password?"
+        "forgett_password":"Did you forget your password?",
+        "without_account":"Have not any account yet?",
+        "input_email":"put your email",
+        "input_password":"put your password"
     },
     "signup":{
 
     },
-    "coming_soon":"Coming soon..."
+    "coming_soon":"Coming soon...",
+    "social_login":{
+        "alt_login":"Or Sign up using"
+    }
 }

@@ -20,6 +20,7 @@ export class LoginPage implements OnInit {
 
   // variables
   proximamente: String;
+  lenguaje: String;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +32,7 @@ export class LoginPage implements OnInit {
     public popoverController: PopoverController
     ) { 
     this.createForm();
+    this.current_lenguaje();
   }
 
   ngOnInit() {
@@ -60,6 +62,28 @@ export class LoginPage implements OnInit {
       (error: any)=>{
         this.presentToast(error.message);
       });
+    }
+    else{
+      console.log(this.loginForm)
+    }
+  }
+
+  current_lenguaje(){
+    let variable = this.translate.getDefaultLang();
+
+    if(variable=='es'){
+      this.translate.get('spanish').subscribe(
+        value => {
+          this.proximamente = value;
+        }
+      )
+    }
+    else{
+      this.translate.get('english').subscribe(
+        value => {
+          this.proximamente = value;
+        }
+      )
     }
   }
 

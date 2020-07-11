@@ -35,6 +35,22 @@
     src: url('./assets/fonts/BalsamiqSans-Bold.ttf');
   }
 
+@font-face {
+    font-family: 'ChelseaMarket';
+    src: url('./assets/fonts/ChelseaMarket-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'HoltwoodOneSC';
+    src: url('./assets/fonts/HoltwoodOneSC-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'ShadowsIntoLight';
+    src: url('./assets/fonts/ShadowsIntoLight-Regular.ttf');
+}
+
+
 .center {
     display: flex;
     justify-content: center;
@@ -44,7 +60,7 @@
   }
 
 .border-green {
-    border: solid 1px green;
+    border: solid 1px green !important;
 }
 
 .aling-left {

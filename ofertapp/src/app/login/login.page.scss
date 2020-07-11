@@ -14,14 +14,22 @@
     margin-bottom: 8%;
 }
 
+.item {
+    padding: 2%;
+    text-align: left !important;
+}
+
+ion-input {
+    border-bottom: solid 1px rgb(110, 110, 110);
+}
+
 .head {
     text-align: center;
     font-family: 'BalsamiqSans';
 }
 
 .forget-pw {
-    text-align: center;
-    align-items: center;
+    text-align: right;
 }
 
 .forget-pw > ion-text{
@@ -29,8 +37,9 @@
 }
 
 .social-login {
+    text-align: center;
     margin-top: 5%;
-    padding: 8%;
+    padding: 20%;
     padding-bottom: 0%;
     padding-top: 0;
 }
@@ -42,14 +51,16 @@
 }
 
 .button {
+    --background: rgb(63,221,251);
+    --background: linear-gradient(90deg, rgba(63,221,251,1) 0%, rgba(235,70,252,1) 100%);
+    --background-activated: rgb(63,250,251);
+    --background-activated: linear-gradient(90deg, rgba(63,250,251,1) 0%, rgba(252,70,236,1) 100%);
     height: 45px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2.5px;
     font-weight: 500;
-    background-color: transparent;
-    background: transparent;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     }

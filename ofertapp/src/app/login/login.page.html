@@ -1,46 +1,40 @@
 <ion-content fullscreen>
   <div class="box">
-    <div class="row content">
-        <div>
-            <ion-grid
-            fixed="true"
-            class="head"
-            >
-              <ion-row>
-                <ion-col>
-                  <ion-text color="primary">
-                    <h2>{{ 'login.login' | translate }}</h2>
-                  </ion-text>
-                </ion-col>
-                <ion-col>
-                  <ion-text color="medium">
-                    <ion-router-link color="medium" href="/register">
-                      <h2>{{ 'login.singup' | translate }}</h2>
-                    </ion-router-link>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-        </div>
-        <div class="login-intro center">
-          <div>
-              <ion-avatar class="ion-margin-start">
-                <img src="assets/media/login/etiqueta.svg">
-              </ion-avatar>
+    <!--Header-->
+    <div class="row header">
+      <div class="center" style="padding: 10%;">
+        <ion-text>
+          <h1 style="font-family: BalsamiqSans;">
+              {{ 'login.login' | translate }}
+          </h1>
+          <div (click)="presentPopover($event)" style="text-align:center;">
+            <ion-text color="medium">
+              <h6>español <ion-icon name="caret-down-outline"></ion-icon></h6>
+            </ion-text>
           </div>
-        </div>
-        <div class="login-form">
+        </ion-text>
+      </div>
+    </div>
+    <!--Content-->
+    <div class="row content">
+      <div class="login-form">
           <form [formGroup]="loginForm" novalidate (ngSubmit)="Login()">
-            <ion-item>
+            <div class="item">
               <ion-label position="stacked">{{ 'login.email' | translate }}</ion-label>
-              <ion-input formControlName="username" placeholder="" type="text" maxlength="30"></ion-input>
-            </ion-item>
-            <ion-item>
+              <ion-input formControlName="username" placeholder="" type="text" maxlength="30" placeholder=""></ion-input>
+            </div>
+            <div class="item">
               <ion-label position="stacked">{{ 'login.password' | translate }}</ion-label>
-              <ion-input formControlName="password" placeholder="" type="password" maxlength="30"></ion-input>
-            </ion-item>
+              <ion-input formControlName="password" placeholder="" type="password" maxlength="30" placeholder=""></ion-input>
+            </div>
+            <div class="forget-pw">
+              <ion-text color="primary" (click)=social_login()>
+                {{ 'login.forgett_password' | translate }}
+              </ion-text>
+            </div>
+            <br>
             <ion-button 
-              color="primary"
+              expand="block"
               type="submit"
               class="button"
             >
@@ -48,12 +42,10 @@
             </ion-button>
           </form>
         </div>
-        <div class="forget-pw">
-          <ion-text color="primary">
-            {{ 'login.forgett_password' | translate }}
-          </ion-text>
-        </div>
         <div class="social-login">
+            <ion-text color="medium" style="font-family: BalsamiqSans;">
+                {{ 'social_login.alt_login' | translate }}
+              </ion-text>
             <ion-grid
             fixed="true"
             >
@@ -77,19 +69,21 @@
             </ion-grid>
         </div>
     </div>
+    <!--Footer-->
     <div class="row footer">
-      <ion-item>
-        <div style="width:50%">
-          <h6>ofertapp V 1.0.0 2020</h6>
-        </div>
-        <div class="aling-rigth" style="width:50%" (click)="presentPopover($event)">
-          <h6>español</h6>
-        </div>
-        
-      </ion-item>
+      <div class="center" style="padding:5%;">
+        <ion-text color="medium" style="font-family: BalsamiqSans;">
+          {{ 'login.without_account' | translate }}
+        </ion-text>
+      </div>
+      <div class="center" style="padding-bottom:5%;">
+        <br>
+        <ion-text>
+          <ion-router-link href="/register">
+            {{ 'login.singup' | translate }}
+          </ion-router-link>
+        </ion-text>
+      </div>
     </div>
   </div>
-  
-
-
 </ion-content>
