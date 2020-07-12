@@ -33,6 +33,37 @@ export class RegisterPage implements OnInit {
   clientForm: FormGroup;
   businessForm: FormGroup;
 
+  validation_messages = {
+    'name': [
+      { type: 'required', message: 'Name is required.' }
+    ],
+    'lastname': [
+      { type: 'required', message: 'Last name is required.' }
+    ],
+    'email': [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Please enter a valid email.' }
+    ],
+    'phone': [
+      { type: 'required', message: 'Phone is required.' },
+      { type: 'validCountryPhone', message: 'The phone is incorrect for the selected country.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is required.' },
+      { type: 'minlength', message: 'Password must be at least 5 characters long.' },
+      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
+    ],
+    'confirm_password': [
+      { type: 'required', message: 'Confirm password is required.' }
+    ],
+    'matching_passwords': [
+      { type: 'areEqual', message: 'Password mismatch.' }
+    ],
+    'terms': [
+      { type: 'pattern', message: 'You must accept terms and conditions.' }
+    ],
+  };
+
   constructor(
     public popoverController: PopoverController,
     private fb: FormBuilder,
@@ -46,30 +77,40 @@ export class RegisterPage implements OnInit {
 
   create_client_form(){
     this.clientForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      password2: ['', Validators.required],
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+      password: new FormControl('', Validators.compose([Validators.minLength(8), Validators.required])),
+      password2: new FormControl('', Validators.required),
     });
   }
 
   create_business_form(){
     this.businessForm = this.fb.group({
-      name: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      password2: ['', Validators.required]
+      name: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+      password: new FormControl('', Validators.required),
+      password2: new FormControl('', Validators.required)
     })
   }
 
   register(){
+    let postData = {};
+    let valid;
     if(this.user_type){
-      console.log(this.clientForm.value);
+      if(this.clientForm.valid){
+        postData = this.clientForm.value;
+        valid = this.clientForm.valid;
+      }
     }
     else{
-      console.log(this.businessForm.value);
+      if(this.businessForm.valid){
+        postData = this.businessForm.value
+        valid = this.businessForm.valid;
+      }
     }
+    console.log(valid);
+    console.log(postData);
   }
 
   set_user_type(type){

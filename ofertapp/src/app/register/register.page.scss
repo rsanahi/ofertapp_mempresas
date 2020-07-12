@@ -17,8 +17,8 @@ ion-slides {
 
 .swiper-slide img {
     max-height: 10%;
-    max-width: 30%;
-    margin: 40px 0 10px;
+    max-width: 25%;
+    margin: 20px 0 10px;
     pointer-events: none;
 }
 
@@ -40,4 +40,9 @@ p b {
 .arrow-button{
     border: 0;
     background-color: transparent !important;
+}
+
+.form-control {
+    margin-left: 5%;
+    margin-right: 5%;
 }

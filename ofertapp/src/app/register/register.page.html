@@ -62,51 +62,64 @@
           <ion-slide>
             <img src="assets/media/slide-2.png"/>
             <!--Formulario cliente-->
-            <div *ngIf="user_type">
+            <div *ngIf="user_type" class="form-control">
               <h2>{{ 'signup.client' | translate}}</h2>
-              <form [formGroup]="clientForm" novalidate>
+              <form [formGroup]="clientForm">
                 <ion-item>
-                  <ion-label position="stacked">{{ 'signup.client_form.name' | translate}}</ion-label>
+                  <ion-label position="stacked" color="primary">{{ 'signup.client_form.name' | translate}}</ion-label>
                   <ion-input formControlName="name" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.name">
+                    <div class="error-message" *ngIf="clientForm.get('name').hasError(validation.type) && (clientForm.get('name').dirty || clientForm.get('name').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
+
                 <ion-item>
-                  <ion-label position="stacked">{{ 'signup.client_form.email' | translate}}</ion-label>
+                  <ion-label position="stacked" color="primary">{{ 'signup.client_form.email' | translate}}</ion-label>
                   <ion-input formControlName="email" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">{{ 'signup.client_form.password' | translate}}</ion-label>
-                  <ion-input formControlName="password" placeholder="" type="text" maxlength="30"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">{{ 'signup.client_form.confirm_password' | translate}}</ion-label>
-                  <ion-input formControlName="password2" placeholder="" type="text" maxlength="30"></ion-input>
-                </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.email">
+                    <div class="error-message" *ngIf="clientForm.get('email').hasError(validation.type) && (clientForm.get('email').dirty || clientForm.get('email').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
               </form>
             </div>
             <!--Formulario empresa-->
-            <div *ngIf="!user_type">
+            <div *ngIf="!user_type" class="form-control">
               <h2>{{ 'signup.business' | translate}}</h2>
               <form [formGroup]="businessForm" novalidate>
                 <ion-item>
-                  <ion-label position="stacked">{{ 'signup.business_form.name' | translate}}</ion-label>
+                  <ion-label position="stacked" color="primary">{{ 'signup.business_form.name' | translate}}</ion-label>
                   <ion-input formControlName="name" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.name">
+                    <div class="error-message" *ngIf="clientForm.get('name').hasError(validation.type) && (clientForm.get('name').dirty || clientForm.get('name').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
                 <ion-item>
-                  <ion-label position="stacked">{{ 'signup.business_form.phone' | translate}}</ion-label>
+                  <ion-label position="stacked" color="primary">{{ 'signup.business_form.phone' | translate}}</ion-label>
                   <ion-input formControlName="phone" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-label position="stacked">{{ 'signup.business_form.email' | translate}}</ion-label>
+                  <ion-label position="stacked" color="primary">{{ 'signup.business_form.email' | translate}}</ion-label>
                   <ion-input formControlName="email" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">{{ 'signup.business_form.password' | translate}}</ion-label>
-                  <ion-input formControlName="password" placeholder="" type="text" maxlength="30"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">{{ 'signup.business_form.confirm_password' | translate}}</ion-label>
-                  <ion-input formControlName="password2" placeholder="" type="text" maxlength="30"></ion-input>
-                </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.email">
+                    <div class="error-message" *ngIf="clientForm.get('email').hasError(validation.type) && (clientForm.get('email').dirty || clientForm.get('email').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
               </form>
             </div>
           </ion-slide>
