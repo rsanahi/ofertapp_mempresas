@@ -5,6 +5,9 @@ import { IonSlides} from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { PasswordValidator } from '../validators/password.validator';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +32,7 @@ export class RegisterPage implements OnInit {
   left_arrow : Boolean;
   rigth_arrow : Boolean;
   user_type : Boolean; //Si es True sera Cliente, False Empresa
+  isLoading = false;
 
   //FORM
   clientForm: FormGroup;
@@ -61,6 +65,9 @@ export class RegisterPage implements OnInit {
   constructor(
     public popoverController: PopoverController,
     private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private loadingController: LoadingController,
   ) {
     this.create_client_form()
     this.create_business_form()
@@ -107,20 +114,45 @@ export class RegisterPage implements OnInit {
   register(){
     let postData = {};
     let valid;
+    let url;
     if(this.user_type){
       if(this.clientForm.valid){
-        postData = this.clientForm.value;
+        postData = {
+          'fk_user':{
+            'first_name':this.clientForm.value.name,
+            'email':this.clientForm.value.email,
+            'password':this.clientForm.value.matching_passwords.password
+          }
+        };
         valid = this.clientForm.valid;
+        url = 'register_client';
       }
     }
     else{
       if(this.businessForm.valid){
         postData = this.businessForm.value
         valid = this.businessForm.valid;
+        url = 'register_business';
       }
     }
-    console.log(valid);
-    console.log(postData);
+    if(valid){
+      console.log(postData);
+      this.loading_present();
+      this.authService.login(postData,url).subscribe((res:any)=>{
+        this.loading_dismiss();
+        console.log(res)
+        if(res.fk_user){
+          this.router.navigate(['/login'])
+        }
+        else {
+          console.log('Incorrect username or password');
+        } 
+      },
+      (error: any)=>{
+        console.log(error.message);
+        this.loading_dismiss();
+      });
+    }
   }
 
   set_user_type(type){
@@ -187,6 +219,29 @@ export class RegisterPage implements OnInit {
         this.rigth_arrow = true;
       }
     });
+  }
+
+  //loading
+  async loading_present() {
+    this.isLoading = true;
+    return await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    }).then(a => {
+      a.present().then(() => {
+        if (!this.isLoading) {
+          a.dismiss();
+        }
+      });
+    });
+  }
+
+  async loading_dismiss() {
+    if (this.isLoading) {
+      this.isLoading = false;
+      return await this.loadingController.dismiss();
+    }
+    return null;
   }
 
 }

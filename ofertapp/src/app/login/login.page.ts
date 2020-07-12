@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { AuthConstants } from '../config/auth-constants';
@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ import { PopoverComponent } from '../components/popover/popover.component';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
+  isLoading = false;
 
   // variables
   proximamente: String;
@@ -29,7 +31,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private translate: TranslateService,
     public toastController: ToastController,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private loadingController: LoadingController
     ) { 
     this.createForm();
     this.current_lenguaje();
@@ -48,7 +51,9 @@ export class LoginPage implements OnInit {
   Login(){
     if(this.loginForm.valid){
       const postData = this.loginForm.value;
-      this.authService.login(postData).subscribe((res:any)=>{
+      this.loading_present();
+      this.authService.login(postData,'login').subscribe((res:any)=>{
+        this.loading_dismiss();
         if(res.user){
           this.storageService.store(AuthConstants.AUTH, res.auth_token);
           this.storageService.store(AuthConstants.GROUP, res.user.groups[0].id);
@@ -117,6 +122,28 @@ export class LoginPage implements OnInit {
       }
     )
     this.presentToast(this.proximamente);
+  }
+
+  async loading_present() {
+    this.isLoading = true;
+    return await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    }).then(a => {
+      a.present().then(() => {
+        if (!this.isLoading) {
+          a.dismiss();
+        }
+      });
+    });
+  }
+
+  async loading_dismiss() {
+    if (this.isLoading) {
+      this.isLoading = false;
+      return await this.loadingController.dismiss();
+    }
+    return null;
   }
 
 }
