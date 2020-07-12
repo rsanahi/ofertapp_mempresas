@@ -4,6 +4,7 @@ import { ViewChild } from '@angular/core';
 import { IonSlides} from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
+import { PasswordValidator } from '../validators/password.validator';
 
 @Component({
   selector: 'app-register',
@@ -35,32 +36,25 @@ export class RegisterPage implements OnInit {
 
   validation_messages = {
     'name': [
-      { type: 'required', message: 'Name is required.' }
-    ],
-    'lastname': [
-      { type: 'required', message: 'Last name is required.' }
+      { type: 'required', message: 'signup.errors_form.name' }
     ],
     'email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Please enter a valid email.' }
+      { type: 'required', message: 'signup.errors_form.email1' },
+      { type: 'pattern', message: 'signup.errors_form.email2' }
     ],
     'phone': [
-      { type: 'required', message: 'Phone is required.' },
-      { type: 'validCountryPhone', message: 'The phone is incorrect for the selected country.' }
+      { type: 'required', message: 'signup.errors_form.phone' },
     ],
     'password': [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
+      { type: 'required', message: 'signup.errors_form.password1' },
+      { type: 'minlength', message: 'signup.errors_form.password2' },
+      { type: 'pattern', message: 'signup.errors_form.password3' }
     ],
     'confirm_password': [
-      { type: 'required', message: 'Confirm password is required.' }
+      { type: 'required', message: 'signup.errors_form.confirm_password' }
     ],
     'matching_passwords': [
-      { type: 'areEqual', message: 'Password mismatch.' }
-    ],
-    'terms': [
-      { type: 'pattern', message: 'You must accept terms and conditions.' }
+      { type: 'areEqual', message: 'signup.errors_form.matching_passwords' }
     ],
   };
 
@@ -79,8 +73,16 @@ export class RegisterPage implements OnInit {
     this.clientForm = this.fb.group({
       name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
-      password: new FormControl('', Validators.compose([Validators.minLength(8), Validators.required])),
-      password2: new FormControl('', Validators.required),
+      matching_passwords : new FormGroup({
+        password: new FormControl('', Validators.compose([
+          Validators.minLength(8),
+          Validators.required,
+          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+        ])),
+        confirm_password: new FormControl('', Validators.required)
+      }, (formGroup: FormGroup) => {
+        return PasswordValidator.areEqual(formGroup);
+      })
     });
   }
 
@@ -89,8 +91,16 @@ export class RegisterPage implements OnInit {
       name: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
-      password: new FormControl('', Validators.required),
-      password2: new FormControl('', Validators.required)
+      matching_passwords: new FormGroup({
+        password: new FormControl('', Validators.compose([
+          Validators.minLength(8),
+          Validators.required,
+          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+        ])),
+        confirm_password: new FormControl('', Validators.required)
+      }, (formGroup: FormGroup) => {
+        return PasswordValidator.areEqual(formGroup);
+      })
     })
   }
 
@@ -122,6 +132,8 @@ export class RegisterPage implements OnInit {
       - False: Usuario Empresa
     */
     this.user_type = type;
+    this.clientForm.reset();
+    this.businessForm.reset();
     this.swipeNext();
   }
 

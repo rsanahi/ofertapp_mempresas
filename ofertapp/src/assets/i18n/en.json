@@ -31,6 +31,17 @@
             "email":"Email",
             "password":"Password",
             "confirm_password":"Confirm Password"
+        },
+        "errors_form":{
+            "name":"Name is required.",
+            "email1":"Email is required.",
+            "email2":"Please enter a valid email.",
+            "phone":"Phone is required.",
+            "password1":"Password is required.",
+            "password2":"Password must be at least 8 characters long.",
+            "password3":"Your password must contain at least one uppercase, one lowercase, and one number.",
+            "confirm_password":"Confirm password is required.",
+            "matching_passwords":"Password mismatch."
         }
     },
     "coming_soon":"Coming soon...",

@@ -31,6 +31,17 @@
             "email":"Email",
             "password":"Contraseña",
             "confirm_password":"Confirmar Contraseña"
+        },
+        "errors_form":{
+            "name":"El nombre es requerido.",
+            "email1":"El email es requerido.",
+            "email2":"Por favor, inserte un email valido.",
+            "phone":"El telefono es requerido.",
+            "password1":"La contraseña es requerida.",
+            "password2":"La contraseña debe ser de almenos 8 caracteres.",
+            "password3":"La contraseña debe tener almenos una letra mayuscula, una minuscula y un número.",
+            "confirm_password":"La confirmacion de contraseña es requerida.",
+            "matching_passwords":"Las contraseñas no coinciden."
         }
     },
     "coming_soon":"Proximamente...",
