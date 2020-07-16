@@ -3,16 +3,16 @@
     "english":"ingles",
     "login":{
         "login":"Iniciar Sesión",
-        "singup":"REGÍSTRATE",
+        "singup":"Regístrate",
         "email":"email",
         "password":"contraseña",
         "forgett_password":"¿Olvidaste tu contraseña?",
-        "without_account":"¿No tiene un cuenta todavia?",
+        "without_account":"¿No tienes una cuenta todavia?",
         "input_email":"coloca tu email",
         "input_password":"coloca tu clave"
     },
     "signup":{
-        "login":"Inicíar sesion",
+        "login":"Inicíar sesión",
         "signup":"Regístrate",
         "already_account":"¿Ya tienes una cuenta?",
         "welcome":"Bienvenidos",
@@ -46,6 +46,6 @@
     },
     "coming_soon":"Proximamente...",
     "social_login":{
-        "alt_login":"O inicia sesion con"
+        "alt_login":"O inicia sesión con"
     }
 }

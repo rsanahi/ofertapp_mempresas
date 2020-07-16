@@ -86,6 +86,16 @@
 background: #222;
 }
 
+/* DOES NOT WORK - not specific enough */
+ion-loading {
+  color: rgb(65, 65, 65);
+}
+
+/* Works - pass "my-custom-class" in cssClass to increase specificity */
+.my-custom-class {
+  color: rgb(65, 65, 65);
+}
+
 ion-content {
   .error-message
   {

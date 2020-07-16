@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { AuthConstants } from '../config/auth-constants';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
-import { LoadingController } from '@ionic/angular';
+import { LoadingService } from '../services/ui/loading.service';
+import { ToastService } from '../services/ui/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,6 @@ import { LoadingController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
-  isLoading = false;
 
   // variables
   proximamente: String;
@@ -30,9 +29,9 @@ export class LoginPage implements OnInit {
     private storageService: StorageService,
     private router: Router,
     private translate: TranslateService,
-    public toastController: ToastController,
     public popoverController: PopoverController,
-    private loadingController: LoadingController
+    private loadingService: LoadingService,
+    private toastService: ToastService,
     ) { 
     this.createForm();
     this.current_lenguaje();
@@ -43,17 +42,17 @@ export class LoginPage implements OnInit {
 
   createForm(){
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     });
   }
 
   Login(){
     if(this.loginForm.valid){
       const postData = this.loginForm.value;
-      this.loading_present();
+      this.loadingService.loading_present();
       this.authService.login(postData,'login').subscribe((res:any)=>{
-        this.loading_dismiss();
+        this.loadingService.loading_dismiss();
         if(res.user){
           this.storageService.store(AuthConstants.AUTH, res.auth_token);
           this.storageService.store(AuthConstants.GROUP, res.user.groups[0].id);
@@ -65,10 +64,12 @@ export class LoginPage implements OnInit {
         }
       },
       (error: any)=>{
-        this.presentToast(error.message);
+        this.loadingService.loading_dismiss();
+        this.toastService.presentToast("Network connection error.");
       });
     }
     else{
+      this.loadingService.loading_dismiss();
       console.log(this.loginForm)
     }
   }
@@ -104,46 +105,13 @@ export class LoginPage implements OnInit {
     return await popover.present();
   }
 
-  // ion toast
-  async presentToast(text) {
-    const toast = await this.toastController.create({
-      message: text,
-      duration: 2000,
-      position: "bottom",
-      color: "light"
-    });
-    toast.present();
-  }
-
   social_login(){
     this.translate.get('coming_soon').subscribe(
       value => {
         this.proximamente = value;
       }
     )
-    this.presentToast(this.proximamente);
-  }
-
-  async loading_present() {
-    this.isLoading = true;
-    return await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-    }).then(a => {
-      a.present().then(() => {
-        if (!this.isLoading) {
-          a.dismiss();
-        }
-      });
-    });
-  }
-
-  async loading_dismiss() {
-    if (this.isLoading) {
-      this.isLoading = false;
-      return await this.loadingController.dismiss();
-    }
-    return null;
+    this.toastService.presentToast(this.proximamente);
   }
 
 }

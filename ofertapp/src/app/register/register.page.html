@@ -66,7 +66,7 @@
               <h3>{{ 'signup.client' | translate}}</h3>
               <form [formGroup]="clientForm">
                 <ion-item>
-                  <ion-label position="stacked" color="primary">{{ 'signup.client_form.name' | translate }}</ion-label>
+                  <ion-label position="stacked" color="medium"><ion-icon name="person-outline"></ion-icon> {{ 'signup.client_form.name' | translate }}</ion-label>
                   <ion-input formControlName="name" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
                 <div class="validation-errors">
@@ -78,7 +78,7 @@
                 </div>
 
                 <ion-item>
-                  <ion-label position="stacked" color="primary">{{ 'signup.client_form.email' | translate }}</ion-label>
+                  <ion-label position="stacked" color="medium"><ion-icon name="mail-outline"></ion-icon> {{ 'signup.client_form.email' | translate }}</ion-label>
                   <ion-input formControlName="email" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
                 <div class="validation-errors">
@@ -90,7 +90,7 @@
                 </div>
                 <div formGroupName="matching_passwords">
                   <ion-item>
-                    <ion-label position="stacked" color="primary">{{ 'signup.business_form.password' | translate }}</ion-label>
+                    <ion-label position="stacked" color="medium"><ion-icon name="lock-open-outline"></ion-icon> {{ 'signup.business_form.password' | translate }}</ion-label>
                     <ion-input type="password" formControlName="password"></ion-input>
                   </ion-item>
                   <div class="validation-errors">
@@ -101,7 +101,7 @@
                     </ng-container>
                   </div>
                   <ion-item>
-                    <ion-label position="stacked" color="primary">{{ 'signup.business_form.confirm_password' | translate }}</ion-label>
+                    <ion-label position="stacked" color="medium"><ion-icon name="lock-open-outline"></ion-icon> {{ 'signup.business_form.confirm_password' | translate }}</ion-label>
                     <ion-input type="password" formControlName="confirm_password"></ion-input>
                   </ion-item>
                   <div class="validation-errors">
@@ -127,7 +127,7 @@
               <h2>{{ 'signup.business' | translate }}</h2>
               <form [formGroup]="businessForm" novalidate>
                 <ion-item>
-                  <ion-label position="stacked" color="primary">{{ 'signup.business_form.name' | translate }}</ion-label>
+                  <ion-label position="stacked" color="medium"><ion-icon name="people-outline"></ion-icon> {{ 'signup.business_form.name' | translate }}</ion-label>
                   <ion-input formControlName="name" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
                 <div class="validation-errors">
@@ -138,11 +138,11 @@
                   </ng-container>
                 </div>
                 <ion-item>
-                  <ion-label position="stacked" color="primary">{{ 'signup.business_form.phone' | translate }}</ion-label>
+                  <ion-label position="stacked" color="medium"><ion-icon name="call-outline"></ion-icon> {{ 'signup.business_form.phone' | translate }}</ion-label>
                   <ion-input formControlName="phone" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-label position="stacked" color="primary">{{ 'signup.business_form.email' | translate }}</ion-label>
+                  <ion-label position="stacked" color="medium"><ion-icon name="mail-outline"></ion-icon> {{ 'signup.business_form.email' | translate }}</ion-label>
                   <ion-input formControlName="email" placeholder="" type="text" maxlength="30"></ion-input>
                 </ion-item>
                 <div class="validation-errors">
@@ -154,7 +154,7 @@
                 </div>
                 <div formGroupName="matching_passwords">
                   <ion-item>
-                    <ion-label position="stacked" color="primary">{{ 'signup.business_form.password' | translate }}</ion-label>
+                    <ion-label position="stacked" color="medium"><ion-icon name="lock-open-outline"></ion-icon> {{ 'signup.business_form.password' | translate }}</ion-label>
                     <ion-input type="password" formControlName="password"></ion-input>
                   </ion-item>
                   <div class="validation-errors">
@@ -165,7 +165,7 @@
                     </ng-container>
                   </div>
                   <ion-item>
-                    <ion-label position="stacked" color="primary">{{ 'signup.business_form.confirm_password' | translate }}</ion-label>
+                    <ion-label position="stacked" color="medium"><ion-icon name="lock-open-outline"></ion-icon> {{ 'signup.business_form.confirm_password' | translate }}</ion-label>
                     <ion-input type="password" formControlName="confirm_password"></ion-input>
                   </ion-item>
                   <div class="validation-errors">

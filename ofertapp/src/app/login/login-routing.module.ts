@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginPage } from './login.page';
 
+import { IsAuthGuard } from '../guards/is-auth.guard';
+
 const routes: Routes = [
   {
     path: '',

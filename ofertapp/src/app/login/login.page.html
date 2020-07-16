@@ -17,14 +17,19 @@
     </div>
     <!--Content-->
     <div class="row content">
+      <div class="center">
+        <ion-thumbnail slot="" class="logo">
+          <ion-img src="assets/media/Ofertappbolsapng.png"></ion-img>
+        </ion-thumbnail>
+      </div>
       <div class="login-form">
-          <form [formGroup]="loginForm" novalidate (ngSubmit)="Login()">
+          <form [formGroup]="loginForm" (ngSubmit)="Login()">
             <div class="item">
-              <ion-label position="stacked">{{ 'login.email' | translate }}</ion-label>
+              <ion-label position="stacked" color="medium"><ion-icon name="mail-outline"></ion-icon> {{ 'login.email' | translate }}</ion-label>
               <ion-input formControlName="username" placeholder="" type="text" maxlength="30" placeholder=""></ion-input>
             </div>
             <div class="item">
-              <ion-label position="stacked">{{ 'login.password' | translate }}</ion-label>
+              <ion-label position="stacked" color="medium"><ion-icon name="lock-open-outline"></ion-icon> {{ 'login.password' | translate }}</ion-label>
               <ion-input formControlName="password" placeholder="" type="password" maxlength="30" placeholder=""></ion-input>
             </div>
             <div class="forget-pw">

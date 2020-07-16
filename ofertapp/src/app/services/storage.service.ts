@@ -22,7 +22,7 @@ export class StorageService {
   async get(storageKey: string){
     const res = await Storage.get({key:storageKey});
     if(res.value){
-      return JSON.parse(escape(atob(res.value)));
+      return escape(atob(res.value));
     }
     else{
       return false;
