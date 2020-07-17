@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
+import { Icon } from 'ionicons/dist/types/components/icon/icon';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
+  public sectionMenu: String;
+
   public appPages = [
     {
       title: 'Inbox',
@@ -44,7 +47,14 @@ export class AppComponent implements OnInit {
       icon: 'warning'
     }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
+  public labels = [
+    {
+      title: 'Profile',
+      url: '/profile',
+      icon: 'heart'
+    }
+  ];
 
   constructor(
     private platform: Platform,

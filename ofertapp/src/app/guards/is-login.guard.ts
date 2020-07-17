@@ -8,25 +8,25 @@ import { AuthConstants } from '../config/auth-constants';
 @Injectable({
   providedIn: 'root'
 })
-export class IsAuthGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+export class IsLoginGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
   constructor(private storageService:StorageService,private router: Router,){}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return new Promise(resolve => {
-        this.storageService.get(AuthConstants.AUTH).then( res => {
-          if(res){
-            resolve(true);
-          }
-          else{
-            this.router.navigate([""]);
-            resolve(false);
-          }
-        }).catch( err => {
-          console.log(err);
+    return new Promise(resolve => {
+      this.storageService.get(AuthConstants.AUTH).then( res => {
+        if(res){
+          this.router.navigate(["/folder/Inbox"]);
           resolve(false);
-        });
+        }
+        else{
+          resolve(true);
+        }
+      }).catch( err => {
+        console.log(err);
+        resolve(true);
       });
+    });
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
