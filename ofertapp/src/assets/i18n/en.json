@@ -42,6 +42,11 @@
             "password3":"Your password must contain at least one uppercase, one lowercase, and one number.",
             "confirm_password":"Confirm password is required.",
             "matching_passwords":"Password mismatch."
+        },
+        "errors_backend":{
+            "already_email":"There is already a user with this email!",
+            "password_common":"This password is too common.",
+            "password_similar":"The password is too similar to the first name."
         }
     },
     "coming_soon":"Coming soon...",

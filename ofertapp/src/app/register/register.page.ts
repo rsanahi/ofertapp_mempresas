@@ -8,6 +8,8 @@ import { PasswordValidator } from '../validators/password.validator';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { ToastService } from '../services/ui/toast.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -68,6 +70,8 @@ export class RegisterPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private loadingController: LoadingController,
+    private toastService: ToastService,
+    private translate: TranslateService
   ) {
     this.create_client_form()
     this.create_business_form()
@@ -130,17 +134,22 @@ export class RegisterPage implements OnInit {
     }
     else{
       if(this.businessForm.valid){
-        postData = this.businessForm.value
+        postData = {
+          'telefono':this.businessForm.value.phone,
+          'fk_user':{
+            'first_name':this.businessForm.value.name,
+            'email':this.businessForm.value.email,
+            'password':this.businessForm.value.matching_passwords.password
+          }
+        };
         valid = this.businessForm.valid;
         url = 'register_business';
       }
     }
     if(valid){
-      console.log(postData);
       this.loading_present();
       this.authService.login(postData,url).subscribe((res:any)=>{
         this.loading_dismiss();
-        console.log(res)
         if(res.fk_user){
           this.router.navigate(['/login'])
         }
@@ -149,7 +158,36 @@ export class RegisterPage implements OnInit {
         } 
       },
       (error: any)=>{
-        console.log(error.message);
+        let current_error = error.error;
+        let message = "";
+        this.swipeBefore();
+        if(current_error.fk_user.username){
+          this.translate.get('signup.errors_backend.already_email').subscribe(
+            value => {
+              message = value;
+            }
+          )
+        }
+        if(current_error.fk_user.password){
+          let errors = current_error.fk_user.password;
+          errors.forEach(element => {
+            if(element=='This password is too common.'){
+              this.translate.get('signup.errors_backend.password_common').subscribe(
+                value => {
+                  message = value;
+                }
+              )
+            }
+            else if(element=='The password is too similar to the first name.'){
+              this.translate.get('signup.errors_backend.password_similar').subscribe(
+                value => {
+                  message = value;
+                }
+              )
+            }
+          });
+        }
+        this.toastService.presentToast(message);
         this.loading_dismiss();
       });
     }

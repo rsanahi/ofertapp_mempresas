@@ -42,6 +42,11 @@
             "password3":"La contraseña debe tener almenos una letra mayuscula, una minuscula y un número.",
             "confirm_password":"La confirmacion de contraseña es requerida.",
             "matching_passwords":"Las contraseñas no coinciden."
+        },
+        "errors_backend":{
+            "already_email":"Este email ya se encuentra registrado!",
+            "password_common":"Esta contraseña es muy común.",
+            "password_similar":"La contraseña es muy similar al nombre."
         }
     },
     "coming_soon":"Proximamente...",
