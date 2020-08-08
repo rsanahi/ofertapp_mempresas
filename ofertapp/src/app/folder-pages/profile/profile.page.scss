@@ -1,0 +1,51 @@
+ion-content{
+    --background: transparent !important;
+}
+
+ion-header{
+    --background: transparent;
+}
+
+ion-toolbar{
+    --background: transparent;
+}
+
+
+.avatar {
+    background: transparent;
+    background-color: rgba(250, 250, 250, 0.76);
+    height: 280px;
+    width: 100%;
+}
+
+.avatar-profile{
+    border: solid 1px blue;
+    border-radius: 10%;
+    width: 150px;
+    height: 150px;
+}
+
+.profile-items {
+    padding: 5%;
+    padding-top: 2%;
+    padding-bottom: 0%;
+}
+
+.profile-items-card {
+    padding: 4%;
+    padding-bottom: 5%;
+}
+
+.button-save {
+    text-align: right;
+    margin: 2%;
+    margin-top: 2%;
+}
+
+.cambiar-clave {
+    padding: 5%;
+}
+
+ion-card {
+    margin: 0% !important;
+}

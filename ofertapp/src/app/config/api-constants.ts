@@ -1,6 +1,8 @@
 export class API{
-    public static readonly login = 'api/auth/token/login';
+    public static readonly login = 'api/auth/token/login/';
     public static readonly register_client = 'api/cliente/';
     public static readonly register_business = 'api/business/';
-    public static readonly get_client = 'apli/cliente/detalles';
+    public static readonly get_client = 'api/cliente/detalles/';
+    public static readonly get_business = 'api/business/detalles';
+    public static readonly update_business = 'api/business/actualizar/';
 }

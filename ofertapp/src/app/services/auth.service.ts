@@ -30,4 +30,13 @@ export class AuthService {
       this.router.navigate(['']);
     })
   }
+
+  facebook(data){
+    const body = {
+      provider:'facebook',
+      code: data
+    };
+
+    return this.httpService.post('/api/login/social/token_user/facebook/', body);
+  }
 }

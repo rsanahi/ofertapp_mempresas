@@ -15,14 +15,15 @@ export class StorageService {
     const scryptedValue = btoa(escape(JSON.stringify(value)));
     await Storage.set({
       key: storageKey,
-      value: scryptedValue
+      value: value
     });
   }
 
   async get(storageKey: string){
     const res = await Storage.get({key:storageKey});
     if(res.value){
-      return escape(atob(res.value));
+      //return escape(atob(res.value));
+      return res.value;
     }
     else{
       return false;

@@ -9,6 +9,8 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../components/popover/popover.component';
 import { LoadingService } from '../services/ui/loading.service';
 import { ToastService } from '../services/ui/toast.service';
+import { HttpService } from '../services/http.service';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +34,8 @@ export class LoginPage implements OnInit {
     public popoverController: PopoverController,
     private loadingService: LoadingService,
     private toastService: ToastService,
+    private httpSevice: HttpService,
+    private facebook: Facebook
     ) { 
     this.createForm();
     this.current_lenguaje();
@@ -70,8 +74,15 @@ export class LoginPage implements OnInit {
     }
     else{
       this.loadingService.loading_dismiss();
-      console.log(this.loginForm)
     }
+  }
+
+  facebook_login(){
+    this.facebook.login(['public_profile', 'email'])
+    .then((res: FacebookLoginResponse)=>{
+      console.log('response',res);
+    })
+    .catch(e=>console.log('error',e));
   }
 
   current_lenguaje(){

@@ -41,7 +41,9 @@
             "password2":"La contraseña debe ser de almenos 8 caracteres.",
             "password3":"La contraseña debe tener almenos una letra mayuscula, una minuscula y un número.",
             "confirm_password":"La confirmacion de contraseña es requerida.",
-            "matching_passwords":"Las contraseñas no coinciden."
+            "matching_passwords":"Las contraseñas no coinciden.",
+            "name_business":"El nombre de la empresa es requerido.",
+            "address":"La direccion de la empresa es requerida."
         },
         "errors_backend":{
             "already_email":"Este email ya se encuentra registrado!",

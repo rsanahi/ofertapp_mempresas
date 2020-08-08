@@ -41,7 +41,9 @@
             "password2":"Password must be at least 8 characters long.",
             "password3":"Your password must contain at least one uppercase, one lowercase, and one number.",
             "confirm_password":"Confirm password is required.",
-            "matching_passwords":"Password mismatch."
+            "matching_passwords":"Password mismatch.",
+            "name_business":"El nombre de la empresa es requerido.",
+            "address":"La direccion de la empresa es requerida."
         },
         "errors_backend":{
             "already_email":"There is already a user with this email!",
