@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../services/plugins/profile.service';
+import { BusinessService } from '../../services/plugins/business.service';
 import { API } from '../../config/api-constants';
-import { LoadingController } from '@ionic/angular';
+import { LoadingService } from '../../services/ui/loading.service';
 import { ToastService } from '../../services/ui/toast.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -47,13 +48,15 @@ export class ProfilePage implements OnInit {
     ],
   };
 
+  categories = [];
+
   constructor(
     private profileService: ProfileService,
     private fb: FormBuilder,
-    private loadingController: LoadingController,
-    private toastService: ToastService,
-    private translate: TranslateService
+    private businessService: BusinessService,
+    private loadingService: LoadingService,
   ) {
+    this.get_categories();
     this.get_user_details();
     this.create_profile_form();
    }
@@ -67,18 +70,33 @@ export class ProfilePage implements OnInit {
       direccion: new FormControl('', Validators.compose([Validators.required, Validators.minLength(15)])),
       phone: new FormControl('', Validators.compose([Validators.required])),
       name: new FormControl('', Validators.required),
+      categoria: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
     });
   }
 
   get_user_details(){
     this.profileService.get_details('get_business').subscribe((res:any)=>{
-
       if(res){
-        console.log("response",res)
+        this.profileForm.patchValue({
+          'nombre_empresa':res.nombre_local,
+          'direccion': res.direccion,
+          'phone': res.telefono,
+          'categoria': res.categoria,
+          'name':res.fk_user.first_name,
+          'email': res.fk_user.email,
+        });
       }
-      else {
-        console.log('Incorrect username or password');
+    },
+    (error: any)=>{
+      console.log("error",error);
+    });
+  }
+
+  get_categories(){
+    this.businessService.get_business_categories().subscribe((res:any)=>{
+      if(res){
+        this.categories = res.categorias;
       }
     },
     (error: any)=>{
@@ -96,6 +114,7 @@ export class ProfilePage implements OnInit {
         nombre_local: this.profileForm.value.nombre_empresa,
         telefono: this.profileForm.value.phone,
         direccion: this.profileForm.value.direccion,
+        categoria: this.profileForm.value.categoria,
         fk_user: {
           first_name: this.profileForm.value.name,
           email: this.profileForm.value.email,
@@ -106,6 +125,7 @@ export class ProfilePage implements OnInit {
     console.log("updating");
     if(valid){
       let url = 'update_business';
+      this.loadingService.loading_present();
       this.profileService.update_details(url, postData).subscribe((res:any)=>{
         if(res){
           console.log("response",res)
@@ -113,6 +133,7 @@ export class ProfilePage implements OnInit {
         else {
           console.log('Incorrect username or password');
         }
+        this.loadingService.loading_dismiss();
       },
       (error: any)=>{
         console.log("error",error);
