@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./modules/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./modules/register/register.module').then( m => m.RegisterPageModule),
   },
   {
     path: 'profile',
@@ -31,11 +31,12 @@ const routes: Routes = [
   },
   {
     path: 'logout',
-    loadChildren: () => import('./folder-pages/logout/logout.module').then( m => m.LogoutPageModule)
+    loadChildren: () => import('./folder-pages/logout/logout.module').then( m => m.LogoutPageModule),
   },
   {
     path: 'newofert',
-    loadChildren: () => import('./modules/newofert/newofert.module').then( m => m.NewofertPageModule)
+    loadChildren: () => import('./modules/newofert/newofert.module').then( m => m.NewofertPageModule),
+    canActivate: [IsAuthGuard]
   }
 
 
