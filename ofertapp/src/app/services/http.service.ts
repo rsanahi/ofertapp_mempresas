@@ -18,7 +18,7 @@ export class HttpService {
     private storageService: StorageService,
   ) { }
 
-  post(serviceName: string, data: any){
+  post(serviceName: string, data: any = []){
     const options = { header: this.headers, withCredentials: false};
     const url = environment.apiURL+serviceName;
     return this.http.post(url, data, options);

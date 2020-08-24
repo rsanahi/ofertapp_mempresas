@@ -26,9 +26,7 @@ export class AuthService {
   }
 
   logout(){
-    this.storageService.remove(AuthConstants.AUTH).then(res=>{
-      this.router.navigate(['']);
-    })
+    return this.httpService.post(API['logout']);
   }
 
   facebook(data){
