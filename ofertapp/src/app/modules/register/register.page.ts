@@ -3,13 +3,14 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { IonSlides} from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
-import { PopoverComponent } from '../components/popover/popover.component';
-import { PasswordValidator } from '../validators/password.validator';
-import { AuthService } from '../services/auth.service';
+import { PopoverComponent } from '../../components/popover/popover.component';
+import { PasswordValidator } from '../../validators/password.validator';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { ToastService } from '../services/ui/toast.service';
+import { ToastService } from '../../services/ui/toast.service';
 import { TranslateService } from '@ngx-translate/core';
+import { EventsService } from '../../services/events.service';
 
 @Component({
   selector: 'app-register',
@@ -35,6 +36,7 @@ export class RegisterPage implements OnInit {
   rigth_arrow : Boolean;
   user_type : Boolean; //Si es True sera Cliente, False Empresa
   isLoading = false;
+  lenguaje: String = "";
 
   //FORM
   clientForm: FormGroup;
@@ -71,10 +73,29 @@ export class RegisterPage implements OnInit {
     private router: Router,
     private loadingController: LoadingController,
     private toastService: ToastService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private eventService: EventsService,
   ) {
-    this.create_client_form()
-    this.create_business_form()
+    this.create_client_form();
+    this.create_business_form();
+
+    this.eventService.getLenguajeObservable().subscribe((res)=>{
+      if(res=="es"){
+        this.translate.get('spanish').subscribe(
+          value => {
+            this.lenguaje = value;
+          }
+        )
+      }
+      else{
+        this.translate.get('english').subscribe(
+          value => {
+            this.lenguaje = value;
+          }
+        )
+      }
+      console.log("je my new lg",res);
+    });
   }
 
   ngOnInit() {

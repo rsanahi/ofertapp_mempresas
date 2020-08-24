@@ -9,7 +9,7 @@
           </h1>
           <div (click)="presentPopover($event)" style="text-align:center;">
             <ion-text color="medium">
-              <h6>español <ion-icon name="caret-down-outline"></ion-icon></h6>
+              <h6> {{ lenguaje }} <ion-icon name="caret-down-outline"></ion-icon></h6>
             </ion-text>
           </div>
         </ion-text>
@@ -210,7 +210,7 @@
       <div class="center" style="padding-bottom:5%;">
         <br>
         <ion-text>
-          <ion-router-link href="/login">
+          <ion-router-link routerLink="/login">
             {{ 'signup.login' | translate }}
           </ion-router-link>
         </ion-text>

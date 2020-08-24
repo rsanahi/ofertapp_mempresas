@@ -10,7 +10,7 @@ import { AuthConstants } from '../config/auth-constants';
 export class HttpService {
 
   headers = new HttpHeaders({
-
+    'Content-Type': 'application/json'
   });
 
   constructor(
@@ -32,6 +32,15 @@ export class HttpService {
 
   put(serviceName: string, data: any){
     const options = { header: this.headers, withCredentials: false};
+    const url = environment.apiURL+serviceName;
+    return this.http.put(url, data, options);
+  }
+
+  put_form(serviceName: string, data: any){
+    let headers = new HttpHeaders({
+
+    });
+    const options = { headers: headers, withCredentials: false};
     const url = environment.apiURL+serviceName;
     return this.http.put(url, data, options);
   }

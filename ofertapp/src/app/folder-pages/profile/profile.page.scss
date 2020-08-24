@@ -1,13 +1,13 @@
 ion-content{
-    --background: transparent !important;
+    --background: white !important;
 }
 
 ion-header{
-    --background: transparent;
+    --background: white;
 }
 
 ion-toolbar{
-    --background: transparent;
+    --background: white;
 }
 
 
@@ -16,6 +16,7 @@ ion-toolbar{
     background-color: rgba(250, 250, 250, 0.76);
     height: 280px;
     width: 100%;
+    position: relative;
 }
 
 .avatar-profile{
@@ -23,6 +24,12 @@ ion-toolbar{
     border-radius: 10%;
     width: 150px;
     height: 150px;
+}
+
+.button-upload {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .profile-items {

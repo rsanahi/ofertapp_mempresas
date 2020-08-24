@@ -26,7 +26,7 @@ export class StorageService {
       return res.value;
     }
     else{
-      return false;
+      return '';
     }
   }
 

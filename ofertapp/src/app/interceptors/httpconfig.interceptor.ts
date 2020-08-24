@@ -26,16 +26,18 @@ export class HttpConfigInterceptor implements HttpInterceptor{
             if(res){
                 this.token = "Token "+res;
             }
+
         }).catch( err => {
             console.log(err);
         });
+
         if(this.token != '' && this.token != null){
             request = request.clone({ headers: request.headers.set('Authorization', this.token) });
            
         }
 
         if(!request.headers.has('Content-Type')){
-            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
+            //request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
 
         request = request.clone({ headers: request.headers.set('Accept', '*/*') });

@@ -17,18 +17,27 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    loadChildren: () => import('./modules/login/login.module').then( m => m.LoginPageModule),
     canActivate: [IsLoginGuard]
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./modules/register/register.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'profile',
     loadChildren: () => import('./folder-pages/profile/profile.module').then( m => m.ProfilePageModule),
     canActivate: [IsAuthGuard]
+  },
+  {
+    path: 'logout',
+    loadChildren: () => import('./folder-pages/logout/logout.module').then( m => m.LogoutPageModule)
+  },
+  {
+    path: 'newofert',
+    loadChildren: () => import('./modules/newofert/newofert.module').then( m => m.NewofertPageModule)
   }
+
 
 ];
 

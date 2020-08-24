@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../services/plugins/profile.service';
 import { BusinessService } from '../../services/plugins/business.service';
+import { FilesService } from '../../services/ui/files.service';
 import { API } from '../../config/api-constants';
 import { LoadingService } from '../../services/ui/loading.service';
 import { ToastService } from '../../services/ui/toast.service';
+import { SheetService } from '../../services/ui/sheet.service';
 import { TranslateService } from '@ngx-translate/core';
+import { EventsService } from '../../services/events.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +20,9 @@ export class ProfilePage implements OnInit {
 
   //FORM
   profileForm: FormGroup;
+  imgProfile;
+  subs: Boolean = true;
+  proenv: any;
 
   validation_messages = {
     'name': [
@@ -49,16 +56,34 @@ export class ProfilePage implements OnInit {
   };
 
   categories = [];
+  camera_text = "";
+  gallery_text = "";
+  cancel_text = "";
+  image_source_text = "";
 
   constructor(
     private profileService: ProfileService,
     private fb: FormBuilder,
     private businessService: BusinessService,
     private loadingService: LoadingService,
+    private actionsheetService: SheetService,
+    private translate: TranslateService,
+    private fileService: FilesService,
+    private eventService: EventsService,
   ) {
     this.get_categories();
     this.get_user_details();
     this.create_profile_form();
+
+    if(this.subs){
+      this.subs = false;
+      this.proenv = this.eventService.getImgBusinessProfile().subscribe((res)=>{
+        if(res != ''){
+          this.update_image(res);
+        }
+      });
+    }
+
    }
 
   ngOnInit() {
@@ -71,7 +96,7 @@ export class ProfilePage implements OnInit {
       phone: new FormControl('', Validators.compose([Validators.required])),
       name: new FormControl('', Validators.required),
       categoria: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+      email: new FormControl({value: '', disabled: true}, Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
     });
   }
 
@@ -86,6 +111,7 @@ export class ProfilePage implements OnInit {
           'name':res.fk_user.first_name,
           'email': res.fk_user.email,
         });
+        this.imgProfile = this.get_api_url()+res.logo;
       }
     },
     (error: any)=>{
@@ -107,9 +133,7 @@ export class ProfilePage implements OnInit {
   update_user_profile(){
     let postData = {};
     let valid = false;
-    console.log(this.profileForm.errors);
     if(this.profileForm.valid){
-      console.log("valid");
       postData = {
         nombre_local: this.profileForm.value.nombre_empresa,
         telefono: this.profileForm.value.phone,
@@ -122,7 +146,6 @@ export class ProfilePage implements OnInit {
       }
       valid = this.profileForm.valid
     }
-    console.log("updating");
     if(valid){
       let url = 'update_business';
       this.loadingService.loading_present();
@@ -139,6 +162,80 @@ export class ProfilePage implements OnInit {
         console.log("error",error);
       });
     }
+  }
+
+  //Load Img
+  update_image(img){
+    this.profileService.update_img_profile('update_img_profile', img).subscribe((res:any)=>{
+      if(res){
+        this.imgProfile = this.get_api_url()+res.detail.logo;
+        //this.imgProfile = "";
+        console.log("new profile", this.imgProfile);
+      }
+    },
+    (error:any)=>{
+      console.log(error);
+    });
+  }
+
+  selectImage(){
+
+    this.translate.get('profile.camera_source').subscribe(
+      value => {
+        this.camera_text = value;
+      }
+    )
+
+    this.translate.get('profile.library_source').subscribe(
+      value => {
+        this.gallery_text = value;
+      }
+    )
+
+    this.translate.get('profile.cancel_load').subscribe(
+      value => {
+        this.cancel_text = value;
+      }
+    )
+
+    this.translate.get('profile.image_source').subscribe(
+      value => {
+        this.image_source_text = value;
+      }
+    )
+
+    let data = [{
+      text: this.camera_text,
+      role: 'destructive',
+      icon: 'camera',
+      handler: () => {
+        this.fileService.take_picture("camera");
+      }
+    }, {
+      text: this.gallery_text,
+      icon: 'image',
+      handler: () => {
+        this.fileService.take_picture("gallery");
+      }
+    }, {
+      text: this.cancel_text,
+      icon: 'close',
+      role: 'cancel',
+      handler: () => {
+        console.log('Cancel clicked');
+      }
+    }];
+    this.actionsheetService.generate_sheet(this.image_source_text, data);
+  }
+
+  get_api_url(){
+    let url = environment.apiURL.slice(0,environment.apiURL.lastIndexOf('/'));
+    return url;
+  }
+
+  ionViewDidLeave(){
+    this.subs = true;
+    this.proenv.unsubscribe();
   }
 
 }

@@ -4,8 +4,9 @@
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Ofertapp</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
-
+          <!--
+            <ion-note>your favorite app</ion-note>
+          -->
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i; sectionMenu = 'pages' " routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && sectionMenu == 'pages' ">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>

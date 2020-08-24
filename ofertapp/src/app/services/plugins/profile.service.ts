@@ -21,4 +21,8 @@ export class ProfileService {
   update_details(url:string, data:any): Observable<any> {
     return this.httpService.put(API[url], data);
   }
+
+  update_img_profile(url:string, data): Observable<any> {
+    return this.httpService.put_form(API[url], data);
+  }
 }

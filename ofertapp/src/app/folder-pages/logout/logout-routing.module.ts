@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginPage } from './login.page';
-
-import { IsAuthGuard } from '../guards/is-auth.guard';
+import { LogoutPage } from './logout.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginPage
+    component: LogoutPage
   }
 ];
 
@@ -16,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LoginPageRoutingModule {}
+export class LogoutPageRoutingModule {}

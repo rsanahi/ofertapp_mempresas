@@ -15,6 +15,10 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { Crop } from '@ionic-native/crop/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +41,10 @@ import { Facebook } from '@ionic-native/facebook/ngx';
     SplashScreen,
     HttpClientModule,
     Facebook,
+    Camera,
+    File,
+    WebView,
+    Crop,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ],

@@ -54,5 +54,11 @@
     "coming_soon":"Coming soon...",
     "social_login":{
         "alt_login":"Or sign up using"
+    },
+    "profile":{
+        "image_source":"Select Image Source",
+        "library_source":"Gallery",
+        "camera_source":"Camera",
+        "cancel_load":"Cancel"
     }
 }

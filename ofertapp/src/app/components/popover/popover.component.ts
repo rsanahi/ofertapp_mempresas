@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { EventsService } from '../../services/events.service';
 
 @NgModule({
   imports: [ CommonModule ],
@@ -22,6 +23,7 @@ export class PopoverComponent implements OnInit {
   constructor(
     public popoverController: PopoverController,
     private translate: TranslateService,
+    private eventService: EventsService,
   ) { }
 
   ngOnInit() {}
@@ -32,6 +34,7 @@ export class PopoverComponent implements OnInit {
 
   useLanguage(language: string) {
     this.translate.use(language);
+    this.eventService.change_current_lenguaje(language);
     this.dismissPopover();
   }
 }
