@@ -26,11 +26,14 @@
           <form [formGroup]="loginForm" (ngSubmit)="Login()">
             <div class="item">
               <ion-label position="stacked" color="medium"><ion-icon name="mail-outline"></ion-icon> {{ 'login.email' | translate }}</ion-label>
-              <ion-input formControlName="username" placeholder="" type="text" maxlength="30" placeholder=""></ion-input>
+              <ion-input formControlName="username" type="text" maxlength="30" placeholder=""></ion-input>
             </div>
             <div class="item">
               <ion-label position="stacked" color="medium"><ion-icon name="lock-open-outline"></ion-icon> {{ 'login.password' | translate }}</ion-label>
-              <ion-input formControlName="password" placeholder="" type="password" maxlength="30" placeholder=""></ion-input>
+              <div class="show-password">
+                <ion-input class="no-line" formControlName="password" [type]="showPassword ? 'text' : 'password'" maxlength="50" placeholder=""></ion-input>
+                <ion-icon class="eye-icon" name="{{passwordIcon}}" (click)="toggle_password()"></ion-icon>
+              </div>
             </div>
             <div class="forget-pw">
               <ion-text color="primary" (click)=social_login()>

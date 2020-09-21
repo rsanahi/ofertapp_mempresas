@@ -25,6 +25,8 @@ export class LoginPage implements OnInit {
   // variables
   proximamente: String;
   lenguaje: String;
+  showPassword: boolean = false;
+  passwordIcon: String = 'eye-outline';
 
   constructor(
     private fb: FormBuilder,
@@ -145,6 +147,17 @@ export class LoginPage implements OnInit {
       }
     )
     this.toastService.presentToast(this.proximamente);
+  }
+
+  toggle_password(){
+    let icons = ['eye-outline', 'eye-off-outline'];
+    this.showPassword = !this.showPassword;
+    if(this.showPassword){
+      this.passwordIcon = icons[0];
+    }
+    else{
+      this.passwordIcon = icons[1];
+    }
   }
 
 }

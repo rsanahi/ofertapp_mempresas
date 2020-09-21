@@ -60,5 +60,23 @@
         "library_source":"Galeria",
         "camera_source":"Camara",
         "cancel_load":"Cancelar"
+    },
+    "new_ofert":{
+        "new_ofert":"Nueva Oferta",
+        "title":"Titulo",
+        "description":"Descipcion",
+        "price":"Precio Neto",
+        "coin":"Moneda",
+        "percent":"Porcentaje",
+        "quantity":"Cantidad",
+        "error_forms":{
+            "title": "El titulo es requerido.",
+            "description": "La descipcion es requerida.",
+            "price": "El precio es requerido.",
+            "coin": "El tipo moneda es requerido.",
+            "percent": "El porcentaje de la oferta es requerido.",
+            "quantity": "El porcentaje de la oferta es requerido."
+        }
     }
+    
 }

@@ -100,14 +100,14 @@ export class FilesService {
   prepare_to_upload(imgEntry) {
     this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
     .then(entry => {
-      (<FileEntry>entry).file(file => this.read_file(file))
+      (<FileEntry>entry).file(file => this.read_file(file,imgEntry.path))
     }).catch(err => {
       console.log(err);
       this.toastService.presentToast("Error while reading file");
     });
   }
 
-  read_file(file:any){
+  read_file(file:any, file_src:any){
     const reader = new FileReader();
     reader.onloadend = () => {
       const formData = new FormData();
@@ -116,6 +116,7 @@ export class FilesService {
       });
 
       formData.append('logo', imgBlod, file.name);
+      formData.append('logo_src', file_src);
       this.eventService.change_business_img_profile(formData);
     };
     reader.readAsArrayBuffer(file);

@@ -60,5 +60,22 @@
         "library_source":"Gallery",
         "camera_source":"Camera",
         "cancel_load":"Cancel"
+    },
+    "new_ofert":{
+        "new_ofert":"New Ofert",
+        "title":"Title",
+        "description":"Description",
+        "price":"Net price",
+        "coin":"Coin",
+        "percent":"Percent",
+        "quantity":"Quantity",
+        "error_forms":{
+            "title": "The title is required.",
+            "description": "Description is required.",
+            "precio": "The price is required.",
+            "coin": "The coin type is required.",
+            "percent": "The percentage of the offer is required.",
+            "quantity": "The percentage of the offer is required."
+        }
     }
 }

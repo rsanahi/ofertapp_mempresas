@@ -67,7 +67,7 @@
           </div>
           <ion-item>
             <ion-label color="medium"  position="stacked"> Categoria </ion-label>
-              <ion-select ok-text="Okay" cancel-text="Cancel" formControlName="categoria">
+            <ion-select ok-text="Okay" cancel-text="Cancel" formControlName="categoria">
               <ion-select-option *ngFor="let category of categories" [value]="category.categoria">{{category.categoria}}</ion-select-option>
             </ion-select>
           </ion-item>

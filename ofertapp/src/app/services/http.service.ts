@@ -19,19 +19,19 @@ export class HttpService {
   ) { }
 
   post(serviceName: string, data: any = []){
-    const options = { header: this.headers, withCredentials: false};
+    const options = { headers: this.headers, withCredentials: false};
     const url = environment.apiURL+serviceName;
     return this.http.post(url, data, options);
   }
 
   get(serviceName: string){
-    const options = { header: this.headers, withCredentials: false};
+    const options = { headers: this.headers, withCredentials: false};
     const url = environment.apiURL+serviceName;
     return this.http.get(url, options);
   }
 
   put(serviceName: string, data: any){
-    const options = { header: this.headers, withCredentials: false};
+    const options = { headers: this.headers, withCredentials: false};
     const url = environment.apiURL+serviceName;
     return this.http.put(url, data, options);
   }
@@ -43,6 +43,15 @@ export class HttpService {
     const options = { headers: headers, withCredentials: false};
     const url = environment.apiURL+serviceName;
     return this.http.put(url, data, options);
+  }
+
+  post_form(serviceName: string, data: any){
+    let headers = new HttpHeaders({
+
+    });
+    const options = { headers: headers, withCredentials: false};
+    const url = environment.apiURL+serviceName;
+    return this.http.post(url, data, options);
   }
 
 }

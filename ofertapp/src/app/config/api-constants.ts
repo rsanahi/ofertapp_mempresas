@@ -8,4 +8,5 @@ export class API{
     public static readonly update_business = 'api/business/actualizar/';
     public static readonly categories = 'api/business/categorias/';
     public static readonly update_img_profile = 'api/business/actualizar-logo/';
+    public static readonly set_ofert = 'api/oferts/';
 }

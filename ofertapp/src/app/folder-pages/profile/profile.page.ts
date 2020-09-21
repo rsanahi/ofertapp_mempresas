@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ProfileService } from '../../services/plugins/profile.service';
 import { BusinessService } from '../../services/plugins/business.service';
 import { FilesService } from '../../services/ui/files.service';
@@ -70,6 +70,7 @@ export class ProfilePage implements OnInit {
     private translate: TranslateService,
     private fileService: FilesService,
     private eventService: EventsService,
+    private zone: NgZone,
   ) {
     this.get_categories();
     this.get_user_details();
@@ -160,6 +161,7 @@ export class ProfilePage implements OnInit {
       },
       (error: any)=>{
         console.log("error",error);
+        this.loadingService.loading_dismiss();
       });
     }
   }
@@ -168,8 +170,7 @@ export class ProfilePage implements OnInit {
   update_image(img){
     this.profileService.update_img_profile('update_img_profile', img).subscribe((res:any)=>{
       if(res){
-        this.imgProfile = this.get_api_url()+res.detail.logo;
-        //this.imgProfile = "";
+        this.zone.run(()=>{this.imgProfile = this.get_api_url()+res.detail.logo;});
         console.log("new profile", this.imgProfile);
       }
     },

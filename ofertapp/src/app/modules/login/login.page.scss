@@ -23,6 +23,20 @@ ion-input {
     border-bottom: solid 1px rgb(110, 110, 110);
 }
 
+.eye-icon {
+    margin-top: 10px;
+}
+
+.show-password {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: solid 1px rgb(110, 110, 110);
+}
+
+.no-line {
+    border-bottom: 0px !important;
+}
+
 .head {
     text-align: center;
     font-family: 'BalsamiqSans';

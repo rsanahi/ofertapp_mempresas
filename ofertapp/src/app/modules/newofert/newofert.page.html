@@ -2,13 +2,140 @@
   <ion-toolbar>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button routerLink="/folder/Inbox"><ion-icon name="warning" color=primary></ion-icon></ion-button>
+        <ion-button routerLink="/folder/Inbox"><ion-icon name="arrow-back-outline" color="primary"></ion-icon></ion-button>
       </ion-buttons>
-      <ion-title>NUEVA OFERTA</ion-title>
+      <ion-title>{{ 'new_ofert.new_ofert' | translate }}</ion-title>
     </ion-toolbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h1>NUEVA OFERTA GG!</h1>
+  <form [formGroup]="ofertaForm">
+      <ion-card>
+        <div class="avatar">
+          <ion-img [src]="img_src" atl="assets/media/oferta_default.png"></ion-img>
+          <div class="button-upload">
+            <ion-button fill="outline" (click)='selectImage()'>
+              <ion-icon name="camera-outline" color=primary></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+        <ion-card-header>
+          <!--
+            <ion-card-subtitle>Destination</ion-card-subtitle>
+          -->
+          <ion-card-title>
+
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="ofert_content">
+          <ion-item>
+            <ion-label position="stacked" color="medium">{{ 'new_ofert.title' | translate }}</ion-label>
+            <ion-input formControlName="titulo" placeholder="Nueva Oferta"></ion-input>
+          </ion-item>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.titulo">
+              <div class="error-message" *ngIf="ofertaForm.get('titulo').hasError(validation.type) && (ofertaForm.get('titulo').dirty || ofertaForm.get('titulo').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message | translate }}
+              </div>
+            </ng-container>
+          </div>
+          <ion-item>
+            <ion-label position="stacked" color="medium">{{ 'new_ofert.description' | translate }}</ion-label>
+            <ion-textarea
+              cols=""
+              color=""
+              rows="2"
+              formControlName="descripcion"
+              value="">
+            </ion-textarea>
+          </ion-item>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.descripcion">
+              <div class="error-message" *ngIf="ofertaForm.get('descripcion').hasError(validation.type) && (ofertaForm.get('descripcion').dirty || ofertaForm.get('descripcion').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message | translate }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="precio-porcenjate">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="8">
+                  <ion-item class="precio">
+                    <ion-label position="stacked" color="medium">{{ 'new_ofert.price' | translate }}</ion-label>
+                    <ion-input 
+                      formControlName="precio" 
+                      (ionInput)="handleInput($event)"
+                      name="dummyFacade" 
+                      id="dummyFacade" 
+                      #dummyFacade 
+                      type="text" 
+                      inputmode="text"
+                      placeholder="0.00$"
+                    ></ion-input>
+                  </ion-item>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.precio">
+                      <div class="error-message" *ngIf="ofertaForm.get('precio').hasError(validation.type) && (ofertaForm.get('precio').dirty || ofertaForm.get('precio').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message | translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item class="porcen">
+                    <ion-label position="stacked" color="medium">{{ 'new_ofert.coin' | translate }}</ion-label>
+                    <ion-select formControlName="moneda" ok-text="Okay" cancel-text="Cancel" value="bolivares">
+                      <ion-select-option value="1">Bs</ion-select-option>
+                      <ion-select-option value="2">$</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.moneda">
+                      <div class="error-message" *ngIf="ofertaForm.get('moneda').hasError(validation.type) && (ofertaForm.get('moneda').dirty || ofertaForm.get('moneda').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message | translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item class="precio">
+                    <ion-label position="stacked" color="medium">{{ 'new_ofert.percent' | translate }}</ion-label>
+                    <ion-input formControlName="porcentaje" placeholder="10%" type=""></ion-input>
+                  </ion-item>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.porcentaje">
+                      <div class="error-message" *ngIf="ofertaForm.get('porcentaje').hasError(validation.type) && (ofertaForm.get('porcentaje').dirty || ofertaForm.get('porcentaje').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message | translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item class="precio">
+                    <ion-label position="stacked" color="medium">{{ 'new_ofert.quantity' | translate }}</ion-label>
+                    <ion-input placeholder="1" formControlName="cantidad"></ion-input>
+                  </ion-item>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.cantidad">
+                      <div class="error-message" *ngIf="ofertaForm.get('cantidad').hasError(validation.type) && (ofertaForm.get('cantidad').dirty || ofertaForm.get('cantidad').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message | translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <div class="center">
+            <ion-button
+            (click)="set_oferta()"
+            >
+              Crear
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  </form>
+
 </ion-content>

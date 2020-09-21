@@ -8,12 +8,18 @@ import { NewofertPageRoutingModule } from './newofert-routing.module';
 
 import { NewofertPage } from './newofert.page';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NewofertPageRoutingModule
+    NewofertPageRoutingModule,
+    TranslateModule,
+    ReactiveFormsModule,
   ],
   declarations: [NewofertPage]
 })
