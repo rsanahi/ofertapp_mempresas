@@ -3,14 +3,14 @@
     <ion-menu contentId="main-content" type="overlay" *ngIf="true">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Ofertapp</ion-list-header>
+          <ion-list-header>Ofertapp </ion-list-header>
           <!--
             <ion-note>your favorite app</ion-note>
           -->
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i; sectionMenu = 'pages' " routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && sectionMenu == 'pages' ">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+              <ion-label>{{ p.title | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
@@ -20,7 +20,7 @@
           <ion-menu-toggle auto-hide="false" *ngFor="let label of labels; let i = index">
             <ion-item (click)="selectedIndex = i; sectionMenu = 'labels' " routerDirection="root" [routerLink]="[label.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && sectionMenu == 'labels' ">
               <ion-icon slot="start" [ios]="label.icon + '-outline'" [md]="label.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ label.title }}</ion-label>
+              <ion-label>{{ label.title | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
 

@@ -3,10 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Profile</ion-title>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/newofert"><ion-icon name="add-circle" color="primary"></ion-icon></ion-button>
-    </ion-buttons>
+    <ion-title>{{ 'menu.profile' | translate  }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -30,10 +27,10 @@
       <ion-card class="profile-items-card">
         <form [formGroup]="profileForm">
           <ion-text class="center">
-            <h5>Informacion de la Empresa</h5>
+            <h5>{{ 'profile.company_info' | translate  }} </h5>
           </ion-text>
           <ion-item>
-              <ion-label position="stacked" color="medium"> Nombre de la Empresa </ion-label>
+              <ion-label position="stacked" color="medium"><ion-icon name="people-outline"></ion-icon>{{ 'profile.bussines_name' | translate  }}</ion-label>
               <ion-input placeholder="" type="text" maxlength="30" formControlName="nombre_empresa"></ion-input>
           </ion-item>
           <div class="validation-errors">
@@ -44,7 +41,7 @@
             </ng-container>
           </div>
           <ion-item>
-              <ion-label position="stacked" color="medium"> Direccion </ion-label>
+              <ion-label position="stacked" color="medium"><ion-icon name="pin-outline"></ion-icon>{{ 'profile.direction' | translate  }}</ion-label>
               <ion-input placeholder="" type="text" maxlength="30" formControlName="direccion"></ion-input>
           </ion-item>
           <div class="validation-errors">
@@ -55,7 +52,7 @@
             </ng-container>
           </div>
           <ion-item>
-              <ion-label position="stacked" color="medium"> Phone </ion-label>
+              <ion-label position="stacked" color="medium"><ion-icon name="call-outline"></ion-icon>{{ 'profile.phone' | translate  }}</ion-label>
               <ion-input placeholder="" type="text" maxlength="30" formControlName="phone"></ion-input>
           </ion-item>
           <div class="validation-errors">
@@ -66,17 +63,17 @@
             </ng-container>
           </div>
           <ion-item>
-            <ion-label color="medium"  position="stacked"> Categoria </ion-label>
+            <ion-label color="medium"  position="stacked"><ion-icon name="apps-outline"></ion-icon> {{ 'profile.category' | translate  }} </ion-label>
             <ion-select ok-text="Okay" cancel-text="Cancel" formControlName="categoria">
               <ion-select-option *ngFor="let category of categories" [value]="category.categoria">{{category.categoria}}</ion-select-option>
             </ion-select>
           </ion-item>
           <!--Informacion de Usurio-->
           <ion-text class="center">
-            <h5>Informacion de usuario</h5>
+            <h5>{{ 'profile.user_info' | translate  }} </h5>
           </ion-text>
           <ion-item>
-              <ion-label position="stacked" color="medium"> Nombre </ion-label>
+              <ion-label position="stacked" color="medium"><ion-icon name="person-outline"></ion-icon> {{ 'profile.user_name' | translate  }} </ion-label>
               <ion-input placeholder="" type="text" maxlength="30" formControlName="name"></ion-input>
           </ion-item>
           <div class="validation-errors">
@@ -87,7 +84,7 @@
             </ng-container>
           </div>
           <ion-item>
-              <ion-label position="stacked" color="medium"> Email </ion-label>
+              <ion-label position="stacked" color="medium"><ion-icon name="mail-open-outline"></ion-icon> {{ 'profile.email' | translate  }} </ion-label>
               <ion-input placeholder="" type="text" maxlength="30" formControlName="email"></ion-input>
           </ion-item>
           <div class="validation-errors">
@@ -99,7 +96,7 @@
           </div>
         </form>
         <div class="button-save">
-          <ion-button size="small" shape="round" fill="outline" (click)='update_user_profile()'>Save</ion-button>
+          <ion-button size="small" (click)='update_user_profile()'>{{ 'base.save' | translate }}</ion-button>
         </div>
       </ion-card>
     </div>
@@ -108,14 +105,18 @@
         <ion-item>
           <ion-chip outline color="primary" slot="start">
             <ion-label></ion-label>
-            <ion-icon name="lock-open-outline" color="primary"></ion-icon>
+            <ion-icon name="qr-code-outline" color="primary"></ion-icon>
             <ion-label></ion-label>
           </ion-chip>
-          <ion-label>Cambiar contraseña</ion-label>
+          <ion-label>{{ 'profile.download_qr' | translate  }}</ion-label>
           <ion-icon name="chevron-forward-outline"></ion-icon>
         </ion-item>
       </ion-card>
     </div>
-
   </div>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button routerLink="/newofert">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -16,7 +16,7 @@ export class IsLoginGuard implements CanActivate, CanActivateChild, CanDeactivat
     return new Promise(resolve => {
       this.storageService.get(AuthConstants.AUTH).then( res => {
         if(res){
-          this.router.navigate(["/folder/Inbox"]);
+          this.router.navigate(["/main"]);
           resolve(false);
         }
         else{

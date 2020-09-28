@@ -61,6 +61,8 @@ export class ProfilePage implements OnInit {
   cancel_text = "";
   image_source_text = "";
 
+  loading_profile = "";
+
   constructor(
     private profileService: ProfileService,
     private fb: FormBuilder,
@@ -71,6 +73,7 @@ export class ProfilePage implements OnInit {
     private fileService: FilesService,
     private eventService: EventsService,
     private zone: NgZone,
+    private toastService: ToastService,
   ) {
     this.get_categories();
     this.get_user_details();
@@ -114,6 +117,7 @@ export class ProfilePage implements OnInit {
         });
         this.imgProfile = this.get_api_url()+res.logo;
       }
+      console.log(res);
     },
     (error: any)=>{
       console.log("error",error);
@@ -149,18 +153,22 @@ export class ProfilePage implements OnInit {
     }
     if(valid){
       let url = 'update_business';
-      this.loadingService.loading_present();
+      this.translate.get('profile.loading_profile').subscribe(
+        value => {
+          this.loading_profile = value;
+        }
+      )
+
+      this.loadingService.loading_present(this.loading_profile);
       this.profileService.update_details(url, postData).subscribe((res:any)=>{
         if(res){
-          console.log("response",res)
-        }
-        else {
-          console.log('Incorrect username or password');
+          console.log("response",res);
         }
         this.loadingService.loading_dismiss();
       },
       (error: any)=>{
-        console.log("error",error);
+        this.toastService.presentToast("Network connection error.");
+        console.log("error",error.message);
         this.loadingService.loading_dismiss();
       });
     }
@@ -168,14 +176,23 @@ export class ProfilePage implements OnInit {
 
   //Load Img
   update_image(img){
+    this.translate.get('profile.loading_img_profile').subscribe(
+      value => {
+        this.loading_profile = value;
+      }
+    )
+    this.loadingService.loading_present(this.loading_profile);
     this.profileService.update_img_profile('update_img_profile', img).subscribe((res:any)=>{
       if(res){
         this.zone.run(()=>{this.imgProfile = this.get_api_url()+res.detail.logo;});
         console.log("new profile", this.imgProfile);
       }
+      this.loadingService.loading_dismiss();
     },
     (error:any)=>{
       console.log(error);
+      this.toastService.presentToast("Network connection error.");
+      this.loadingService.loading_dismiss();
     });
   }
 

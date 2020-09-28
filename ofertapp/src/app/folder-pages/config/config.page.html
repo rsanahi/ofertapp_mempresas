@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'menu.config' | translate  }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="options">
+    <ion-card>
+      <!-- Configuracion de la cuenta -->
+      <ion-text class="center">
+        <h5> {{ 'settings.setting' | translate  }} </h5>
+      </ion-text>
+      <ion-item>
+        <ion-chip outline color="primary" slot="start">
+          <ion-label></ion-label>
+          <ion-icon name="book-outline" color="primary"></ion-icon>
+          <ion-label></ion-label>
+        </ion-chip>
+        <ion-label>{{ 'settings.language' | translate  }} ({{lenguaje}})</ion-label>
+        <ion-icon name="chevron-forward-outline" (click)="presentPopover($event)"></ion-icon>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <!-- Seguridad -->
+      <ion-text class="center">
+        <h5> {{ 'settings.security' | translate  }} </h5>
+      </ion-text>
+      <ion-item>
+        <ion-chip outline color="primary" slot="start">
+          <ion-label></ion-label>
+          <ion-icon name="lock-closed-outline" color="primary"></ion-icon>
+          <ion-label></ion-label>
+        </ion-chip>
+        <ion-label> {{ 'settings.change_password' | translate  }} </ion-label>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <!-- Notificaciones -->
+      <ion-text class="center">
+        <h5> {{ 'settings.notifications' | translate  }} </h5>
+      </ion-text>
+      <ion-item>
+        <ion-chip outline color="primary" slot="start">
+          <ion-label></ion-label>
+          <ion-icon name="notifications-outline" color="primary"></ion-icon>
+          <ion-label></ion-label>
+        </ion-chip>
+        <ion-label>{{ 'settings.disable_notifications' | translate  }}</ion-label>
+        <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <!-- Legal y Politicas -->
+      <ion-text class="center">
+        <h5> {{ 'settings.politics' | translate  }} </h5>
+      </ion-text>
+      <ion-item>
+        <ion-chip outline color="primary" slot="start">
+          <ion-label></ion-label>
+          <ion-icon name="git-commit-outline" color="primary"></ion-icon>
+          <ion-label></ion-label>
+        </ion-chip>
+        <ion-label>{{ 'settings.terms_service' | translate  }}</ion-label>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-chip outline color="primary" slot="start">
+          <ion-label></ion-label>
+          <ion-icon name="git-commit-outline" color="primary"></ion-icon>
+          <ion-label></ion-label>
+        </ion-chip>
+        <ion-label>{{ 'settings.data_policy' | translate  }}</ion-label>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-chip outline color="primary" slot="start">
+          <ion-label></ion-label>
+          <ion-icon name="git-commit-outline" color="primary"></ion-icon>
+          <ion-label></ion-label>
+        </ion-chip>
+        <ion-label>{{ 'settings.about' | translate  }}</ion-label>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-card>
+  </div>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button routerLink="/newofert">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

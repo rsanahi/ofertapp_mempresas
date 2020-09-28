@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, NgZone} from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone} from '@angular/core';
 import { OfferService } from '../../services/plugins/offer.service';
 import { FilesService } from '../../services/ui/files.service';
-import { API } from '../../config/api-constants';
 import { LoadingService } from '../../services/ui/loading.service';
 import { ToastService } from '../../services/ui/toast.service';
 import { SheetService } from '../../services/ui/sheet.service';
 import { EventsService } from '../../services/events.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 import { IonInput } from '@ionic/angular';
 
 @Component({
@@ -24,11 +23,11 @@ export class NewofertPage implements OnInit {
   image_source_text = "";
   ofertaForm: FormGroup;
 
-  subs: Boolean = true;
-  proenv: any;
+  subs: Boolean = false;
+  proenv: any = null;
 
   //foto form
-  img_form;
+  img_form:any = '';
   img_src="assets/media/oferta_default.png";
 
   //price
@@ -37,6 +36,9 @@ export class NewofertPage implements OnInit {
   amount: string = '';
   amountFormated: string = "";
   precision: number = 2;
+
+  loading_ofer = "";
+  sucess_offer = "";
 
   @ViewChild('dummyFacade', {static: false}) private dummyFacade: IonInput;
 
@@ -70,6 +72,8 @@ export class NewofertPage implements OnInit {
     private fb: FormBuilder,
     private offerService: OfferService,
     private zone: NgZone,
+    private toastService: ToastService,
+    private router: Router,
   ) { 
     if(this.subs){
       this.subs = false;
@@ -78,15 +82,28 @@ export class NewofertPage implements OnInit {
           this.img_form = res;
           this.zone.run(()=>{this.img_src = res.get('logo_src');});
           
-          console.log(this.img_src);
         }
       });
     }
-
+    this.ac();
     this.create_ofert_form();
   }
 
   ngOnInit() {
+  }
+  ac(){
+    this.subs = true;
+    this.translate.get('new_ofert.loading_ofert').subscribe(
+      value => {
+        this.loading_ofer = value;
+      }
+    )
+
+    this.translate.get('new_ofert.sucess').subscribe(
+      value => {
+        this.sucess_offer = value;
+      }
+    )
   }
 
   create_ofert_form(){
@@ -103,7 +120,7 @@ export class NewofertPage implements OnInit {
   set_oferta(){
     let valid = false;
     let formData = new FormData();
-    if(this.img_form != null || this.img_form != ''){
+    if(this.img_form != null && this.img_form != ''){
       formData = this.img_form;
     }
     if(this.ofertaForm.valid){
@@ -117,14 +134,16 @@ export class NewofertPage implements OnInit {
       valid = this.ofertaForm.valid;
     }
     if(valid){
-      this.loadingService.loading_present();
+
+      this.loadingService.loading_present(this.loading_ofer);
       this.offerService.set_new_offer('set_ofert',formData).subscribe((res:any)=>{
         console.log(res);
+        this.loadingService.loading_dismiss();
+        this.toastService.presentToast(this.sucess_offer);
+        this.router.navigate(['/main']);
       },
       (error: any)=>{
         console.log(error);
-      },
-      ()=>{
         this.loadingService.loading_dismiss();
       });
     }
@@ -230,6 +249,8 @@ export class NewofertPage implements OnInit {
 
   ionViewDidLeave(){
     this.subs = true;
-    this.proenv.unsubscribe();
+    if(this.proenv != null){
+      this.proenv.unsubscribe();
+    }
   }
 }

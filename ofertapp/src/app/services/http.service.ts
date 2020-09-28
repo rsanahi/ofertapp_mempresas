@@ -24,8 +24,8 @@ export class HttpService {
     return this.http.post(url, data, options);
   }
 
-  get(serviceName: string){
-    const options = { headers: this.headers, withCredentials: false};
+  get(serviceName: string, data:any={}){
+    const options = { headers: this.headers, withCredentials: false, params: data};
     const url = environment.apiURL+serviceName;
     return this.http.get(url, options);
   }

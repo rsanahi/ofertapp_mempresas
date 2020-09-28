@@ -17,8 +17,8 @@ export class OfferService {
     return this.httpService.post_form(API[url], data);
   }
 
-  get_details(url:string): Observable<any> {
-    return this.httpService.get(API[url]);
+  get_oferts(url:string, data:any=[]): Observable<any> {
+    return this.httpService.get(API[url], data);
   }
 
 }

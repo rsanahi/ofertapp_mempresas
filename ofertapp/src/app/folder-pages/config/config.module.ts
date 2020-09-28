@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { ConfigPageRoutingModule } from './config-routing.module';
 
-import { FolderPage } from './folder.page';
+import { ConfigPage } from './config.page';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -15,9 +15,9 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule,
+    ConfigPageRoutingModule,
     TranslateModule
   ],
-  declarations: [FolderPage]
+  declarations: [ConfigPage]
 })
-export class FolderPageModule {}
+export class ConfigPageModule {}

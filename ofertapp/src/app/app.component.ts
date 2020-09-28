@@ -4,7 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { Icon } from 'ionicons/dist/types/components/icon/icon';
 
 @Component({
   selector: 'app-root',
@@ -17,45 +16,30 @@ export class AppComponent implements OnInit {
 
   public appPages = [
     {
-      title: 'Inbox',
-      url: '/folder/Inbox',
-      icon: 'mail'
+      title: 'menu.init',
+      url: '/main',
+      icon: 'layers'
     },
     {
-      title: 'Outbox',
-      url: '/folder/Outbox',
-      icon: 'paper-plane'
+      title: 'menu.scan',
+      url: '/folder/menu.scan',
+      icon: 'scan'
     },
-    {
-      title: 'Favorites',
-      url: '/folder/Favorites',
-      icon: 'heart'
-    },
-    {
-      title: 'Archived',
-      url: '/folder/Archived',
-      icon: 'archive'
-    },
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
-    }
   ];
 
   public labels = [
     {
-      title: 'Profile',
+      title: 'menu.profile',
       url: '/profile',
-      icon: 'heart'
+      icon: 'person'
     },
     {
-      title: 'Logout',
+      title: 'menu.config',
+      url: '/config',
+      icon: 'settings'
+    },
+    {
+      title: 'menu.logout',
       url: '/logout',
       icon: 'log-out'
     }

@@ -37,7 +37,15 @@ const routes: Routes = [
     path: 'newofert',
     loadChildren: () => import('./modules/newofert/newofert.module').then( m => m.NewofertPageModule),
     canActivate: [IsAuthGuard]
+  },  {
+    path: 'main',
+    loadChildren: () => import('./folder-pages/main/main.module').then( m => m.MainPageModule)
+  },
+  {
+    path: 'config',
+    loadChildren: () => import('./folder-pages/config/config.module').then( m => m.ConfigPageModule)
   }
+
 
 
 ];

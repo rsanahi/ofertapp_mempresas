@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button routerLink="/folder/Inbox"><ion-icon name="arrow-back-outline" color="primary"></ion-icon></ion-button>
+        <ion-button routerLink="/main"><ion-icon name="arrow-back-outline" color="primary"></ion-icon></ion-button>
       </ion-buttons>
       <ion-title>{{ 'new_ofert.new_ofert' | translate }}</ion-title>
     </ion-toolbar>
@@ -30,7 +30,7 @@
         </ion-card-header>
         <ion-card-content class="ofert_content">
           <ion-item>
-            <ion-label position="stacked" color="medium">{{ 'new_ofert.title' | translate }}</ion-label>
+            <ion-label position="stacked" color="medium"> <ion-icon name="pencil-outline"></ion-icon>{{ 'new_ofert.title' | translate }}</ion-label>
             <ion-input formControlName="titulo" placeholder="Nueva Oferta"></ion-input>
           </ion-item>
           <div class="validation-errors">
@@ -41,7 +41,7 @@
             </ng-container>
           </div>
           <ion-item>
-            <ion-label position="stacked" color="medium">{{ 'new_ofert.description' | translate }}</ion-label>
+            <ion-label position="stacked" color="medium"><ion-icon name="reorder-four-outline"></ion-icon> {{ 'new_ofert.description' | translate }}</ion-label>
             <ion-textarea
               cols=""
               color=""
@@ -62,7 +62,7 @@
               <ion-row>
                 <ion-col size="8">
                   <ion-item class="precio">
-                    <ion-label position="stacked" color="medium">{{ 'new_ofert.price' | translate }}</ion-label>
+                    <ion-label position="stacked" color="medium"><ion-icon name="cash-outline"></ion-icon> {{ 'new_ofert.price' | translate }}</ion-label>
                     <ion-input 
                       formControlName="precio" 
                       (ionInput)="handleInput($event)"
@@ -84,7 +84,7 @@
                 </ion-col>
                 <ion-col size="4">
                   <ion-item class="porcen">
-                    <ion-label position="stacked" color="medium">{{ 'new_ofert.coin' | translate }}</ion-label>
+                    <ion-label position="stacked" color="medium">$ {{ 'new_ofert.coin' | translate }}</ion-label>
                     <ion-select formControlName="moneda" ok-text="Okay" cancel-text="Cancel" value="bolivares">
                       <ion-select-option value="1">Bs</ion-select-option>
                       <ion-select-option value="2">$</ion-select-option>
@@ -100,7 +100,7 @@
                 </ion-col>
                 <ion-col size="6">
                   <ion-item class="precio">
-                    <ion-label position="stacked" color="medium">{{ 'new_ofert.percent' | translate }}</ion-label>
+                    <ion-label position="stacked" color="medium">% {{ 'new_ofert.percent' | translate }}</ion-label>
                     <ion-input formControlName="porcentaje" placeholder="10%" type=""></ion-input>
                   </ion-item>
                   <div class="validation-errors">
@@ -113,7 +113,7 @@
                 </ion-col>
                 <ion-col size="6">
                   <ion-item class="precio">
-                    <ion-label position="stacked" color="medium">{{ 'new_ofert.quantity' | translate }}</ion-label>
+                    <ion-label position="stacked" color="medium"> <ion-icon name="swap-vertical-outline"></ion-icon>{{ 'new_ofert.quantity' | translate }}</ion-label>
                     <ion-input placeholder="1" formControlName="cantidad"></ion-input>
                   </ion-item>
                   <div class="validation-errors">
@@ -130,8 +130,9 @@
           <div class="center">
             <ion-button
             (click)="set_oferta()"
+            size="small"
             >
-              Crear
+            {{ 'base.create' | translate }}
             </ion-button>
           </div>
         </ion-card-content>

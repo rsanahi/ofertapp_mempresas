@@ -9,7 +9,6 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../components/popover/popover.component';
 import { LoadingService } from '../../services/ui/loading.service';
 import { ToastService } from '../../services/ui/toast.service';
-import { HttpService } from '../../services/http.service';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { EventsService } from '../../services/events.service';
 
@@ -37,7 +36,6 @@ export class LoginPage implements OnInit {
     public popoverController: PopoverController,
     private loadingService: LoadingService,
     private toastService: ToastService,
-    private httpSevice: HttpService,
     private facebook: Facebook,
     private eventService: EventsService,
     ) { 
@@ -83,7 +81,7 @@ export class LoginPage implements OnInit {
           this.storageService.store(AuthConstants.NAME, res.user.username);
           this.storageService.store(AuthConstants.AUTH, res.auth_token);
 
-          this.router.navigate(['/folder/Inbox']);
+          this.router.navigate(['/main']);
         }
         else {
           console.log('Incorrect username or password');

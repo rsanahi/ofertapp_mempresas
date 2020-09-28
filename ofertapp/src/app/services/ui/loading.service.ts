@@ -12,10 +12,10 @@ export class LoadingService {
     private loadingController: LoadingController
   ) { }
 
-  async loading_present() {
+  async loading_present(text='Please wait ...') {
     this.isLoading = true;
     return await this.loadingController.create({
-      message: 'Please wait ...',
+      message: text,
       spinner: 'circles' 
     }).then(a => {
       a.present().then(() => {

@@ -1,0 +1,14 @@
+.searchbar-input {
+    --border-radius: 10px;
+    height: auto;
+    font-size: 1.1rem;
+    font-weight: 400;
+    --color: #7f8490;
+    --background: white;
+    -webkit-box-shadow: 0 8px 14px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.1) !important;
+  }
+
+.img_card {
+  max-height: 50%;
+}

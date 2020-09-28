@@ -26,6 +26,11 @@ export class LogoutPage implements OnInit {
       this.storageService.clear().then(res=>{
         this.router.navigate(['']);
       });
+    },
+    (error)=>{
+      this.storageService.clear().then(res=>{
+        this.router.navigate(['']);
+      });
     });
 
 

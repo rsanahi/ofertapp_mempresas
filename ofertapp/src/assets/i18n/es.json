@@ -1,6 +1,18 @@
 {
     "spanish":"español",
     "english":"ingles",
+    "base":{
+        "save":"Guardar",
+        "create":"Crear",
+        "infinitescroll":"Cargando ..."
+    },
+    "menu":{
+        "init":"Mis ofertas",
+        "scan":"Scan",
+        "profile":"Perfil",
+        "config":"Configuracion",
+        "logout":"Cerrar sesion"
+    },
     "login":{
         "login":"Iniciar Sesión",
         "singup":"Regístrate",
@@ -59,7 +71,18 @@
         "image_source":"Selecctionar Fuente de Imagen",
         "library_source":"Galeria",
         "camera_source":"Camara",
-        "cancel_load":"Cancelar"
+        "cancel_load":"Cancelar",
+        "loading_profile":"Actualizando perfil ...",
+        "loading_img_profile":"Actualizando imagen ...",
+        "bussines_name":"Nombre de la empresa",
+        "direction":"Direccion",
+        "phone":"Telefono",
+        "category":"Categoria",
+        "user_name":"Nombre",
+        "email":"Email",
+        "company_info":"Informacion de la Empresa",
+        "user_info":"Informacion del Usuario",
+        "download_qr":"Descargar Qr de empresa."
     },
     "new_ofert":{
         "new_ofert":"Nueva Oferta",
@@ -76,7 +99,25 @@
             "coin": "El tipo moneda es requerido.",
             "percent": "El porcentaje de la oferta es requerido.",
             "quantity": "El porcentaje de la oferta es requerido."
-        }
+        },
+        "loading_ofert":"Creando oferta ...",
+        "sucess":"Oferta creada con exito ..."
+    },
+    "offer":{
+        "search":"Buscar"
+    },
+    "settings":{
+        "setting":"Configuración de cuenta",
+        "language":"Idioma",
+        "security":"Seguridad",
+        "change_password":"Cambiar contraseña",
+        "notifications":"Notificaciones",
+        "disable_notifications":"Desactivar notificaciones",
+        "politics":"Legales y Políticas",
+        "terms_service":"Terminos de servicio",
+        "data_policy":"Politica de datos",
+        "cookies_policy":"Cookies policy",
+        "about":"Acerca de la aplicacion"
     }
     
 }
