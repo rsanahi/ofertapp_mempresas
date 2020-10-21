@@ -30,14 +30,11 @@ const routes: Routes = [
     canActivate: [IsAuthGuard]
   },
   {
-    path: 'logout',
-    loadChildren: () => import('./folder-pages/logout/logout.module').then( m => m.LogoutPageModule),
-  },
-  {
     path: 'newofert',
     loadChildren: () => import('./modules/newofert/newofert.module').then( m => m.NewofertPageModule),
     canActivate: [IsAuthGuard]
-  },  {
+  },
+  {
     path: 'main',
     loadChildren: () => import('./folder-pages/main/main.module').then( m => m.MainPageModule)
   },

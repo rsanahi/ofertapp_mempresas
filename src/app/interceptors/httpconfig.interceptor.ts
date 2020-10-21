@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from '../services/storage.service';
 import { AuthConstants } from '../config/auth-constants';
+import { BusinessService } from '../services/plugins/business.service';
 
 import { 
     HttpInterceptor,
@@ -19,17 +20,16 @@ export class HttpConfigInterceptor implements HttpInterceptor{
     token = "";
     constructor(
         private storageService: StorageService,
+        private businessService: BusinessService,
     ){}
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
-        this.storageService.get(AuthConstants.AUTH).then( res => {
-            if(res){
-                this.token = "Token "+res;
-            }
-
-        }).catch( err => {
-            console.log(err);
-        });
+        let res = this.businessService.get_token();
+        if(res){
+            this.token = "Token "+res;
+        }
+        else {
+            this.token = "";
+        }
 
         if(this.token != '' && this.token != null){
             request = request.clone({ headers: request.headers.set('Authorization', this.token) });

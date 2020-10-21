@@ -59,7 +59,7 @@ export class MainPage implements OnInit {
       this.ionRefresher.complete();
     },
     (error: any)=>{
-      console.log(error);
+      // console.log(error);
     });
   }
 

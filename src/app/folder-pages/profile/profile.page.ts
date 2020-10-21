@@ -117,10 +117,9 @@ export class ProfilePage implements OnInit {
         });
         this.imgProfile = this.get_api_url()+res.logo;
       }
-      console.log(res);
     },
     (error: any)=>{
-      console.log("error",error);
+      // console.log("error",error);
     });
   }
 
@@ -131,7 +130,7 @@ export class ProfilePage implements OnInit {
       }
     },
     (error: any)=>{
-      console.log("error",error);
+      // console.log("error",error);
     });
   }
 
@@ -161,14 +160,11 @@ export class ProfilePage implements OnInit {
 
       this.loadingService.loading_present(this.loading_profile);
       this.profileService.update_details(url, postData).subscribe((res:any)=>{
-        if(res){
-          console.log("response",res);
-        }
+        this.toastService.presentToast("Se ha actualizado correctamente ..");
         this.loadingService.loading_dismiss();
       },
       (error: any)=>{
         this.toastService.presentToast("Network connection error.");
-        console.log("error",error.message);
         this.loadingService.loading_dismiss();
       });
     }
@@ -185,12 +181,10 @@ export class ProfilePage implements OnInit {
     this.profileService.update_img_profile('update_img_profile', img).subscribe((res:any)=>{
       if(res){
         this.zone.run(()=>{this.imgProfile = this.get_api_url()+res.detail.logo;});
-        console.log("new profile", this.imgProfile);
       }
       this.loadingService.loading_dismiss();
     },
     (error:any)=>{
-      console.log(error);
       this.toastService.presentToast("Network connection error.");
       this.loadingService.loading_dismiss();
     });
@@ -240,7 +234,7 @@ export class ProfilePage implements OnInit {
       icon: 'close',
       role: 'cancel',
       handler: () => {
-        console.log('Cancel clicked');
+        // console.log('Cancel clicked');
       }
     }];
     this.actionsheetService.generate_sheet(this.image_source_text, data);

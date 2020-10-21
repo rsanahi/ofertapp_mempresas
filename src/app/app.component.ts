@@ -4,6 +4,10 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
+import { StorageService } from './services/storage.service';
+import { AuthService } from './services/auth.service';
+import { BusinessService } from './services/plugins/business.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +44,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'menu.logout',
-      url: '/logout',
+      url: 'logout',
       icon: 'log-out'
     }
   ];
@@ -49,7 +53,12 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService,
+    private storageService: StorageService,
+    private router: Router,
+    private businessService: BusinessService,
+
   ) {
     this.initializeApp();
     this.translate.addLangs(['en', 'es']);
@@ -69,5 +78,19 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+  }
+
+  log_out_user(){
+    this.authService.logout().subscribe((res:any)=>{
+      this.storageService.clear().then(res=>{
+        this.router.navigate(['']);
+      });
+    },
+    (error)=>{
+      this.storageService.clear().then(res=>{
+        this.router.navigate(['']);
+      });
+    });
+    this.businessService.clear_user_details();
   }
 }

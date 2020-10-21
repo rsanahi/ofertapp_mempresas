@@ -206,13 +206,11 @@ export class NewofertPage implements OnInit {
 
       this.loadingService.loading_present(this.loading_ofer);
       this.offerService.set_new_offer('set_ofert',formData).subscribe((res:any)=>{
-        console.log(res);
         this.loadingService.loading_dismiss();
         this.toastService.presentToast(this.sucess_offer);
         this.router.navigate(['/main']);
       },
       (error: any)=>{
-        console.log(error);
         this.loadingService.loading_dismiss();
       });
     }
@@ -263,7 +261,6 @@ export class NewofertPage implements OnInit {
       icon: 'close',
       role: 'cancel',
       handler: () => {
-        console.log('Cancel clicked');
       }
     }];
     this.actionsheetService.generate_sheet(this.image_source_text, data);
@@ -302,12 +299,10 @@ export class NewofertPage implements OnInit {
     }
     this.loadingService.loading_present(this.enable_offert);
     this.offerService.update_ofert('set_ofert', data).subscribe((res:any)=>{
-      console.log(res);
       this.toastService.presentToast(this.sucess_enable);
       this.loadingService.loading_dismiss();
     },
     (error: any)=>{
-      console.log(error);
       this.toastService.presentToast(error.message.detail);
       this.loadingService.loading_dismiss();
     });
@@ -317,13 +312,11 @@ export class NewofertPage implements OnInit {
   eliminar_oferta(){
     this.loadingService.loading_present(this.deleting_offer);
     this.offerService.delete_ofert('set_ofert', this.id_offert).subscribe((res:any)=>{
-      console.log(res);
       this.router.navigate(['/main']);
       this.toastService.presentToast(this.sucess_delete);
       this.loadingService.loading_dismiss();
     },
     (error: any)=>{
-      console.log(error);
       this.toastService.presentToast(error.message.detail);
       this.loadingService.loading_dismiss();
     });

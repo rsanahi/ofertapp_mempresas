@@ -94,7 +94,6 @@ export class RegisterPage implements OnInit {
           }
         )
       }
-      console.log("je my new lg",res);
     });
   }
 

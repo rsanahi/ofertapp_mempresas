@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { AuthConstants } from '../../config/auth-constants';
+import { BusinessService } from '../../services/plugins/business.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PopoverController } from '@ionic/angular';
@@ -38,6 +39,7 @@ export class LoginPage implements OnInit {
     private toastService: ToastService,
     private facebook: Facebook,
     private eventService: EventsService,
+    private businessService: BusinessService,
     ) { 
     this.createForm();
     this.current_lenguaje();
@@ -81,17 +83,16 @@ export class LoginPage implements OnInit {
           this.storageService.store(AuthConstants.NAME, res.user.username);
           this.storageService.store(AuthConstants.AUTH, res.auth_token);
 
+          this.businessService.set_token(res.auth_token);
           this.router.navigate(['/main']);
         }
         else {
-          console.log('Incorrect username or password');
+          this.toastService.presentToast("Incorrect username or password");
         }
-        console.log(res);
       },
       (error: any)=>{
         this.loadingService.loading_dismiss();
         this.toastService.presentToast("Network connection error.");
-        console.log(error);
       });
     }
     else{
@@ -102,7 +103,7 @@ export class LoginPage implements OnInit {
   facebook_login(){
     this.facebook.login(['public_profile', 'email'])
     .then((res: FacebookLoginResponse)=>{
-      console.log('response',res);
+      // console.log('response',res);
     })
     .catch(e=>console.log('error',e));
   }
