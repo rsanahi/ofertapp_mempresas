@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonInfiniteScroll, IonSearchbar, IonRefresher } from '@ionic/angular';
 import { OfferService } from '../../services/plugins/offer.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class MainPage implements OnInit {
   constructor(
     private translate: TranslateService,
     private offerService: OfferService,
+    private router: Router
   ) {
     this.init_text();
     this.load_data();
@@ -110,6 +112,16 @@ export class MainPage implements OnInit {
     if (this.total <= this.itemListData.length) {
       event.target.disabled = true;
     }
+  }
+
+  edit_offer(item){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        offer: item,
+        edit: true
+      }
+    }
+    this.router.navigate(['newofert'], navigationExtras);
   }
 
   toggleInfiniteScroll() {

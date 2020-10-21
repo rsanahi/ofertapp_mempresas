@@ -31,7 +31,7 @@
         <ion-card-content class="ofert_content">
           <ion-item>
             <ion-label position="stacked" color="medium"> <ion-icon name="pencil-outline"></ion-icon>{{ 'new_ofert.title' | translate }}</ion-label>
-            <ion-input formControlName="titulo" placeholder="Nueva Oferta"></ion-input>
+            <ion-input formControlName="titulo" placeholder="Nueva Oferta" (ionChange)="enable_save()"></ion-input>
           </ion-item>
           <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.titulo">
@@ -129,11 +129,31 @@
           </div>
           <div class="center">
             <ion-button
-            (click)="set_oferta()"
-            size="small"
+              (click)="set_oferta()"
+              size="small"
+              *ngIf="!edit"
             >
             {{ 'base.create' | translate }}
             </ion-button>
+            <ion-button
+              size="small"
+              *ngIf="edit"
+              [disabled]="data_edit != data_copy"
+            >
+            Guardar
+            </ion-button>
+            <br>
+          </div>
+          <div *ngIf="edit">
+            <br>
+            <ion-item>
+              <ion-label>{{ 'settings.disable_notifications' | translate  }}</ion-label>
+              <ion-toggle slot="end" [checked]="checked_offert" (ionChange)="habilitar_oferta()"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{ 'base.delete' | translate  }}</ion-label>
+              <ion-icon name="trash-outline" color="danger" (click)="eliminar_oferta()"></ion-icon>
+            </ion-item>
           </div>
         </ion-card-content>
       </ion-card>

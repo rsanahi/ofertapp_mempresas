@@ -7,7 +7,7 @@ import { SheetService } from '../../services/ui/sheet.service';
 import { EventsService } from '../../services/events.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IonInput } from '@ionic/angular';
 
 @Component({
@@ -22,6 +22,21 @@ export class NewofertPage implements OnInit {
   cancel_text = "";
   image_source_text = "";
   ofertaForm: FormGroup;
+  data: {
+    cantidad: null,
+    descripcion: null,
+    deshabilitado: null,
+    fk_business: null,
+    id: null,
+    img: null,
+    moneda: null,
+    porcentaje: null,
+    precio: null,
+    soft_delete: false,
+    titulo: null,
+  }
+
+  data_copy: any;
 
   subs: Boolean = false;
   proenv: any = null;
@@ -39,6 +54,16 @@ export class NewofertPage implements OnInit {
 
   loading_ofer = "";
   sucess_offer = "";
+  deleting_offer = "";
+  sucess_delete = "";
+  enable_offert = ""; 
+  sucess_enable = ""; 
+
+  //edit oferta
+  edit:Boolean = false;
+  data_edit;
+  checked_offert = true;
+  id_offert = null;
 
   @ViewChild('dummyFacade', {static: false}) private dummyFacade: IonInput;
 
@@ -74,7 +99,22 @@ export class NewofertPage implements OnInit {
     private zone: NgZone,
     private toastService: ToastService,
     private router: Router,
+    private activaedRoute: ActivatedRoute
   ) { 
+    this.activaedRoute.queryParams.subscribe(params => {
+      
+      if(this.router.getCurrentNavigation().extras.state){
+        console.log("params: ", this.router.getCurrentNavigation().extras.state);
+        this.edit = this.router.getCurrentNavigation().extras.state.edit;
+        this.data_edit = this.router.getCurrentNavigation().extras.state.offer;
+        this.data_copy = this.router.getCurrentNavigation().extras.state.offer;
+        this.checked_offert = this.router.getCurrentNavigation().extras.state.offer.deshabilitado;
+        this.id_offert = this.router.getCurrentNavigation().extras.state.offer.id;
+        console.log(typeof(this.data_copy));
+        this.set_edit_data_form();
+      }
+    })
+
     if(this.subs){
       this.subs = false;
       this.proenv = this.eventService.getImgBusinessProfile().subscribe((res)=>{
@@ -104,6 +144,35 @@ export class NewofertPage implements OnInit {
         this.sucess_offer = value;
       }
     )
+
+    this.translate.get('new_ofert.deleting_ofert').subscribe(
+      value => {
+        this.deleting_offer = value;
+      }
+    )
+
+    this.translate.get('new_ofert.sucess_delete').subscribe(
+      value => {
+        this.sucess_delete = value;
+      }
+    )
+  }
+
+  enable_save(){
+    if(this.edit){
+      console.log(this.data_copy, this.ofertaForm.value);
+    }
+  }
+
+  set_edit_data_form(){
+    this.ofertaForm.patchValue({
+      'titulo':this.data_edit.titulo,
+      'descripcion': this.data_edit.descripcion,
+      'precio': this.data_edit.precio,
+      'moneda': String(this.data_edit.moneda),
+      'porcentaje':this.data_edit.porcentaje,
+      'cantidad': this.data_edit.cantidad,
+    });
   }
 
   create_ofert_form(){
@@ -200,6 +269,66 @@ export class NewofertPage implements OnInit {
     this.actionsheetService.generate_sheet(this.image_source_text, data);
   }
 
+  habilitar_oferta(){
+    this.checked_offert =  !this.checked_offert;
+    if(this.checked_offert){
+      this.translate.get('new_ofert.enable_offert').subscribe(
+        value => {
+          this.enable_offert = value; 
+        }
+      )
+      this.translate.get('new_ofert.sucess_enable').subscribe(
+        value => {
+          this.sucess_enable = value;  
+        }
+      )
+    }
+    else {
+      this.translate.get('new_ofert.disable_offert').subscribe(
+        value => {
+          this.enable_offert = value; 
+        }
+      )
+      this.translate.get('new_ofert.sucess_disable').subscribe(
+        value => {
+          this.sucess_enable = value;  
+        }
+      )
+    }
+    let data = {
+      titulo: this.data_copy.titulo,
+      id: this.id_offert,
+      deshabilitado: this.checked_offert,
+    }
+    this.loadingService.loading_present(this.enable_offert);
+    this.offerService.update_ofert('set_ofert', data).subscribe((res:any)=>{
+      console.log(res);
+      this.toastService.presentToast(this.sucess_enable);
+      this.loadingService.loading_dismiss();
+    },
+    (error: any)=>{
+      console.log(error);
+      this.toastService.presentToast(error.message.detail);
+      this.loadingService.loading_dismiss();
+    });
+  }
+
+  // 
+  eliminar_oferta(){
+    this.loadingService.loading_present(this.deleting_offer);
+    this.offerService.delete_ofert('set_ofert', this.id_offert).subscribe((res:any)=>{
+      console.log(res);
+      this.router.navigate(['/main']);
+      this.toastService.presentToast(this.sucess_delete);
+      this.loadingService.loading_dismiss();
+    },
+    (error: any)=>{
+      console.log(error);
+      this.toastService.presentToast(error.message.detail);
+      this.loadingService.loading_dismiss();
+    });
+  }
+
   //price format
   handleInput(event: CustomEvent) {
     this.clearInput();
@@ -224,7 +353,7 @@ export class NewofertPage implements OnInit {
 
   private formattPrice(){
     if(this.amount.length > 0){
-      this.amountFormated = this.amount + ' $';
+      this.amountFormated = this.amount;
     }
     else{
       this.amountFormated = '';

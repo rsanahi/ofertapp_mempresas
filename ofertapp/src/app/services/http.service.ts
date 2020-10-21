@@ -36,6 +36,11 @@ export class HttpService {
     return this.http.put(url, data, options);
   }
 
+  delete(serviceName: string){
+    const url = environment.apiURL+serviceName;
+    return this.http.delete(url);
+  }
+
   put_form(serviceName: string, data: any){
     let headers = new HttpHeaders({
 

@@ -21,4 +21,14 @@ export class OfferService {
     return this.httpService.get(API[url], data);
   }
 
+  delete_ofert(url:string, data:any=[]): Observable<any> {
+    url = API[url]+`${data}/`;
+    return this.httpService.delete(url);
+  }
+
+  update_ofert(url:string, data:any=[]): Observable<any> {
+    url = API[url]+`${data.id}/`;
+    return this.httpService.put(url, data);
+  }
+
 }

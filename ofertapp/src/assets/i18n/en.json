@@ -4,7 +4,8 @@
     "base":{
         "save":"Save",
         "create":"Create",
-        "infinitescroll":"Loading ..."
+        "infinitescroll":"Loading ...",
+        "delete": "Eliminar"
     },
     "menu":{
         "init":"My ofers",
@@ -101,7 +102,13 @@
             "quantity": "The percentage of the offer is required."
         },
         "loading_ofert":"Creating offer ...",
-        "sucess":"Oferta creada con exito ..."
+        "sucess":"Oferta creada con exito ...",
+        "deleting_offer": "Deleting offert ..",
+        "sucess_delete": "Oferta eliminada con exito ..",
+        "enable_offert": "Habilitando oferta ..",
+        "disable_offert": "Deshabilitando oferta ..",
+        "sucess_enable": "Oferta habilitada con exito!",
+        "sucess_disable": "Oferta Deshabilitado con exito!"
     },
     "offer":{
         "search":"Search"
