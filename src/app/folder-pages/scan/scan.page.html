@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'menu.scan' | translate  }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="qr_back">
+
+  <div *ngIf="!scan_activate">
+    <div class="scan_info">
+      <ion-text class="center">
+        <h5> Toca en el recuadro para escanear el codigo Qr y canjear tu oferta! </h5>
+      </ion-text>
+    </div>
+    <div class="center">
+      <div class="qr_square">
+        <div class="area" (click)="start_scan()">
+            <img src="assets/media/qr_scan_area.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="scan_activate" id="qr_back">
+    <div class="center qr_back">
+      <div class="qr_square">
+        <div class="area">
+          
+          <img src="assets/media/qr_scan.png" alt="">
+          
+        </div>
+      </div>
+    </div>
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button (click)="stop_scan()">
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+</ion-content>

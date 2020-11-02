@@ -59,6 +59,17 @@
     width: 100%;
   }
 
+.logo-menu {
+  height: 100px;
+  width: 150px;
+}
+
+.boxing {
+  border-radius: 10px;
+  box-shadow:6px 6px 4px 4px #D1D9E6,
+            -8px -8px 8px 8px rgb(248, 248, 248);
+}
+
 .border-green {
     border: solid 1px green !important;
 }

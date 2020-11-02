@@ -20,12 +20,18 @@ import { File } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 
+import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+import { NgxMaskIonicModule } from 'ngx-mask-ionic';
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    NgxMaskIonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -45,6 +51,7 @@ import { Crop } from '@ionic-native/crop/ngx';
     File,
     WebView,
     Crop,
+    QRScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ],

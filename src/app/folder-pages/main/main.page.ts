@@ -3,7 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonInfiniteScroll, IonSearchbar, IonRefresher } from '@ionic/angular';
 import { OfferService } from '../../services/plugins/offer.service';
 import { NavigationExtras, Router } from '@angular/router';
-
+import { LoadingService } from '../../services/ui/loading.service';
+import { ToastService } from '../../services/ui/toast.service';
 
 @Component({
   selector: 'app-main',
@@ -30,7 +31,9 @@ export class MainPage implements OnInit {
   constructor(
     private translate: TranslateService,
     private offerService: OfferService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService,
+    private toastService: ToastService,
   ) {
     this.init_text();
     this.load_data();
@@ -46,10 +49,10 @@ export class MainPage implements OnInit {
       search: this.page_search,
       ordering: this.page_order
     }
-
+    this.loadingService.loading_present();
     this.offerService.get_oferts('set_ofert', params).subscribe((res:any)=>{
       res.results.forEach(element => {
-        this.itemListData.push(element)
+        this.itemListData.push(element);
       });
       if(res.next != null || res.next){
         this.page_number = res.next.split("?")[1].split("&")[1].split("=")[1];
@@ -57,9 +60,11 @@ export class MainPage implements OnInit {
       this.total = res.count;
       this.infiniteScroll.complete();
       this.ionRefresher.complete();
+      this.loadingService.loading_dismiss();
     },
     (error: any)=>{
-      // console.log(error);
+      this.toastService.presentToast("Network connection error.");
+      this.loadingService.loading_dismiss();
     });
   }
 

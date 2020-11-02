@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
@@ -40,6 +41,7 @@ export class LoginPage implements OnInit {
     private facebook: Facebook,
     private eventService: EventsService,
     private businessService: BusinessService,
+    private sidemenu: MenuController,
     ) { 
     this.createForm();
     this.current_lenguaje();
@@ -65,6 +67,14 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  // ionViewDidEnter() {
+  //   this.sidemenu.swipeGesture(false);
+  // }
+
+  // ionViewDidLeave() {
+  //   this.sidemenu.swipeGesture(true);
+  // }
+
   createForm(){
     this.loginForm = this.fb.group({
       username: new FormControl('', Validators.required),
@@ -84,6 +94,8 @@ export class LoginPage implements OnInit {
           this.storageService.store(AuthConstants.AUTH, res.auth_token);
 
           this.businessService.set_token(res.auth_token);
+          this.businessService.set_user_details(res.user);
+          this.eventService.set_user_logeed();
           this.router.navigate(['/main']);
         }
         else {
@@ -92,7 +104,7 @@ export class LoginPage implements OnInit {
       },
       (error: any)=>{
         this.loadingService.loading_dismiss();
-        this.toastService.presentToast("Network connection error.");
+        this.toastService.presentToast(error.message);
       });
     }
     else{

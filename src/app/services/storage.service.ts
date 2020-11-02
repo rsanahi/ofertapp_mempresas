@@ -1,40 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Plugins } from '@capacitor/core';
-
-const { Storage } = Plugins;
+import { Storage  } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  constructor() { }
+  constructor(
+    private storage: Storage,
+  ) { }
 
   async store(storageKey: string, value:any){
-
     const scryptedValue = btoa(escape(JSON.stringify(value)));
-    await Storage.set({
-      key: storageKey,
-      value: value
-    });
+    await this.storage.set(storageKey,value);
   }
 
   async get(storageKey: string){
-    const res = await Storage.get({key:storageKey});
-    if(res.value){
-      //return escape(atob(res.value));
-      return res.value;
-    }
-    else{
-      return '';
-    }
+    let data = await this.storage.get(storageKey).then((val) => {
+      if(val){
+        //return escape(atob(res.value));
+        return val;
+      }
+      else{
+        return '';
+      }
+    }).catch((error) =>{
+      console.log(error);
+    });
+
+    return data;
   }
 
   async remove(storageKey: string){
-    await Storage.remove({key: storageKey});
+    await this.storage.remove(storageKey);
   }
 
   async clear(){
-    await Storage.clear();
+    await this.storage.clear();
   }
 }

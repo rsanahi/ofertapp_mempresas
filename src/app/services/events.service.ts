@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { BusinessService } from './plugins/business.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,11 @@ export class EventsService {
 
   private current_lenguaje = new BehaviorSubject('es');
   private current_image = new BehaviorSubject('');
+  private current_user = new BehaviorSubject({});
 
-  constructor() { }
+  constructor(
+    private businessService: BusinessService
+  ) { }
 
   change_current_lenguaje(data: any) {
     const new_languaje = data;
@@ -21,12 +25,21 @@ export class EventsService {
     this.current_image.next(new_img_profile);
   }
 
+  set_user_logeed() {
+    const user_data = this.businessService.get_user_details();
+    this.current_user.next(user_data);
+  }
+
   getLenguajeObservable(): Observable<String> {
     return this.current_lenguaje.asObservable();
   }
 
   getImgBusinessProfile(): Observable<any> {
     return this.current_image.asObservable();
+  }
+
+  getUserLogged(): Observable<any> {
+    return this.current_user.asObservable();
   }
 
 }

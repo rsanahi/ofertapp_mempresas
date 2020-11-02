@@ -18,13 +18,14 @@
       -->
       <ion-img [src]="imgProfile" [alt]="imgProfile"></ion-img>
       <div class="button-upload">
-        <ion-button fill="outline" (click)='selectImage()'>
-          <ion-icon name="camera-outline" color=primary></ion-icon>
+        <ion-button color="primary" (click)='selectImage()' class="img-button">
+          <ion-icon name="camera-outline" color="light"></ion-icon>
         </ion-button>
       </div>
     </div>
+    <br>
     <div class="profile-items">
-      <ion-card class="profile-items-card">
+      <ion-card class="profile-items-card boxing">
         <form [formGroup]="profileForm">
           <ion-text class="center">
             <h5>{{ 'profile.company_info' | translate  }} </h5>
@@ -101,7 +102,7 @@
       </ion-card>
     </div>
     <div class="cambiar-clave">
-      <ion-card>
+      <ion-card class="boxing">
         <ion-item>
           <ion-chip outline color="primary" slot="start">
             <ion-label></ion-label>

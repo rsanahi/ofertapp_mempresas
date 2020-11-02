@@ -22,17 +22,12 @@ export class NewofertPage implements OnInit {
   cancel_text = "";
   image_source_text = "";
   ofertaForm: FormGroup;
-  data: {
-    cantidad: null,
-    descripcion: null,
-    deshabilitado: null,
-    fk_business: null,
-    id: null,
-    img: null,
+  data_edit: {
+    cantidad: 0,
+    descripcion: "",
     moneda: null,
     porcentaje: null,
     precio: null,
-    soft_delete: false,
     titulo: null,
   }
 
@@ -61,7 +56,6 @@ export class NewofertPage implements OnInit {
 
   //edit oferta
   edit:Boolean = false;
-  data_edit;
   checked_offert = true;
   id_offert = null;
 
@@ -101,16 +95,16 @@ export class NewofertPage implements OnInit {
     private router: Router,
     private activaedRoute: ActivatedRoute
   ) { 
-    this.activaedRoute.queryParams.subscribe(params => {
+    this.activaedRoute.queryParams.subscribe( _ => {
       
       if(this.router.getCurrentNavigation().extras.state){
-        console.log("params: ", this.router.getCurrentNavigation().extras.state);
         this.edit = this.router.getCurrentNavigation().extras.state.edit;
         this.data_edit = this.router.getCurrentNavigation().extras.state.offer;
-        this.data_copy = this.router.getCurrentNavigation().extras.state.offer;
+
+        //this.data_copy = this.data_edit;
+
         this.checked_offert = this.router.getCurrentNavigation().extras.state.offer.deshabilitado;
         this.id_offert = this.router.getCurrentNavigation().extras.state.offer.id;
-        console.log(typeof(this.data_copy));
         this.set_edit_data_form();
       }
     })

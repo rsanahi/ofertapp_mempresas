@@ -3,10 +3,14 @@
     <ion-menu contentId="main-content" type="overlay" *ngIf="true">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Ofertapp </ion-list-header>
-          <!--
-            <ion-note>your favorite app</ion-note>
-          -->
+          <div class="center">
+            <ion-avatar>
+              <img src="assets/media/avatar.svg">
+            </ion-avatar>
+          </div>
+          <div class="center">
+            <ion-note *ngIf="user_logged">{{ user_details.user_details.username }}</ion-note>
+          </div>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i; sectionMenu = 'pages' " routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && sectionMenu == 'pages' ">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
@@ -29,6 +33,11 @@
           </ion-menu-toggle>
 
         </ion-list>
+        <div class="center">
+          <ion-thumbnail class="logo-menu">
+            <ion-img src="assets/media/Ofertappbolsaeditable.png"></ion-img>
+          </ion-thumbnail>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

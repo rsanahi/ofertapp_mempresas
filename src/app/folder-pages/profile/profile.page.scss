@@ -10,6 +10,10 @@ ion-toolbar{
     --background: white;
 }
 
+.img-button {
+    --border-radius: 30% 30%;
+    box-shadow: 10px 10px 10px 10px;
+}
 
 .avatar {
     background: transparent;

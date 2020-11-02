@@ -1,7 +1,6 @@
 {
   "name": "ofertapp",
   "integrations": {
-    "capacitor": {},
     "cordova": {}
   },
   "type": "angular"

@@ -36,14 +36,19 @@ const routes: Routes = [
   },
   {
     path: 'main',
-    loadChildren: () => import('./folder-pages/main/main.module').then( m => m.MainPageModule)
+    loadChildren: () => import('./folder-pages/main/main.module').then( m => m.MainPageModule),
+    canActivate: [IsAuthGuard]
   },
   {
     path: 'config',
-    loadChildren: () => import('./folder-pages/config/config.module').then( m => m.ConfigPageModule)
+    loadChildren: () => import('./folder-pages/config/config.module').then( m => m.ConfigPageModule),
+    canActivate: [IsAuthGuard]
+  },
+  {
+    path: 'scan',
+    loadChildren: () => import('./folder-pages/scan/scan.module').then( m => m.ScanPageModule),
+    canActivate: [IsAuthGuard]
   }
-
-
 
 ];
 

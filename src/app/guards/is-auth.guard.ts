@@ -15,10 +15,11 @@ export class IsAuthGuard implements CanActivate, CanActivateChild, CanDeactivate
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       return new Promise(resolve => {
         this.storageService.get(AuthConstants.AUTH).then( res => {
-          if(res){
+          if(res!=null){
             resolve(true);
           }
           else{
+            console.log("guard",res);
             this.router.navigate([""]);
             resolve(false);
           }

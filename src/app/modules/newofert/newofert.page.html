@@ -11,12 +11,12 @@
 
 <ion-content>
   <form [formGroup]="ofertaForm">
-      <ion-card>
+      <ion-card class="boxing">
         <div class="avatar">
           <ion-img [src]="img_src" atl="assets/media/oferta_default.png"></ion-img>
           <div class="button-upload">
-            <ion-button fill="outline" (click)='selectImage()'>
-              <ion-icon name="camera-outline" color=primary></ion-icon>
+            <ion-button color="primary" (click)='selectImage()' class="img-button">
+              <ion-icon name="camera-outline" color="light"></ion-icon>
             </ion-button>
           </div>
         </div>
@@ -71,7 +71,7 @@
                       #dummyFacade 
                       type="text" 
                       inputmode="text"
-                      placeholder="0.00$"
+                      placeholder="0.00"
                     ></ion-input>
                   </ion-item>
                   <div class="validation-errors">

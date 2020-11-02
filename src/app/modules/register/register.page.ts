@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ViewChild } from '@angular/core';
-import { IonSlides} from '@ionic/angular';
+import { IonSlides, MenuController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../../components/popover/popover.component';
 import { PasswordValidator } from '../../validators/password.validator';
@@ -75,6 +75,7 @@ export class RegisterPage implements OnInit {
     private toastService: ToastService,
     private translate: TranslateService,
     private eventService: EventsService,
+    private sidemenu: MenuController,
   ) {
     this.create_client_form();
     this.create_business_form();
@@ -100,6 +101,14 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
+  // ionViewDidEnter() {
+  //   this.sidemenu.swipeGesture(false);
+  // }
+
+  // ionViewDidLeave() {
+  //   this.sidemenu.swipeGesture(true);
+  // }
+  
   create_client_form(){
     this.clientForm = this.fb.group({
       name: new FormControl('', Validators.required),
@@ -171,13 +180,15 @@ export class RegisterPage implements OnInit {
       this.authService.login(postData,url).subscribe((res:any)=>{
         this.loading_dismiss();
         if(res.fk_user){
-          this.router.navigate(['/login'])
+          this.router.navigate(['/login']);
+          this.toastService.presentToast('Se ha registrado con exito!');
         }
         else {
           console.log('Incorrect username or password');
         } 
       },
       (error: any)=>{
+        this.loading_dismiss();
         let current_error = error.error;
         let message = "";
         this.swipeBefore();
@@ -208,7 +219,6 @@ export class RegisterPage implements OnInit {
           });
         }
         this.toastService.presentToast(message);
-        this.loading_dismiss();
       });
     }
   }

@@ -8,6 +8,8 @@ import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
 import { BusinessService } from './services/plugins/business.service';
 import { Router } from '@angular/router';
+import { EventsService } from './services/events.service';
+import { LoadingService } from './services/ui/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'menu.scan',
-      url: '/folder/menu.scan',
+      url: '/scan',
       icon: 'scan'
     },
   ];
@@ -49,6 +51,10 @@ export class AppComponent implements OnInit {
     }
   ];
 
+  public user_details = {};
+  public userevn;
+  public user_logged = false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -58,11 +64,20 @@ export class AppComponent implements OnInit {
     private storageService: StorageService,
     private router: Router,
     private businessService: BusinessService,
-
+    private eventService: EventsService,
+    private loadingService: LoadingService,
   ) {
     this.initializeApp();
     this.translate.addLangs(['en', 'es']);
     this.translate.setDefaultLang('es');
+
+    this.userlogged();
+
+    this.userevn = this.eventService.getUserLogged().subscribe((res)=>{
+      if(res != {}){
+        this.set_user(res);
+      }
+    });
   }
 
   initializeApp() {
@@ -80,17 +95,37 @@ export class AppComponent implements OnInit {
     }
   }
 
+  userlogged(){
+    let data = this.businessService.get_user_details();
+    this.set_user(data);
+  }
+
   log_out_user(){
+    this.loadingService.loading_present('Finalizando sesion ..');
     this.authService.logout().subscribe((res:any)=>{
+      this.loadingService.loading_dismiss();
       this.storageService.clear().then(res=>{
         this.router.navigate(['']);
       });
     },
     (error)=>{
+      this.loadingService.loading_dismiss();
       this.storageService.clear().then(res=>{
         this.router.navigate(['']);
       });
     });
     this.businessService.clear_user_details();
   }
+
+  set_user(data){
+    console.log(data);
+    if(data['user_details']){
+      this.user_logged = true;
+      this.user_details = data;
+    }
+    if(this.userevn){
+      this.userevn.unsubscribe();
+    }
+  }
+
 }
