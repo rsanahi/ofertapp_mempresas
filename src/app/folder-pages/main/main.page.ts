@@ -5,6 +5,7 @@ import { OfferService } from '../../services/plugins/offer.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { LoadingService } from '../../services/ui/loading.service';
 import { ToastService } from '../../services/ui/toast.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-main',
@@ -34,12 +35,17 @@ export class MainPage implements OnInit {
     private router: Router,
     private loadingService: LoadingService,
     private toastService: ToastService,
+    private sidemenu: MenuController,
   ) {
     this.init_text();
     this.load_data();
    }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.sidemenu.swipeGesture(true);
   }
 
   load_data(){

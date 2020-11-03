@@ -51,7 +51,11 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  public user_details = {};
+  public user_details = {
+    user_details: {
+      username: ''
+    }
+  };
   public userevn;
   public user_logged = false;
 

@@ -67,9 +67,9 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  // ionViewDidEnter() {
-  //   this.sidemenu.swipeGesture(false);
-  // }
+  ionViewDidEnter() {
+    this.sidemenu.swipeGesture(false);
+  }
 
   // ionViewDidLeave() {
   //   this.sidemenu.swipeGesture(true);

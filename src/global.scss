@@ -70,6 +70,11 @@
             -8px -8px 8px 8px rgb(248, 248, 248);
 }
 
+.toolboard {
+  --box-shadow:6px 0px 4px 0px rgb(28, 74, 148),
+            -8px -0px 8px 0px rgb(180, 27, 27);
+}
+
 .border-green {
     border: solid 1px green !important;
 }
