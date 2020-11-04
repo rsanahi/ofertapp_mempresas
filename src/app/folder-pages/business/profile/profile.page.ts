@@ -1,13 +1,13 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { ProfileService } from '../../services/plugins/profile.service';
-import { BusinessService } from '../../services/plugins/business.service';
-import { FilesService } from '../../services/ui/files.service';
-import { API } from '../../config/api-constants';
-import { LoadingService } from '../../services/ui/loading.service';
-import { ToastService } from '../../services/ui/toast.service';
-import { SheetService } from '../../services/ui/sheet.service';
+import { ProfileService } from '../../../services/plugins/profile.service';
+import { BusinessService } from '../../../services/plugins/business.service';
+import { FilesService } from '../../../services/ui/files.service';
+import { API } from '../../../config/api-constants';
+import { LoadingService } from '../../../services/ui/loading.service';
+import { ToastService } from '../../../services/ui/toast.service';
+import { SheetService } from '../../../services/ui/sheet.service';
 import { TranslateService } from '@ngx-translate/core';
-import { EventsService } from '../../services/events.service';
+import { EventsService } from '../../../services/events.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
@@ -37,7 +37,7 @@ export class ProfilePage implements OnInit {
     ],
     'direccion':[
       { type: 'required', message: 'signup.errors_form.address'},
-      { type: 'minlength', message: 'signup.errors_form.password2' },
+      { type: 'minlength', message: 'signup.errors_form.address2' },
     ],
     'phone': [
       { type: 'required', message: 'signup.errors_form.phone' },

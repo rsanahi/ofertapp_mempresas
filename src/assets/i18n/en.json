@@ -12,7 +12,8 @@
         "scan":"Scan",
         "profile":"Profile",
         "config":"Config",
-        "logout":"Logout"
+        "logout":"Logout",
+        "ofers":"Ofers"
     },
     "login":{
         "login":"Log In",
@@ -56,7 +57,8 @@
             "confirm_password":"Confirm password is required.",
             "matching_passwords":"Password mismatch.",
             "name_business":"El nombre de la empresa es requerido.",
-            "address":"La direccion de la empresa es requerida."
+            "address":"La direccion de la empresa es requerida.",
+            "address2":"La direccion de la empresa debe ser de almenos 15 caracteres."
         },
         "errors_backend":{
             "already_email":"There is already a user with this email!",

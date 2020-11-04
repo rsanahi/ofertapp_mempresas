@@ -8,7 +8,7 @@ import { BusinessService } from '../../services/plugins/business.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PopoverController } from '@ionic/angular';
-import { PopoverComponent } from '../../components/popover/popover.component';
+import { PopoverControllerPage } from '../../components/popover-controller/popover-controller.page';
 import { LoadingService } from '../../services/ui/loading.service';
 import { ToastService } from '../../services/ui/toast.service';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
@@ -96,7 +96,13 @@ export class LoginPage implements OnInit {
           this.businessService.set_token(res.auth_token);
           this.businessService.set_user_details(res.user);
           this.eventService.set_user_logeed();
-          this.router.navigate(['/main']);
+          console.log( res.user.groups[0].id);
+          if(res.user.groups[0].id == 2){
+            this.router.navigate(['/main']);
+          }
+          else{
+            this.router.navigate(['/ofertas']);
+          }
         }
         else {
           this.toastService.presentToast("Incorrect username or password");
@@ -142,7 +148,7 @@ export class LoginPage implements OnInit {
   //ion popover
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
-      component: PopoverComponent,
+      component: PopoverControllerPage,
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true,

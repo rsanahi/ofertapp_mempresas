@@ -12,7 +12,7 @@
             <ion-note *ngIf="user_logged">{{ user_details.user_details.username }}</ion-note>
           </div>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i; sectionMenu = 'pages' " routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && sectionMenu == 'pages' ">
+            <ion-item *ngIf="user_details.user_group.id == p.group || p.group == 0" (click)="selectedIndex = i; sectionMenu = 'pages' " routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && sectionMenu == 'pages' ">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title | translate }}</ion-label>
             </ion-item>
@@ -22,7 +22,7 @@
         <ion-list id="labels-list">
           <ion-list-header>Labels</ion-list-header>
           <ion-menu-toggle auto-hide="false" *ngFor="let label of labels; let i = index">
-            <ion-item *ngIf="label.url != 'logout'" (click)="selectedIndex = i; sectionMenu = 'labels' " routerDirection="root" [routerLink]="[label.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && sectionMenu == 'labels' ">
+            <ion-item *ngIf="(label.url != 'logout') && (user_details.user_group.id == label.group || label.group == 0)" (click)="selectedIndex = i; sectionMenu = 'labels' " routerDirection="root" [routerLink]="[label.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && sectionMenu == 'labels' ">
               <ion-icon slot="start" [ios]="label.icon + '-outline'" [md]="label.icon + '-sharp'"></ion-icon>
               <ion-label>{{ label.title | translate }}</ion-label>
             </ion-item>

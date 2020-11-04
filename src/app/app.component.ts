@@ -21,39 +21,56 @@ export class AppComponent implements OnInit {
   public sectionMenu: String;
 
   public appPages = [
+    // BUSINESS
     {
       title: 'menu.init',
       url: '/main',
-      icon: 'layers'
+      icon: 'layers',
+      group: 2
     },
     {
       title: 'menu.scan',
       url: '/scan',
-      icon: 'scan'
+      icon: 'scan',
+      group: 2
     },
+
+    // CLIENTE
+    {
+      title: 'menu.ofers',
+      url: '/ofertas',
+      icon: 'pricetag',
+      group: 3
+    }
   ];
 
   public labels = [
     {
       title: 'menu.profile',
       url: '/profile',
-      icon: 'person'
+      icon: 'person',
+      group: 2
     },
     {
       title: 'menu.config',
       url: '/config',
-      icon: 'settings'
+      icon: 'settings',
+      group: 0
     },
     {
       title: 'menu.logout',
       url: 'logout',
-      icon: 'log-out'
+      icon: 'log-out',
+      group: 0
     }
   ];
 
   public user_details = {
     user_details: {
       username: ''
+    },
+    user_group:{
+      id: 0
     }
   };
   public userevn;
@@ -97,11 +114,25 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+    this.get_user_details_from_storage();
   }
 
   userlogged(){
     let data = this.businessService.get_user_details();
     this.set_user(data);
+  }
+
+  get_user_details_from_storage(){
+    this.storageService.get('user_details').then( res => {
+      if(res != null){
+        this.set_user(res);
+      }
+      else {
+        return null; 
+      }
+    }).catch( err => {
+        console.log(err);
+    });
   }
 
   log_out_user(){
@@ -122,7 +153,6 @@ export class AppComponent implements OnInit {
   }
 
   set_user(data){
-    console.log(data);
     if(data['user_details']){
       this.user_logged = true;
       this.user_details = data;

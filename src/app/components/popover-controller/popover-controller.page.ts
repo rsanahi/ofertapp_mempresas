@@ -5,20 +5,12 @@ import { NgModule } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { EventsService } from '../../services/events.service';
 
-@NgModule({
-  imports: [ CommonModule ],
-  declarations: [PopoverComponent]
-})
-
 @Component({
-  selector: 'app-popover',
-  templateUrl: './popover.component.html',
-  styleUrls: ['./popover.component.scss'],
+  selector: 'app-popover-controller',
+  templateUrl: './popover-controller.page.html',
+  styleUrls: ['./popover-controller.page.scss'],
 })
-export class PopoverComponent implements OnInit {
-
-  @Input('idioma') idioma=false;
-  @Input('labels') labels={"es":"","en":""}
+export class PopoverControllerPage implements OnInit {
 
   constructor(
     public popoverController: PopoverController,
@@ -26,7 +18,11 @@ export class PopoverComponent implements OnInit {
     private eventService: EventsService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+
+  @Input('idioma') idioma=false;
+  @Input('labels') labels={"es":"","en":""}
 
   async dismissPopover() {
     await this.popoverController.dismiss();
@@ -37,4 +33,5 @@ export class PopoverComponent implements OnInit {
     this.eventService.change_current_lenguaje(language);
     this.dismissPopover();
   }
+
 }

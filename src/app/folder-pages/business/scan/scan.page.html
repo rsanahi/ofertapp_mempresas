@@ -33,6 +33,17 @@
         </div>
       </div>
     </div>
+    <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+      <ion-fab-button (click)="qrscanner_usercamara()">
+        <ion-icon name="camera-reverse-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-fab horizontal="center" vertical="bottom" slot="fixed">
+      <ion-fab-button (click)="qrscanner_light()">
+        <ion-icon *ngIf="!qrscannlight" name="flash-outline"></ion-icon>
+        <ion-icon *ngIf="qrscannlight" name="flash-off-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
       <ion-fab-button (click)="stop_scan()">
         <ion-icon name="close"></ion-icon>

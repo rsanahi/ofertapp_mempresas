@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
-import { ToastService } from '../../services/ui/toast.service';
+import { ToastService } from '../../../services/ui/toast.service';
 
 @Component({
   selector: 'app-scan',
@@ -12,6 +12,8 @@ export class ScanPage implements OnInit {
   scan_activate:Boolean = false;
   qrBack:any;
   scanSub=null;
+  qrscannlight=false;
+  qescanncamera=false;
 
   constructor(
     private qrScanner: QRScanner,
@@ -75,6 +77,40 @@ export class ScanPage implements OnInit {
     }
     this.zone.run(()=>{this.scan_activate = false;});
     
+  }
+
+  qrscanner_light(){
+    if(!this.qrscannlight){
+      this.qrScanner.enableLight().then(()=>{
+        this.qrscannlight = true;
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
+    else if(this.qrscannlight){
+      this.qrScanner.disableLight().then(()=>{
+        this.qrscannlight = false;
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
+  }
+
+  qrscanner_usercamara(){
+    if(!this.qescanncamera){
+      this.qrScanner.useFrontCamera().then(()=>{
+        this.qescanncamera = true;
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
+    else if(this.qescanncamera){
+      this.qrScanner.useBackCamera().then(()=>{
+        this.qescanncamera = false;
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
   }
 
   ionViewWillLeave(){

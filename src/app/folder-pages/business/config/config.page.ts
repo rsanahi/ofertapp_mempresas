@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EventsService } from '../../services/events.service';
-import { ToastService } from '../../services/ui/toast.service';
+import { EventsService } from '../../../services/events.service';
+import { ToastService } from '../../../services/ui/toast.service';
 import { PopoverController } from '@ionic/angular';
-import { PopoverComponent } from '../../components/popover/popover.component';
+import { PopoverControllerPage } from '../../../components/popover-controller/popover-controller.page';
 
 @Component({
   selector: 'app-config',
@@ -45,7 +45,7 @@ export class ConfigPage implements OnInit {
 
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
-      component: PopoverComponent,
+      component: PopoverControllerPage,
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true,

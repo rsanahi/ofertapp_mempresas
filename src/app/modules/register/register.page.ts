@@ -3,7 +3,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { IonSlides, MenuController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
-import { PopoverComponent } from '../../components/popover/popover.component';
+import { PopoverControllerPage } from '../../components/popover-controller/popover-controller.page';
 import { PasswordValidator } from '../../validators/password.validator';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -240,7 +240,7 @@ export class RegisterPage implements OnInit {
   //ion popover
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
-      component: PopoverComponent,
+      component: PopoverControllerPage,
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true,

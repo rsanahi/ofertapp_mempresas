@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./folder-pages/profile/profile.module').then( m => m.ProfilePageModule),
+    loadChildren: () => import('./folder-pages/business/profile/profile.module').then( m => m.ProfilePageModule),
     canActivate: [IsAuthGuard]
   },
   {
@@ -36,19 +36,28 @@ const routes: Routes = [
   },
   {
     path: 'main',
-    loadChildren: () => import('./folder-pages/main/main.module').then( m => m.MainPageModule),
+    loadChildren: () => import('./folder-pages/business/main/main.module').then( m => m.MainPageModule),
     canActivate: [IsAuthGuard]
   },
   {
     path: 'config',
-    loadChildren: () => import('./folder-pages/config/config.module').then( m => m.ConfigPageModule),
+    loadChildren: () => import('./folder-pages/business/config/config.module').then( m => m.ConfigPageModule),
     canActivate: [IsAuthGuard]
   },
   {
     path: 'scan',
-    loadChildren: () => import('./folder-pages/scan/scan.module').then( m => m.ScanPageModule),
+    loadChildren: () => import('./folder-pages/business/scan/scan.module').then( m => m.ScanPageModule),
     canActivate: [IsAuthGuard]
+  },
+  {
+    path: 'popover-controller',
+    loadChildren: () => import('./components/popover-controller/popover-controller.module').then( m => m.PopoverControllerPageModule)
+  },
+  {
+    path: 'ofertas',
+    loadChildren: () => import('./folder-pages/client/ofertas/ofertas.module').then( m => m.OfertasPageModule)
   }
+
 
 ];
 

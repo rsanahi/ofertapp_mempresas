@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonInfiniteScroll, IonSearchbar, IonRefresher } from '@ionic/angular';
-import { OfferService } from '../../services/plugins/offer.service';
+import { OfferService } from '../../../services/plugins/offer.service';
 import { NavigationExtras, Router } from '@angular/router';
-import { LoadingService } from '../../services/ui/loading.service';
-import { ToastService } from '../../services/ui/toast.service';
+import { LoadingService } from '../../../services/ui/loading.service';
+import { ToastService } from '../../../services/ui/toast.service';
 import { MenuController } from '@ionic/angular';
 
 @Component({
