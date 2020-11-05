@@ -47,6 +47,7 @@
               color=""
               rows="2"
               formControlName="descripcion"
+              (ionChange)="enable_save()"
               value="">
             </ion-textarea>
           </ion-item>
@@ -72,6 +73,7 @@
                       type="text" 
                       inputmode="text"
                       placeholder="0.00"
+                      (ionChange)="enable_save()"
                     ></ion-input>
                   </ion-item>
                   <div class="validation-errors">
@@ -85,7 +87,7 @@
                 <ion-col size="4">
                   <ion-item class="porcen">
                     <ion-label position="stacked" color="medium">$ {{ 'new_ofert.coin' | translate }}</ion-label>
-                    <ion-select formControlName="moneda" ok-text="Okay" cancel-text="Cancel" value="bolivares">
+                    <ion-select formControlName="moneda" ok-text="Okay" cancel-text="Cancel" value="bolivares" (ionChange)="enable_save()">
                       <ion-select-option value="1">Bs</ion-select-option>
                       <ion-select-option value="2">$</ion-select-option>
                     </ion-select>
@@ -101,7 +103,7 @@
                 <ion-col size="6">
                   <ion-item class="precio">
                     <ion-label position="stacked" color="medium">% {{ 'new_ofert.percent' | translate }}</ion-label>
-                    <ion-input formControlName="porcentaje" placeholder="10%" type=""></ion-input>
+                    <ion-input formControlName="porcentaje" placeholder="10%" type="number" (ionChange)="enable_save()"></ion-input>
                   </ion-item>
                   <div class="validation-errors">
                     <ng-container *ngFor="let validation of validation_messages.porcentaje">
@@ -114,7 +116,7 @@
                 <ion-col size="6">
                   <ion-item class="precio">
                     <ion-label position="stacked" color="medium"> <ion-icon name="swap-vertical-outline"></ion-icon>{{ 'new_ofert.quantity' | translate }}</ion-label>
-                    <ion-input placeholder="1" formControlName="cantidad"></ion-input>
+                    <ion-input (ionChange)="enable_save()" placeholder="1" formControlName="cantidad" type="number"></ion-input>
                   </ion-item>
                   <div class="validation-errors">
                     <ng-container *ngFor="let validation of validation_messages.cantidad">
@@ -138,7 +140,8 @@
             <ion-button
               size="small"
               *ngIf="edit"
-              [disabled]="data_edit != data_copy"
+              (click)="update_oferta()"
+              [disabled]="!button_save_edit"
             >
             Guardar
             </ion-button>

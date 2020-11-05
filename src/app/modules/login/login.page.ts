@@ -29,6 +29,8 @@ export class LoginPage implements OnInit {
   showPassword: boolean = false;
   passwordIcon: String = 'eye-outline';
 
+  error_credentias = "";
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -103,14 +105,26 @@ export class LoginPage implements OnInit {
           else{
             this.router.navigate(['/ofertas']);
           }
+          this.clear_fields();
         }
         else {
           this.toastService.presentToast("Incorrect username or password");
         }
       },
       (error: any)=>{
+        if(error.error['non_field_errors']){
+          this.translate.get('login.error_credentials').subscribe(
+            value => {
+              this.error_credentias = value;
+            }
+          )
+          this.toastService.presentToast(this.error_credentias);
+        }
+        else{
+          this.toastService.presentToast(error.error)
+        }
         this.loadingService.loading_dismiss();
-        this.toastService.presentToast(error.message);
+        ;
       });
     }
     else{
@@ -175,6 +189,13 @@ export class LoginPage implements OnInit {
     else{
       this.passwordIcon = icons[1];
     }
+  }
+
+  clear_fields(){
+    this.loginForm.patchValue({
+      'username': '',
+      'password': '',
+    });
   }
 
 }

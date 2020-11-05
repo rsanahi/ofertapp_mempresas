@@ -58,6 +58,7 @@ export class NewofertPage implements OnInit {
   edit:Boolean = false;
   checked_offert = true;
   id_offert = null;
+  button_save_edit = false;
 
   @ViewChild('dummyFacade', {static: false}) private dummyFacade: IonInput;
 
@@ -154,7 +155,18 @@ export class NewofertPage implements OnInit {
 
   enable_save(){
     if(this.edit){
-      console.log(this.data_copy, this.ofertaForm.value);
+      if(this.data_copy.cantidad != this.ofertaForm.value.cantidad ||
+         this.data_copy.descripcion != this.ofertaForm.value.descripcion ||
+         this.data_copy.moneda != this.ofertaForm.value.moneda ||
+         this.data_copy.porcentaje != this.ofertaForm.value.porcentaje ||
+         this.data_copy.precio != this.ofertaForm.value.precio ||
+         this.data_copy.titulo != this.ofertaForm.value.titulo){
+
+          this.button_save_edit = true;
+      }
+      else{
+        this.button_save_edit = false;
+      }
     }
   }
 
@@ -167,6 +179,17 @@ export class NewofertPage implements OnInit {
       'porcentaje':this.data_edit.porcentaje,
       'cantidad': this.data_edit.cantidad,
     });
+
+    this.data_copy = {
+      titulo: this.data_edit.titulo,
+      descripcion: this.data_edit.descripcion,
+      precio: this.data_edit.precio,
+      moneda: String(this.data_edit.moneda),
+      porcentaje: this.data_edit.porcentaje,
+      cantidad: this.data_edit.cantidad
+    }
+
+    this.amount = this.data_edit.precio;
   }
 
   create_ofert_form(){
@@ -200,6 +223,35 @@ export class NewofertPage implements OnInit {
 
       this.loadingService.loading_present(this.loading_ofer);
       this.offerService.set_new_offer('set_ofert',formData).subscribe((res:any)=>{
+        this.loadingService.loading_dismiss();
+        this.toastService.presentToast(this.sucess_offer);
+        this.router.navigate(['/main']);
+      },
+      (error: any)=>{
+        this.loadingService.loading_dismiss();
+      });
+    }
+  }
+
+  update_oferta(){
+    let valid = false;
+    let formData = new FormData();
+    if(this.img_form != null && this.img_form != ''){
+      formData = this.img_form;
+    }
+    if(this.ofertaForm.valid){
+      
+      formData.append('titulo', this.ofertaForm.value.titulo);
+      formData.append('descripcion', this.ofertaForm.value.descripcion);
+      formData.append('precio', this.amount);
+      formData.append('moneda', this.ofertaForm.value.moneda);
+      formData.append('porcentaje', this.ofertaForm.value.porcentaje);
+      formData.append('cantidad', this.ofertaForm.value.cantidad);
+      valid = this.ofertaForm.valid;
+    }
+    if(valid){
+      this.loadingService.loading_present(this.loading_ofer);
+      this.offerService.update_ofert('set_ofert',formData, this.id_offert).subscribe((res:any)=>{
         this.loadingService.loading_dismiss();
         this.toastService.presentToast(this.sucess_offer);
         this.router.navigate(['/main']);
@@ -292,7 +344,7 @@ export class NewofertPage implements OnInit {
       deshabilitado: this.checked_offert,
     }
     this.loadingService.loading_present(this.enable_offert);
-    this.offerService.update_ofert('set_ofert', data).subscribe((res:any)=>{
+    this.offerService.update_ofert('set_ofert', data, this.id_offert).subscribe((res:any)=>{
       this.toastService.presentToast(this.sucess_enable);
       this.loadingService.loading_dismiss();
     },

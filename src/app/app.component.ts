@@ -149,6 +149,9 @@ export class AppComponent implements OnInit {
         this.router.navigate(['']);
       });
     });
+
+    this.user_details = { user_details: { username: ''},
+                          user_group:{ id: 0 } };
     this.businessService.clear_user_details();
   }
 
@@ -158,7 +161,7 @@ export class AppComponent implements OnInit {
       this.user_details = data;
     }
     if(this.userevn){
-      this.userevn.unsubscribe();
+
     }
   }
 

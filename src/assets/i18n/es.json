@@ -23,7 +23,8 @@
         "forgett_password":"¿Olvidaste tu contraseña?",
         "without_account":"¿No tienes una cuenta todavia?",
         "input_email":"coloca tu email",
-        "input_password":"coloca tu clave"
+        "input_password":"coloca tu clave",
+        "error_credentials":"Usuario o clave incorrectas."
     },
     "signup":{
         "login":"Inicíar sesión",
@@ -90,7 +91,7 @@
     "new_ofert":{
         "new_ofert":"Nueva Oferta",
         "title":"Titulo",
-        "description":"Descipcion",
+        "description":"Descripción",
         "price":"Precio Neto",
         "coin":"Moneda",
         "percent":"Porcentaje",
