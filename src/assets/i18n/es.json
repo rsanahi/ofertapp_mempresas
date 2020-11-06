@@ -24,7 +24,8 @@
         "without_account":"¿No tienes una cuenta todavia?",
         "input_email":"coloca tu email",
         "input_password":"coloca tu clave",
-        "error_credentials":"Usuario o clave incorrectas."
+        "error_credentials":"No se puede iniciar con las credenciales proporcionadas",
+        "error_password":"Usuario o clave invalidas."
     },
     "signup":{
         "login":"Inicíar sesión",

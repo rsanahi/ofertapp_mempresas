@@ -33,7 +33,7 @@ export class NewofertPage implements OnInit {
 
   data_copy: any;
 
-  subs: Boolean = false;
+  subs: Boolean = true;
   proenv: any = null;
 
   //foto form
@@ -112,11 +112,11 @@ export class NewofertPage implements OnInit {
 
     if(this.subs){
       this.subs = false;
-      this.proenv = this.eventService.getImgBusinessProfile().subscribe((res)=>{
+      this.proenv = this.eventService.getImgOfert().subscribe((res)=>{
+        
         if(res != ''){
           this.img_form = res;
           this.zone.run(()=>{this.img_src = res.get('logo_src');});
-          
         }
       });
     }
@@ -294,13 +294,13 @@ export class NewofertPage implements OnInit {
       role: 'destructive',
       icon: 'camera',
       handler: () => {
-        this.fileService.take_picture("camera");
+        this.fileService.take_picture("camera", true);
       }
     }, {
       text: this.gallery_text,
       icon: 'image',
       handler: () => {
-        this.fileService.take_picture("gallery");
+        this.fileService.take_picture("gallery", true);
       }
     }, {
       text: this.cancel_text,

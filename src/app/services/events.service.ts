@@ -10,6 +10,7 @@ export class EventsService {
   private current_lenguaje = new BehaviorSubject('es');
   private current_image = new BehaviorSubject('');
   private current_user = new BehaviorSubject({});
+  private img_oferta = new BehaviorSubject('')
 
   constructor(
     private businessService: BusinessService
@@ -25,6 +26,11 @@ export class EventsService {
     this.current_image.next(new_img_profile);
   }
 
+  change_oferta_img(data) {
+    const new_img_oferta = data;
+    this.img_oferta.next(new_img_oferta);
+  }
+
   set_user_logeed() {
     const user_data = this.businessService.get_user_details();
     this.current_user.next(user_data);
@@ -36,6 +42,10 @@ export class EventsService {
 
   getImgBusinessProfile(): Observable<any> {
     return this.current_image.asObservable();
+  }
+
+  getImgOfert(): Observable<any> {
+    return this.img_oferta.asObservable();
   }
 
   getUserLogged(): Observable<any> {

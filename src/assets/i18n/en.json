@@ -24,7 +24,8 @@
         "without_account":"Have not any account yet?",
         "input_email":"put your email",
         "input_password":"put your password",
-        "error_credentials":"Unable to log in with provided credentials."
+        "error_credentials":"Unable to log in with provided credentials.",
+        "error_password":"invalid password or username."
     },
     "signup":{
         "login":"Log in",

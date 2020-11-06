@@ -17,6 +17,7 @@ import { finalize } from 'rxjs/operators';
 export class FilesService {
 
   STORAGE_KEY = 'OfertappFolder';
+  owner = false;
 
   constructor(
     public webView: WebView,
@@ -38,7 +39,8 @@ export class FilesService {
     }
   }
 
-  take_picture(source){
+  take_picture(source, owner: boolean = false){
+    this.owner = owner;
     if(source == 'gallery'){
       this.take_picture_from(this.camera.PictureSourceType.PHOTOLIBRARY);
     }
@@ -117,7 +119,12 @@ export class FilesService {
 
       formData.append('logo', imgBlod, file.name);
       formData.append('logo_src', file_src);
-      this.eventService.change_business_img_profile(formData);
+      if(this.owner){
+        this.eventService.change_oferta_img(formData);
+      }
+      else{
+        this.eventService.change_business_img_profile(formData);
+      }
     };
     reader.readAsArrayBuffer(file);
   }
