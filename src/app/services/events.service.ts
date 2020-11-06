@@ -10,7 +10,7 @@ export class EventsService {
   private current_lenguaje = new BehaviorSubject('es');
   private current_image = new BehaviorSubject('');
   private current_user = new BehaviorSubject({});
-  private img_oferta = new BehaviorSubject('')
+  private img_oferta = new BehaviorSubject('');
 
   constructor(
     private businessService: BusinessService
@@ -50,6 +50,14 @@ export class EventsService {
 
   getUserLogged(): Observable<any> {
     return this.current_user.asObservable();
+  }
+
+  clear_business_img_profile(){
+    this.current_image = new BehaviorSubject('');
+  }
+
+  clear_oferta_img(){
+    this.img_oferta = new BehaviorSubject('');
   }
 
 }

@@ -91,6 +91,7 @@
     },
     "new_ofert":{
         "new_ofert":"New Offer",
+        "update_offer":"Update offer",
         "title":"Title",
         "description":"Description",
         "price":"Net price",
@@ -106,13 +107,15 @@
             "quantity": "The percentage of the offer is required."
         },
         "loading_ofert":"Creating offer ...",
-        "sucess":"Oferta creada con exito ...",
+        "updating_ofert":"Updating offer ...",
+        "updating_sucess":"Offer successfully updated ...",
+        "sucess":"Offer created successfully ...",
         "deleting_offer": "Deleting offert ..",
-        "sucess_delete": "Oferta eliminada con exito ..",
-        "enable_offert": "Habilitando oferta ..",
-        "disable_offert": "Deshabilitando oferta ..",
-        "sucess_enable": "Oferta habilitada con exito!",
-        "sucess_disable": "Oferta Deshabilitado con exito!"
+        "sucess_delete": "Offer successfully removed ..",
+        "enable_offert": "Enabling offer ..",
+        "disable_offert": "Disabling offer ..",
+        "sucess_enable": "Offer successfully enabled!",
+        "sucess_disable": "Offer successfully disabled!"
     },
     "offer":{
         "search":"Search"

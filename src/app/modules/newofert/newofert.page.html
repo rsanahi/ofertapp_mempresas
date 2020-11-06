@@ -4,7 +4,8 @@
       <ion-buttons slot="start">
         <ion-button routerLink="/main"><ion-icon name="arrow-back-outline" color="primary"></ion-icon></ion-button>
       </ion-buttons>
-      <ion-title>{{ 'new_ofert.new_ofert' | translate }}</ion-title>
+      <ion-title *ngIf="!edit">{{ 'new_ofert.new_ofert' | translate }}</ion-title>
+      <ion-title *ngIf="edit">{{ 'new_ofert.update_offer' | translate }}</ion-title>
     </ion-toolbar>
   </ion-toolbar>
 </ion-header>

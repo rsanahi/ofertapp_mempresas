@@ -29,6 +29,7 @@ export class NewofertPage implements OnInit {
     porcentaje: null,
     precio: null,
     titulo: null,
+    img: "",
   }
 
   data_copy: any;
@@ -53,6 +54,8 @@ export class NewofertPage implements OnInit {
   sucess_delete = "";
   enable_offert = ""; 
   sucess_enable = ""; 
+  updating_offer = "";
+  updating_success = "";
 
   //edit oferta
   edit:Boolean = false;
@@ -109,13 +112,12 @@ export class NewofertPage implements OnInit {
         this.set_edit_data_form();
       }
     })
-
     if(this.subs){
       this.subs = false;
       this.proenv = this.eventService.getImgOfert().subscribe((res)=>{
-        
         if(res != ''){
           this.img_form = res;
+          this.button_save_edit = true;
           this.zone.run(()=>{this.img_src = res.get('logo_src');});
         }
       });
@@ -149,6 +151,18 @@ export class NewofertPage implements OnInit {
     this.translate.get('new_ofert.sucess_delete').subscribe(
       value => {
         this.sucess_delete = value;
+      }
+    )
+
+    this.translate.get('new_ofert.updating_ofert').subscribe(
+      value => {
+        this.updating_offer = value;
+      }
+    )
+
+    this.translate.get('new_ofert.updating_sucess').subscribe(
+      value => {
+        this.updating_success = value;
       }
     )
   }
@@ -189,6 +203,7 @@ export class NewofertPage implements OnInit {
       cantidad: this.data_edit.cantidad
     }
 
+    this.img_src = this.data_edit.img;
     this.amount = this.data_edit.precio;
   }
 
@@ -250,13 +265,14 @@ export class NewofertPage implements OnInit {
       valid = this.ofertaForm.valid;
     }
     if(valid){
-      this.loadingService.loading_present(this.loading_ofer);
+      this.loadingService.loading_present(this.updating_offer);
       this.offerService.update_ofert('set_ofert',formData, this.id_offert).subscribe((res:any)=>{
         this.loadingService.loading_dismiss();
-        this.toastService.presentToast(this.sucess_offer);
+        this.toastService.presentToast(this.updating_success);
         this.router.navigate(['/main']);
       },
       (error: any)=>{
+        this.toastService.presentToast(error.message);
         this.loadingService.loading_dismiss();
       });
     }
@@ -420,5 +436,12 @@ export class NewofertPage implements OnInit {
     if(this.proenv != null){
       this.proenv.unsubscribe();
     }
+    this.img_form = '';
+    this.edit = false;
+    this.checked_offert = true;
+    this.id_offert = null;
+    this.button_save_edit = false;
+    this.img_src="assets/media/oferta_default.png";
+    this.eventService.clear_oferta_img();
   }
 }

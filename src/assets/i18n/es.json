@@ -91,6 +91,7 @@
     },
     "new_ofert":{
         "new_ofert":"Nueva Oferta",
+        "update_offer":"Actualizar Oferta",
         "title":"Titulo",
         "description":"Descripción",
         "price":"Precio Neto",
@@ -106,6 +107,8 @@
             "quantity": "El porcentaje de la oferta es requerido."
         },
         "loading_ofert":"Creando oferta ...",
+        "updating_ofert":"Actualizando oferta ...",
+        "updating_sucess":"Oferta actualizada con exito ...",
         "sucess":"Oferta creada con exito ...",
         "deleting_offer": "Eliminando Oferta ..",
         "sucess_delete": "Oferta eliminada con exito ..",
