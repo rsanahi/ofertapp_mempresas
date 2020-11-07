@@ -98,7 +98,7 @@ export class LoginPage implements OnInit {
           this.businessService.set_token(res.auth_token);
           this.businessService.set_user_details(res.user);
           this.eventService.set_user_logeed();
-          console.log( res.user.groups[0].id);
+          console.log(res.user.groups[0].id);
           if(res.user.groups[0].id == 2){
             this.router.navigate(['/main']);
           }

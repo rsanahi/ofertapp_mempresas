@@ -8,7 +8,26 @@
 </ion-header>
 
 <ion-content>
-  <div class="sin-ofertas center">
-    <h4>No hay ofertas disponibles!</h4>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-lg="3" size-md="4" size-sm="4" size="6" *ngFor="let item of itemListData; let i=index;">
+          <ion-card class="boxing" button="true" type="button" (click)="get_category_oferts(item)">
+            <img class="img_card" src="assets/media/category_default.png"/>
+            <ion-card-header>
+              <ion-card-subtitle>{{item.categoria}} ({{item.count}})</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div *ngIf="itemListData.length == 0" class="sin-ofertas center">
+      <h4>No hay ofertas disponibles!</h4>
+    </div>
+
   </div>
 </ion-content>

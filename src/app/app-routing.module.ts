@@ -55,7 +55,8 @@ const routes: Routes = [
   },
   {
     path: 'ofertas',
-    loadChildren: () => import('./folder-pages/client/ofertas/ofertas.module').then( m => m.OfertasPageModule)
+    loadChildren: () => import('./folder-pages/client/ofertas/ofertas.module').then( m => m.OfertasPageModule),
+    canActivate: [IsAuthGuard]
   }
 
 
