@@ -5,7 +5,8 @@
         "save":"Save",
         "create":"Create",
         "infinitescroll":"Loading ...",
-        "delete": "Eliminar"
+        "delete": "Eliminar",
+        "all_fields_required": "All fields are required!."
     },
     "menu":{
         "init":"My ofers",
@@ -115,7 +116,8 @@
         "enable_offert": "Enabling offer ..",
         "disable_offert": "Disabling offer ..",
         "sucess_enable": "Offer successfully enabled!",
-        "sucess_disable": "Offer successfully disabled!"
+        "sucess_disable": "Offer successfully disabled!",
+        "delete_confirm": "Do you want to remove this offer?"
     },
     "offer":{
         "search":"Search"

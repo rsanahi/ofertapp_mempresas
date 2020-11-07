@@ -5,7 +5,8 @@
         "save":"Guardar",
         "create":"Crear",
         "infinitescroll":"Cargando ...",
-        "delete": "Eliminar"
+        "delete": "Eliminar",
+        "all_fields_required": "Todos los campos son requeridos!."
     },
     "menu":{
         "init":"Mis ofertas",
@@ -115,7 +116,8 @@
         "enable_offert": "Habilitando oferta ..",
         "disable_offert": "Deshabilitando oferta ..",
         "sucess_enable": "Oferta habilitada con exito!",
-        "sucess_disable": "Oferta Deshabilitada con exito!"
+        "sucess_disable": "Oferta Deshabilitada con exito!",
+        "delete_confirm": "¿ Desea eliminar esta oferta ?"
     },
     "offer":{
         "search":"Buscar"

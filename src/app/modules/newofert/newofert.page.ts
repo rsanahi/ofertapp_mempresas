@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IonInput } from '@ionic/angular';
+import { AlertService } from '../../services/ui/alert.service';
 
 @Component({
   selector: 'app-newofert',
@@ -56,6 +57,7 @@ export class NewofertPage implements OnInit {
   sucess_enable = ""; 
   updating_offer = "";
   updating_success = "";
+  delete_confirm = "";
 
   //edit oferta
   edit:Boolean = false;
@@ -97,7 +99,8 @@ export class NewofertPage implements OnInit {
     private zone: NgZone,
     private toastService: ToastService,
     private router: Router,
-    private activaedRoute: ActivatedRoute
+    private activaedRoute: ActivatedRoute,
+    private alertService: AlertService,
   ) { 
     this.activaedRoute.queryParams.subscribe( _ => {
       
@@ -163,6 +166,11 @@ export class NewofertPage implements OnInit {
     this.translate.get('new_ofert.updating_sucess').subscribe(
       value => {
         this.updating_success = value;
+      }
+    )
+    this.translate.get('new_ofert.delete_confirm').subscribe(
+      value => {
+        this.delete_confirm = value;
       }
     )
   }
@@ -239,7 +247,7 @@ export class NewofertPage implements OnInit {
       this.loadingService.loading_present(this.loading_ofer);
       this.offerService.set_new_offer('set_ofert',formData).subscribe((res:any)=>{
         this.loadingService.loading_dismiss();
-        this.toastService.presentToast(this.sucess_offer);
+        this.toastService.presentToast(this.sucess_offer,'success');
         this.router.navigate(['/main']);
       },
       (error: any)=>{
@@ -268,11 +276,11 @@ export class NewofertPage implements OnInit {
       this.loadingService.loading_present(this.updating_offer);
       this.offerService.update_ofert('set_ofert',formData, this.id_offert).subscribe((res:any)=>{
         this.loadingService.loading_dismiss();
-        this.toastService.presentToast(this.updating_success);
+        this.toastService.presentToast(this.updating_success,'success');
         this.router.navigate(['/main']);
       },
       (error: any)=>{
-        this.toastService.presentToast(error.message);
+        this.toastService.presentToast(error.message,'danger');
         this.loadingService.loading_dismiss();
       });
     }
@@ -361,21 +369,45 @@ export class NewofertPage implements OnInit {
     }
     this.loadingService.loading_present(this.enable_offert);
     this.offerService.update_ofert('set_ofert', data, this.id_offert).subscribe((res:any)=>{
-      this.toastService.presentToast(this.sucess_enable);
+      this.toastService.presentToast(this.sucess_enable,'success');
       this.loadingService.loading_dismiss();
     },
     (error: any)=>{
-      this.toastService.presentToast(error.message.detail);
+      this.toastService.presentToast(error.message.detail,'danger');
       this.loadingService.loading_dismiss();
     });
   }
 
   // 
   eliminar_oferta(){
+    let buttons = {
+      cssClass: 'my-custom-class',
+      message: `<strong>${this.delete_confirm}</strong>`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.confirm_eliminar_oferta();
+          }
+        }
+      ]
+    }
+    this.alertService.presentAlertConfirm(buttons);
+
+  }
+
+  confirm_eliminar_oferta(){
     this.loadingService.loading_present(this.deleting_offer);
     this.offerService.delete_ofert('set_ofert', this.id_offert).subscribe((res:any)=>{
       this.router.navigate(['/main']);
-      this.toastService.presentToast(this.sucess_delete);
+      this.toastService.presentToast(this.sucess_delete, 'success');
       this.loadingService.loading_dismiss();
     },
     (error: any)=>{
@@ -383,7 +415,6 @@ export class NewofertPage implements OnInit {
       this.loadingService.loading_dismiss();
     });
   }
-
   //price format
   handleInput(event: CustomEvent) {
     this.clearInput();

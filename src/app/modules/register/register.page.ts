@@ -181,7 +181,7 @@ export class RegisterPage implements OnInit {
         this.loading_dismiss();
         if(res.fk_user){
           this.router.navigate(['/login']);
-          this.toastService.presentToast('Se ha registrado con exito!');
+          this.toastService.presentToast('Se ha registrado con exito!','success');
         }
         else {
           console.log('Incorrect username or password');
@@ -218,7 +218,7 @@ export class RegisterPage implements OnInit {
             }
           });
         }
-        this.toastService.presentToast(message);
+        this.toastService.presentToast(message,'danger');
       });
     }
   }

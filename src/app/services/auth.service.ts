@@ -37,4 +37,8 @@ export class AuthService {
 
     return this.httpService.post('/api/login/social/token_user/facebook/', body);
   }
+
+  cambiar_contraseña(data){
+    return this.httpService.post('api/auth/users/set_password/', data);
+  }
 }

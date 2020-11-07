@@ -118,10 +118,10 @@ export class LoginPage implements OnInit {
               this.error_credentias = value;
             }
           )
-          this.toastService.presentToast(this.error_credentias);
+          this.toastService.presentToast(this.error_credentias,'danger');
         }
         else{
-          this.toastService.presentToast(error.error)
+          this.toastService.presentToast(error.error,'danger')
         }
         this.loadingService.loading_dismiss();
         ;
