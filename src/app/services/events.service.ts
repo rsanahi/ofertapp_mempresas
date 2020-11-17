@@ -12,6 +12,9 @@ export class EventsService {
   private current_user = new BehaviorSubject({});
   private img_oferta = new BehaviorSubject('');
 
+  //created or updated oferta
+  private request_ofert = new BehaviorSubject(false);
+
   constructor(
     private businessService: BusinessService
   ) { }
@@ -36,6 +39,10 @@ export class EventsService {
     this.current_user.next(user_data);
   }
 
+  set_ofert_request(data){
+    this.request_ofert.next(data);
+  }
+
   getLenguajeObservable(): Observable<String> {
     return this.current_lenguaje.asObservable();
   }
@@ -52,12 +59,20 @@ export class EventsService {
     return this.current_user.asObservable();
   }
 
+  getResquestOfert(): Observable<any> {
+    return this.request_ofert.asObservable();
+  }
+
   clear_business_img_profile(){
     this.current_image = new BehaviorSubject('');
   }
 
   clear_oferta_img(){
     this.img_oferta = new BehaviorSubject('');
+  }
+
+  clear_request_ofert(){
+    this.request_ofert = new BehaviorSubject(false);
   }
 
 }

@@ -6,6 +6,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { LoadingService } from '../../../services/ui/loading.service';
 import { ToastService } from '../../../services/ui/toast.service';
 import { MenuController } from '@ionic/angular';
+import { EventsService } from '../../../services/events.service';
 
 @Component({
   selector: 'app-main',
@@ -36,9 +37,17 @@ export class MainPage implements OnInit {
     private loadingService: LoadingService,
     private toastService: ToastService,
     private sidemenu: MenuController,
+    private eventService: EventsService,
   ) {
     this.init_text();
     this.load_data();
+
+    this.eventService.getResquestOfert().subscribe((res)=>{
+      if(res){
+        this.reset_data_scroll();
+        this.load_data();
+      }
+    });
    }
 
   ngOnInit() {
@@ -60,13 +69,11 @@ export class MainPage implements OnInit {
       res.results.forEach(element => {
         this.itemListData.push(element);
       });
-      if(res.next != null || res.next){
-        this.page_number = res.next.split("?")[1].split("&")[1].split("=")[1];
-      }
       this.total = res.count;
       this.infiniteScroll.complete();
       this.ionRefresher.complete();
       this.loadingService.loading_dismiss();
+      this.control_infinitiscroll();
     },
     (error: any)=>{
       this.toastService.presentToast("Network connection error.");
@@ -108,7 +115,7 @@ export class MainPage implements OnInit {
     this.page_search = "";
     this.reset_data_scroll();
     this.load_data();
-    
+    this.toggleInfiniteScroll(false);
   }
 
   reset_data_scroll(){
@@ -119,9 +126,16 @@ export class MainPage implements OnInit {
   }
 
   loadData(event) {
+    this.page_number += 1;
     this.load_data();
+  }
+
+  control_infinitiscroll(){
     if (this.total <= this.itemListData.length) {
-      event.target.disabled = true;
+      this.toggleInfiniteScroll(true);
+    }
+    else{
+      this.toggleInfiniteScroll(false);
     }
   }
 
@@ -135,8 +149,8 @@ export class MainPage implements OnInit {
     this.router.navigate(['newofert'], navigationExtras);
   }
 
-  toggleInfiniteScroll() {
-    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  toggleInfiniteScroll(val) {
+    this.infiniteScroll.disabled = val;
   }
 
 }

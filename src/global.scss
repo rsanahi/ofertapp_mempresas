@@ -50,6 +50,24 @@
     src: url('./assets/fonts/ShadowsIntoLight-Regular.ttf');
 }
 
+// MIos
+
+.without-back {
+  background: transparent !important;
+  --background: transparent !important;
+}
+
+.backg {
+  background:  url('assets/media/back.png') !important;
+  --background: transparent;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  position: absolute !important;
+  width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+}
 
 .center {
     display: flex;
@@ -67,7 +85,7 @@
 .boxing {
   border-radius: 10px;
   box-shadow:6px 6px 4px 4px #D1D9E6,
-            -8px -8px 8px 8px rgb(248, 248, 248);
+            -2px -2px 10px 10px rgba(223, 216, 216, 0.363);
 }
 
 .border-green {

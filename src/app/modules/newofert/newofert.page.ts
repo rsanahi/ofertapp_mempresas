@@ -248,6 +248,7 @@ export class NewofertPage implements OnInit {
       this.offerService.set_new_offer('set_ofert',formData).subscribe((res:any)=>{
         this.loadingService.loading_dismiss();
         this.toastService.presentToast(this.sucess_offer,'success');
+        this.eventService.set_ofert_request(true);
         this.router.navigate(['/main']);
       },
       (error: any)=>{
@@ -277,6 +278,7 @@ export class NewofertPage implements OnInit {
       this.offerService.update_ofert('set_ofert',formData, this.id_offert).subscribe((res:any)=>{
         this.loadingService.loading_dismiss();
         this.toastService.presentToast(this.updating_success,'success');
+        this.eventService.set_ofert_request(true);
         this.router.navigate(['/main']);
       },
       (error: any)=>{
