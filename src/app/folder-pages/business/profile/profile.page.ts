@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { ProfileService } from '../../../services/plugins/profile.service';
-import { BusinessService } from '../../../services/plugins/business.service';
+import { ProfileService } from '../../../services/plugin/profile.service';
+import { BusinessService } from '../../../services/plugin/business.service';
 import { FilesService } from '../../../services/ui/files.service';
 import { API } from '../../../config/api-constants';
 import { LoadingService } from '../../../services/ui/loading.service';

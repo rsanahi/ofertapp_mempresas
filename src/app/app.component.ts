@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
-import { BusinessService } from './services/plugins/business.service';
+import { BusinessService } from './services/plugin/business.service';
 import { Router } from '@angular/router';
 import { EventsService } from './services/events.service';
 import { LoadingService } from './services/ui/loading.service';
@@ -96,9 +96,16 @@ export class AppComponent implements OnInit {
 
     this.userevn = this.eventService.getUserLogged().subscribe((res)=>{
       if(res != {}){
+        console.log("res",res);
         this.set_user(res);
       }
     });
+
+    if(this.businessService.is_authenticated()){
+      let data = this.businessService.get_user_details();
+      console.log("data", data);
+      this.set_user(data);
+    }
   }
 
   initializeApp() {

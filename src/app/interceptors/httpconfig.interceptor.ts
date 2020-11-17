@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from '../services/storage.service';
 import { AuthConstants } from '../config/auth-constants';
-import { BusinessService } from '../services/plugins/business.service';
+import { BusinessService } from '../services/plugin/business.service';
 
 import { 
     HttpInterceptor,

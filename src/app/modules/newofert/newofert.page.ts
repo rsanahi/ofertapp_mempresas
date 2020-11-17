@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone} from '@angular/core';
-import { OfferService } from '../../services/plugins/offer.service';
+import { OfferService } from '../../services/plugin/offer.service';
 import { FilesService } from '../../services/ui/files.service';
 import { LoadingService } from '../../services/ui/loading.service';
 import { ToastService } from '../../services/ui/toast.service';

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { OfferService } from '../../../services/plugins/offer.service';
+import { OfferService } from '../../../services/plugin/offer.service';
 import { IonInfiniteScroll, IonSearchbar, IonRefresher } from '@ionic/angular';
 import { element } from 'protractor';
 
