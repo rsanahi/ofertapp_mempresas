@@ -16,7 +16,9 @@
         foto de perfil
       </div>
       -->
-      <ion-img [src]="imgProfile" [alt]="imgProfile"></ion-img>
+      <div class="center avatar-container">
+        <ion-img [src]="imgProfile" class="your-img" [alt]="imgProfile" style="width:70%"></ion-img>
+      </div>
       <div class="button-upload">
         <ion-button color="primary" (click)='selectImage()' class="img-button">
           <ion-icon name="camera-outline" color="light"></ion-icon>
@@ -114,6 +116,9 @@
         </ion-item>
       </ion-card>
     </div>
+    <br>
+    <br>
+    <br>
   </div>
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button routerLink="/newofert">

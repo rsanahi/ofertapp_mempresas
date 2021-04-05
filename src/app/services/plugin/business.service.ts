@@ -27,7 +27,9 @@ export class BusinessService {
     if(this.token != null){
       return true;
     }
-    return false;
+    else{
+      return false;
+    }
   }
 
   set_token(token){

@@ -42,7 +42,7 @@ export class FilesService {
   take_picture(source, owner: boolean = false){
     this.owner = owner;
     if(source == 'gallery'){
-      this.take_picture_from(this.camera.PictureSourceType.PHOTOLIBRARY);
+      this.take_picture_from(this.camera.PictureSourceType.SAVEDPHOTOALBUM);
     }
     else{
       this.take_picture_from(this.camera.PictureSourceType.CAMERA);
@@ -54,7 +54,9 @@ export class FilesService {
       quality: 100,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
-      correctOrientation: true
+      correctOrientation: true,
+      mediaType: this.camera.MediaType.PICTURE,
+      encodingType: this.camera.EncodingType.JPEG,
     };
 
     this.camera.getPicture(options).then(imagePath => {

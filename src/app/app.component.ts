@@ -10,6 +10,7 @@ import { BusinessService } from './services/plugin/business.service';
 import { Router } from '@angular/router';
 import { EventsService } from './services/events.service';
 import { LoadingService } from './services/ui/loading.service';
+import { ProfileService } from './services/plugin/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -76,6 +77,8 @@ export class AppComponent implements OnInit {
   public userevn;
   public user_logged = false;
 
+  public avatar = "assets/media/avatar.svg";
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -87,6 +90,7 @@ export class AppComponent implements OnInit {
     private businessService: BusinessService,
     private eventService: EventsService,
     private loadingService: LoadingService,
+    private profileService: ProfileService,
   ) {
     this.initializeApp();
     this.translate.addLangs(['en', 'es']);
@@ -96,16 +100,10 @@ export class AppComponent implements OnInit {
 
     this.userevn = this.eventService.getUserLogged().subscribe((res)=>{
       if(res != {}){
-        console.log("res",res);
         this.set_user(res);
+        this.get_user_profile();
       }
     });
-
-    if(this.businessService.is_authenticated()){
-      let data = this.businessService.get_user_details();
-      console.log("data", data);
-      this.set_user(data);
-    }
   }
 
   initializeApp() {
@@ -122,6 +120,23 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
     this.get_user_details_from_storage();
+
+    if(this.businessService.is_authenticated()){
+      let data = this.businessService.get_user_details();
+      this.set_user(data);
+      this.get_user_profile();
+    }
+  }
+
+  get_user_profile(){
+    this.profileService.get_details('get_business').subscribe((res:any)=>{
+      if(res){
+        console.log(res);
+      }
+    },
+    (error: any)=>{
+      // console.log("error",error);
+    });
   }
 
   userlogged(){
